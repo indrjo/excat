@@ -1,0 +1,196 @@
+
+\chapter{Preliminari}
+
+In queste note si assume almeno la {\sc Teoria delle Categorie} che si
+può imparare da~\cite{leinster:categories}. Un altro validissimo testo
+che insegna le basi è anche~\cite{riehl:categories}. Nozioni sulle
+categorie preadditive si possono trovare in~\cite{maclane:categories}
+che è considerato un vero e proprio classico.
+
+
+\section{Kernel e cokernel}
+
+Noi lavoreremo con categorie in cui sono presenti oggetti che sono sia
+terminali che iniziali. Oggetti di questo tipo sono detti {\em oggetti
+  zero}. Non si tratta di categorie come \(\Set\), \(\Top\) e
+\(\Ring\), ma è il caso di \(\Grp\) e \(\Modu_R\), con \(R\) anello.
+
+\begin{definition}
+  Sia \(\cat C\) una categoria con {\em oggetto zero} che indichiamo
+  con \(0\). Per \(a, b \in \obj{\cat C}\), il {\em morfismo nullo} o
+  {\em zero} da \(a\) a \(b\) è la composizione dei morfismi
+  \[
+    \begin{tikzcd}[column sep=small]
+      a \ar["{\exists!}", r] & 0 \ar["{\exists!}", r] & b
+    \end{tikzcd}
+  \]
+  Scriveremo questo morfismo come \(0_a^b\) oppure, se dal contesto è
+  chiaro, semplicemente \(0\).
+\end{definition}
+
+\begin{example}
+  In casi come \(\Grp\) e \(\Modu_R\), il morfismo nullo è quello che
+  manda tutti gli elementi del dominio nell'identità. Anche \(\Ring\)
+  possiede omomorfismi come questi; tuttavia in \(\Ring\) l'oggetto
+  iniziale è \(\mathbb{Z}\) che non è terminale mentre i morfismi zero sono
+  definiti attraverso oggetti zero.
+\end{example}
+
+Comporre con un morfismo nullo dà un morfismo nullo. Più precisamente:
+
+\begin{proposition}\label{lemma:CompCon0}
+  Sia \(\cat C\) una categoria con {\em oggetto zero} \(0\), e
+  \(a, b, c \in \obj{\cat C}\). Allora per ogni \(f : b \to c\) di
+  \(\cat C\) si ha
+  \[
+    f \circ 0_a^b = 0_a^c
+  \]
+  e per ogni \(g : c \to a\) di \(\cat C\) si ha
+  \[
+    0_a^b \circ g = 0_c^b .
+  \]
+\end{proposition}
+
+\begin{proof}
+  Proviamo solo una delle due uguaglianze perché l'altra è
+  simile. Consideriamo i morfismi
+  \[
+    \begin{tikzcd}[column sep=small]
+      a \ar["{\exists!}", r] & 0 \ar["{\exists!}", r] & b \ar["f", r] & c
+    \end{tikzcd}
+  \]
+  Poiché \(0\) è iniziale, la composizione delle ultime due frecce è
+  l'unica che può esserci. Quindi \(f \circ 0_a^b\) è la composizione
+  della freccia \(a \to 0\) con la freccia \(0 \to c\), ed abbiamo
+  concluso.
+\end{proof}
+
+\begin{definition}[Kernel e cokernel]
+  In una categoria \(\cat C\) con oggetto zero \(0\), il {\em kernel}
+  di \(f : a \to b\) è uno qualsiasi degli equalizzatori di
+  \[
+    \begin{tikzcd}
+      a \ar["f", shift left, r] \ar["{0_a^b}", shift right, swap, r] &
+      b
+    \end{tikzcd}
+  \]
+  Dualmente, il {\em cokernel} di \(f : a \to b\) è uno qualsiasi dei
+  coequalizzatori della stessa coppia di morfismi.
+\end{definition}
+
+\begin{remark}
+  Ricordiamo che in generale gli equalizzatori sono monomorfismi e i
+  coequalizzatori sono epimorfismi. Questa informazione può dare delle
+  indicazioni su come sono fatti i kernel e i cokernel in categorie in
+  cui monomorfismo ed epimorfismo significano rispettivamente
+  iniettivo e suriettivo.
+\end{remark}
+
+\begin{example}[Kernel di omomorfismi di moduli]
+  In Algebra, si parla di {\em kernel} di morfismi in vari ambiti. Per
+  esempio, se \(M\) e \(N\) sono due moduli su un fissato anello \(R\)
+  e \(f : M \to N\) è un omomorfismo, allora
+  \[
+    \ker f := \set{x \in M \mid f(x) = 0_N}
+  \]
+  è un sottomodulo di \(M\). Per entrare nel linguaggio della {\sc
+    Teoria delle Categorie},
+  \begin{quotation}
+    l'omomorfismo inclusione \(i : \ker f \hookrightarrow M\) è un equalizzatore
+    della coppia di omomorfismi
+    \[
+      \begin{tikzcd}
+        M \ar["f", shift left, r] \ar["{0_M^N}", shift right, swap, r]
+        & N
+      \end{tikzcd}
+    \]
+  \end{quotation}
+  % Verifichiamo l'affermazione. Anzitutto, è facile vedere che
+  % \(f \circ i = 0_M^N \circ i\), poiché per la
+  % Proposizione~\ref{lemma:CompCon0} si ha che
+  % \(0_M^N \circ i = 0_{\ker f}^N\). Consideriamo ora invece un qualsiasi
+  % diagramma commutativo
+  % \[
+  %   \begin{tikzcd}
+  %     E \ar["j", r] & M \ar["f", shift left, r] \ar["{0_M^N}", shift
+  %     right, swap, r] & N
+  %   \end{tikzcd}
+  % \]
+  % Questo implica che \(f(j(x)) = 0_M^N (j(x)) = 0_N\) per ogni
+  % \(x \in E\). Questo significa che le immagini di \(j\) stanno in
+  % \(\ker f\), quindi è possibile la fattorizzazione \(j = i \circ k\) dove
+  % \(k : E \hookrightarrow \ker f\) è una semplice inclusione. Per finire
+  % \(k\) è l'unico omomorfismo \(E \to \ker f\) per cui commuta il
+  % triangolo
+  % \[
+  %   \begin{tikzcd}
+  %     \ker f \ar["i", r] & M \\
+  %     E \ar[u] \ar["j", ur, swap]
+  %   \end{tikzcd}
+  % \]
+  % a causa dell'iniettività di \(i\).
+\end{example}
+
+\begin{example}[Cokernel di omomorfismi di moduli]
+  Se \(M\) e \(N\) sono due moduli su un fissato anello \(R\) e
+  \(f : M \to N\) è un omomorfismo, allora
+  \[
+    \coker f := \frac{N}{\im f}
+  \]
+  è un sottomodulo di \(M\) chiamato {\em cokernel} di \(f\). Questa
+  nozione è il duale di kernel, nel senso che
+  \begin{quotation}
+    l'omomorfismo di proiezione canonica al quoziente
+    \(\pi_N : N \to \coker f\) è un coequalizzatore della coppia di
+    omomorfismi
+    \[
+      \begin{tikzcd}
+        M \ar["f", shift left, r] \ar["{0_M^N}", shift right, swap, r]
+        & N
+      \end{tikzcd}
+    \]
+  \end{quotation}
+  % Per dimostrare questo fatto si può usare un teorema di omomorfismo,
+  % oppure un argomento categoriale come questo.
+  % \begin{enumerate}
+  % \item Considerare il funtore dimenticante \(U : \Modu_R \to \Set\) che
+  %   è fedele.
+  % \item In \(\Set\) un coequalizzatore di
+  %   \[
+  %     \begin{tikzcd}
+  %       X \ar["f", r, shift left] \ar["g", r, shift right, swap] & Y
+  %     \end{tikzcd}
+  %   \]
+  %   è la proiezione canonica al quoziente \(p : Y \to Y{/}\sim\) dove
+  %   \(\sim\) è la relazione di equivalenza generata da
+  %   \(f(a) \sim f(b)\) al variare di \(a, b \in X\).
+  % \item Se \(M\) è un modulo su \(R\) e \(H\) è un suo sottomodulo, il
+  %   modulo quoziente \(\frac{M}{H}\) è ottenuto quozientando \(M\) con
+  %   la relazione di equivalenza \(\sim\) generata da \(x+h \sim x\) per
+  %   \(x \in M, h \in H\).
+  % \end{enumerate}
+\end{example}
+
+\begin{remark}
+  In Algebra, kernel e cokernel sono degli oggetti, mentre
+  tecnicamente come sono definiti qui sono dei morfismi.
+\end{remark}
+
+
+
+\section{Categorie preadditive}
+
+
+\section{Limiti e colimiti in categorie preadditive}
+
+
+\section{Categorie additive}
+
+
+
+%%% Local Variables:
+%%% mode: LaTeX
+%%% TeX-master: "../main"
+%%% TeX-engine: luatex
+%%% ispell-local-dictionary: "italian"
+%%% End:
