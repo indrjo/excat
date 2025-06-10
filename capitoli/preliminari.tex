@@ -180,8 +180,345 @@ Comporre con un morfismo nullo dà un morfismo nullo. Più precisamente:
 
 \section{Categorie preadditive}
 
+\begin{definition}
+  Una {\em categoria preadditiva} è una categoria \(\cat C\) in cui:
+  \begin{enumerate}
+  \item Per ogni \(a, b \in \obj{\cat C}\) la classe \(\cat C(a, b)\) è
+    dotata di un'operazione interna
+    \[
+      +_{a,b} : \cat C (a, b) \times \cat C (a, b) \to \cat C (a, b)
+    \]
+    e ha un elemento \(0_a^b : a \to b\) che lo rendono un gruppo
+    abeliano.
+  \item Per ogni \(a, b, c \in \obj{\cat C}\) e \(f : a \to b\) di
+    \(\cat C\), le funzioni
+    \begin{align*}
+      & f_\ast := \cat C(c, f) : \cat C(c, a) \to \cat C(c, b) \\
+      & f^\ast := \cat C(f, c) : \cat C(b, c) \to \cat C(a, c)
+    \end{align*}
+    sono omomorfismi di gruppi abeliani.
+  \end{enumerate}
+\end{definition}
 
-\section{Limiti e colimiti in categorie preadditive}
+\begin{recall}
+  Ricordiamo che \(f_\ast(g) := f \circ g\) mentre \(f^\ast(h) := h \circ f\).
+\end{recall}
+
+Spesso scriveremo semplicemente \(+\) senza pedici, perché in genere è
+chiaro di quali frecce stiamo sommando.
+
+Inoltre, come nei primi teoremi di Algebra, il morfismo zero è l'unico
+elemento neutro e per ogni \(f : a \to b\) è unico l'opposto. In
+coerenza con la notazione additiva indichiamo con \(- f\) l'opposto di
+\(f : a \to b\).
+
+Un'altra osservazione da fare è questa. Il simbolo \(0_a^b\) in una
+categoria \(\cat C\) con oggetto zero indica il morfismo zero
+\(a \to b\). Se \(\cat C\) è preaddittiva, non sono notazioni in
+conflitto?  No.
+
+\begin{proposition}
+  In una categoria preadditiva \(\cat C\) con oggetto zero \(0\), il
+  morfismo nullo è elemento neutro.
+\end{proposition}
+
+\begin{proof}
+  Poiché \(0\) è iniziale, \(\cat C(0, b)\) è banale e in particolare
+  \(0_0^b\) è elemento neutro. L'omomorfismo
+  \[
+    \left(0_a^0\right)^\ast : \cat C(0, b) \to \cat C(a, b)
+  \]
+  manda l'elemento neutro del dominio in quello del codominio, che è
+  \[
+    \left(0_a^0\right)^\ast\left(0_0^b\right) = 0_0^b \circ 0_a^0 = 0_a^b
+    . \qedhere
+  \]
+\end{proof}
+
+Ora parleremo di alcune peculiarità dei limiti e dei colimiti in categorie
+preadditive.
+
+\begin{remark}
+A tal proposito è utile osservare che se \(\cat C\) è
+una categoria preadditiva, anche il suo duale \(\opcat C\) lo è. La
+conseguenza più pratica per noi è che dimezza le dimostrazioni: una
+volta dimostrato un enunciato, quello duale è automatico.
+\end{remark}
+
+\begin{proposition}
+  In un categoria preadditiva \(\cat C\) gli oggetti terminali sono
+  iniziali e viceversa.
+\end{proposition}
+
+Quindi in una categoria preadditiva gli oggetti terminali e iniziali
+sono oggetti zero.
+
+\begin{proof}
+  Sia \(t\) un oggetto terminale di \(\cat C\). Se riusciamo a
+  mostrare che \(\cat C(t, a)\) è un gruppo banale per ogni oggetto
+  \(a\) di \(\cat C\), allora possiamo concludere.\newline Prendiamo un
+  \(f : t \to a\) qualsiasi in \(\cat C\) e guardiamo l'omomorfismo di
+  gruppi
+  \[
+    f_\ast = \cat C(t, f) : \cat C(t, t) \to \cat C(t, a) .
+  \]
+  Il dominio è un gruppo banale perché \(t\) è terminale; in
+  particolare, \(\id_t = 0_t^t\). Inoltre, trattandosi di omomorfismo,
+  \[
+    \underbrace{f_\ast \left(\id_t\right)}_{= f} = f\left(0_t^t\right) =
+    0_t^a . \qedhere
+  \]
+\end{proof}
+
+Vediamo i prodotti e i coprodotti finiti ora.
+
+\begin{proposition}\label{proposition:BinProdsAreBinCoprods}
+  Sia \(\cat C\) una categoria preadditiva con oggetto zero \(0\) e
+  \[
+    \begin{tikzcd}[column sep=small]
+      a & a \times b \ar["{p_a}", l, swap] \ar["{p_b}", r] & b
+    \end{tikzcd}
+  \]
+  un prodotto in \(\cat C\). Grazie alla proprietà universale di
+  prodotto, introduciamo le frecce \(i_a : a \to a \times b\) e
+  \(i_b : b \to a \times b\) come le uniche frecce di \(\cat C\) che fanno
+  commutare i diagrammi
+  \[
+    \begin{tikzcd}
+      & a \ar["{\id_a}", dl, swap] \ar[d] \ar["{0_a^b}", dr] \\
+      a & a \times b \ar["{p_a}", l] \ar["{p_b}", r, swap] & b
+    \end{tikzcd}
+    %
+    \quad
+    %
+    \begin{tikzcd}
+      & b \ar["{0_b^a}", dl, swap] \ar[d] \ar["{\id_b}", dr] \\
+      a & a \times b \ar["{p_a}", l] \ar["{p_b}", r, swap] & b
+    \end{tikzcd}
+  \]
+  Allora
+  \[
+    \begin{tikzcd}[column sep=small]
+      a \ar["{i_a}", r] & a \times b & b \ar["{i_b}", l, swap]
+    \end{tikzcd}
+  \]
+  è coprodotto in \(\cat C\). Dualmente, se
+  \[
+    \begin{tikzcd}[column sep=small]
+      a \ar["{i_a}", r] & a + b & b \ar["{i_b}", l, swap]
+    \end{tikzcd}
+  \]
+  é un coprodotto e se \(p_a : a+b \to a\) e \(p_b : a+b \to b\) sono
+  introdotti attraverso la proprietà universale di coprodotto come le
+  uniche frecce che fanno commutare i diagrammi
+  \[
+    \begin{tikzcd}
+      & a \\
+      a \ar["{i_a}", r, swap] \ar["{\id_a}", ur] & a + b \ar[u] & b
+      \ar["{i_b}", l] \ar["{0_b^a}", ul, swap]
+    \end{tikzcd}
+    %
+    \quad
+    %
+    \begin{tikzcd}
+      & a \\
+      a \ar["{i_a}", r, swap] \ar["{\id_a}", ur] & a + b \ar[u] & b
+      \ar["{i_b}", l] \ar["{0_b^a}", ul, swap]
+    \end{tikzcd}
+  \]
+  allora
+  \[
+    \begin{tikzcd}[column sep=small]
+      a & a + b \ar["{p_a}", l, swap] \ar["{p_b}", r] & b
+    \end{tikzcd}
+  \]
+  è un prodotto in \(\cat C\).
+\end{proposition}
+
+In breve: in categorie preadditive si ha \(a \times b \cong a+b\).
+
+\begin{proof}
+  Possiamo limitarci a dimostrare solo il primo fatto. Consideriamo un
+  qualsiasi oggetto con morfismi
+ \[
+    \begin{tikzcd}[column sep=small]
+      a \ar["f", r] & c & b  \ar["g", l, swap]
+    \end{tikzcd}
+  \]
+  e cerchiamo un modo di costruire un morfismo \(a \times b \to c\). Le
+  frecce \(f \circ p_a\) e \(g \circ p_b\) sono di questo tipo, ma non vanno
+  bene per i nostri scopi. Invece la somma sì, perché il diagramma
+  \[
+    \begin{tikzcd}[row sep=large]
+      & c \\
+      a \ar["{i_a}", r, swap] \ar["f", ur, bend left] & a + b \ar["{f \circ p_a + g \circ
+        p_b}" description, u] & b
+      \ar["{i_b}", l] \ar["g", ul, bend right, swap]
+    \end{tikzcd}
+  \]
+  commuta.
+\end{proof}
+
+\begin{definition}\label{definizione:Biprodotto}
+  Un {\em biprodotto} in una categoria preadditiva consta di oggetti e frecce
+  \[
+    \begin{tikzcd}
+      a \ar["{i_a}", r, shift right, swap] & c \ar["{p_a}", l, shift
+      right, swap] \ar["{p_b}", r, shift left] & b \ar["{i_b}", l,
+      shift left]
+    \end{tikzcd}
+  \]
+  tali che
+  \begin{align}
+    & p_a \circ i_a = \id_a \label{eqn:Biprod1} \\
+    & p_b \circ i_b = \id_b \label{eqn:Biprod2}\\
+    & i_a \circ p_a + i_b \circ p_b = \id_c \label{eqn:Biprod3}
+  \end{align}
+\end{definition}
+
+\begin{remark}
+  Dalle identità~\ref{eqn:Biprod1}, \ref{eqn:Biprod2}
+  e~\ref{eqn:Biprod3} discendono
+  \begin{align}
+    & p_a \circ i_b = 0_b^a \label{eqn:Biprod4} \\
+    & p_b \circ i_a = 0_a^b \label{eqn:Biprod5}
+  \end{align}
+  %Combinando~\ref{eqn:Biprod1} e~\ref{eqn:Biprod3} si
+  %ha
+  Proviamo solo la prima visto che l'altra si fa similmente.
+  \[
+    p_a \underbrace{=}_{\eqref{eqn:Biprod3}} p_a \circ \left( i_a \circ p_a + i_b \circ p_b \right) \underbrace{=}_{\eqref{eqn:Biprod1}} p_a + p_a \circ i_b \circ p_b
+  \]
+  da cui
+  \[
+    p_a \circ i_b \circ p_b = 0_c^a .
+  \]
+  Postcomponendo con \(i_b\) e usando~\eqref{eqn:Biprod2}, concludiamo \(p_a \circ i_b = 0_b^a\).
+\end{remark}
+
+\begin{proposition}
+  In una categoria preadditiva con oggetto zero \(0\), un prodotto
+  \[
+    \begin{tikzcd}[column sep=small]
+      a & a \times b \ar["{p_a}", l, swap] \ar["{p_b}", r] & b
+    \end{tikzcd}
+  \]
+  dà un biprodotto
+  \[
+    \begin{tikzcd}
+      a \ar["{i_a}", r, shift right, swap] & a \times b \ar["{p_a}", l, shift
+      right, swap] \ar["{p_b}", r, shift left] & b \ar["{i_b}", l,
+      shift left]
+    \end{tikzcd}
+  \]
+  in cui \(i_a\) e \(i_b\) sono introdotti come nella proposizione
+  precedente. Dualmente, un coprodotto
+  \[
+    \begin{tikzcd}[column sep=small]
+      a \ar["{i_a}", r] & a + b & b \ar["{i_b}", l, swap]
+    \end{tikzcd}
+  \]
+  dà un biprodotto
+  \[
+    \begin{tikzcd}
+      a \ar["{i_a}", r, shift right, swap] & a+b \ar["{p_a}", l, shift
+      right, swap] \ar["{p_b}", r, shift left] & b \ar["{i_b}", l,
+      shift left]
+    \end{tikzcd}
+  \]
+  in cui \(p_a\) e \(p_b\) sono introdotti come nella proposizione
+  precedente. Viceversa, se si ha un biprodotto
+  \[
+    \begin{tikzcd}
+      a \ar["{i_a}", r, shift right, swap] & a+b \ar["{p_a}", l, shift
+      right, swap] \ar["{p_b}", r, shift left] & b \ar["{i_b}", l,
+      shift left]
+    \end{tikzcd}
+  \]
+  allora la coppia di frecce \(p_a\) e \(p_b\) è prodotto e la
+  coppia \(i_a\) e \(i_b\) è coprodotto.
+\end{proposition}
+
+Quindi in categorie preadditive esiste un modo piuttosto compatto di
+esprimere prodotti e coprodotti (che sono la stessa cosa) senza
+passare per le proprietà universali.
+
+\begin{proof}
+  Verifichiamo ad esempio che i prodotti danno biprodotti. Le
+  identità~\eqref{eqn:Biprod1} e~\eqref{eqn:Biprod2} discendono
+  direttamente da come sono introdotte \(i_a\) e \(i_b\). Consideriamo
+  ora il morfismo
+  \[
+    i_a \circ p_a + i_b \circ p_b : a \times b \to a \times b .
+  \]
+  Componendo una volta con \(p_a\) e l'altra con \(p_b\) si ha (vedi
+  anche~\eqref{eqn:Biprod4} e~\eqref{eqn:Biprod5})
+  \begin{align*}
+    & p_a \circ \left(i_a \circ p_a + i_b \circ p_b\right) = \underbrace{p_a \circ
+      i_a}_{= \id_a} \circ p_a + \underbrace{p_a
+      \circ i_b}_{= 0_b^a} \circ p_b = p_a \\
+    & p_b \circ \left(i_a \circ p_a + i_b \circ p_b\right) = \underbrace{p_b \circ
+      i_a}_{= 0_a^b} \circ p_a + \underbrace{p_b
+      \circ i_b}_{= \id_b} \circ p_b = p_b
+  \end{align*}
+  Per la proprietà universale di prodotto, si può concludere che
+  \[
+    i_a \circ p_a + i_b \circ p_b = \id_{a \times b} .
+  \]
+  Per il viceversa prendendo qualsiasi coppia di morfismi
+  \[
+    \begin{tikzcd}[column sep=small]
+      a & a \times b \ar["f", l, swap] \ar["g", r] & b
+    \end{tikzcd}
+  \]
+  si ha
+  \begin{align*}
+    & p_a \circ \left( i_a \circ f + i_b \circ g \right) = f \\
+    & p_b \circ \left( i_a \circ f + i_b \circ g \right) = g
+  \end{align*}
+  Ora se \(h : c \to a \times b\) è tale che \(p_a \circ h = f\) e \(p_b \circ h =
+  g\), allora
+  \[
+    h = \id_{a \times b} \circ h = \left( i_a \circ p_a + i_b \circ p_b \right) \circ h =
+    i_a \circ f + i_b \circ g . \qedhere 
+  \]
+\end{proof}
+
+\begin{proposition}
+  In una categoria preadditiva \(\cat C\) con oggetto zero \(0\), gli
+  equalizzatori di
+  \[
+    \begin{tikzcd}
+      a \ar["f", r, shift left] \ar["g", r, shift right, swap] & b
+    \end{tikzcd}
+  \]
+  sono equalizzatori di
+  \[
+    \begin{tikzcd}
+      a \ar["{f-g}", r, shift left] \ar["{0_a^b}", r, shift right, swap] & b
+    \end{tikzcd}
+  \]
+  e viceversa. Analogamente vale per i coequalizzatori.
+\end{proposition}
+
+Quindi un (co)equalizzatore di una coppia di morfismi è un (co)kernel della
+differenza dei due. 
+
+\begin{proof}
+  Basta osservare che
+  \[
+    \begin{tikzcd}
+      e \ar["i", r] & a \ar["f", r, shift left] \ar["g", r, shift right, swap] & b
+    \end{tikzcd}
+  \]
+  commuta se e solo se commuta
+  \[
+    \begin{tikzcd}
+      e \ar["i", r] & a \ar["{f-g}", r, shift left] \ar["{0_a^b}", r, shift right, swap] & b
+    \end{tikzcd}
+  \qedhere\]
+\end{proof}
+
 
 
 \section{Categorie additive}
