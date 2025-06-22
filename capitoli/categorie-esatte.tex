@@ -1,7 +1,265 @@
 
 \chapter{Categorie esatte}
 
+In questo capitolo raccogliamo una serie di risultati elementari sulle
+successioni esatte corte, seguendo da vicino la trattazione che si può
+trovare in~\cite{buehler:exactcategories}.
+
+
+
 \section{Coppie kernel-cokernel}
+
+\begin{definition}\label{definition:KerCoker}
+  Una \emph{coppia kernel-cokernel} in una categoria additiva
+  \(\cat C\) consiste di due morfismi consecutivi
+  \[
+    \begin{tikzcd}[column sep=small]
+      a \ar["i", r] & b \ar["p", r] & c
+    \end{tikzcd}
+  \]
+  tali che \(i\) è un kernel di \(p\) e \(p\) è un cokernel di \(i\).
+\end{definition}
+
+\begin{example}
+  Sia in \(\Modu_R\) un omomorfismo \(f : M \to N\) e consideriamo la
+  proiezione al quoziente
+  \[
+    \pi : M \to M/\ker f .
+  \]
+  Come si è visto (Esempio~\ref{example:KernelInModR}) il kernel è
+  \(\ker \pi = \ker f\) con l'inclusione. Viceversa
+  \[
+    i : \ker f \hookrightarrow M
+  \]
+  ha come cokernel \(\pi\)
+  (Esempio~\ref{example:CokernelInModR}). Quindi
+  \[
+    \begin{tikzcd}[column sep=small]
+      \ker f \ar["i", hookrightarrow, r] & M \ar["\pi", r] &
+      \frac{M}{\ker f}
+    \end{tikzcd}
+  \]
+  è una coppia ker-coker in \(\Modu_R\). In generale, se \(H\) è un
+  sottomodulo di \(M\), allora
+  \[
+    \begin{tikzcd}[column sep=small]
+      H \ar[hookrightarrow, r] & M \ar["{\pi_H}", r] & \frac{M}{H}
+    \end{tikzcd}
+  \]
+  è una coppia ker-coker.
+\end{example}
+
+\begin{remark}
+  Ricordiamo che i kernel sono certi equalizzatori, quindi sono
+  monomorfismi. Dualmente, i cokernel sono dei coequalizzatori, quindi
+  sono epimorfismi.
+\end{remark}
+
+I seguenti lemmi sono in preparazione alla successiva definizione.
+
+\begin{lemma}\label{lemma:KerCokerId}
+  In una categoria additiva \(\cat C \),
+  \[
+    \begin{tikzcd}[column sep=small]
+      0 \ar["{\exists!}", r] & a \ar["{\id_a}", r] & a
+    \end{tikzcd}
+  \]
+  è una coppia ker-coker.
+\end{lemma}
+
+\begin{proof}
+  Il diagramma
+  \[
+    \begin{tikzcd}
+      0 \ar["{\exists!}", r] & a \ar["{\id_a}", r, shift left]
+      \ar["{0_a^a}", r, shift right, swap] & a
+    \end{tikzcd}
+  \]
+  commuta perché \(\cat C(0,a)\) è banale, essendo \(0\) iniziale. Sia
+  \(i : e \to a\) tale che
+  \[
+    \begin{tikzcd}
+      e \ar["{i}", r] & a \ar["{\id_a}", r, shift left] \ar["{0_a^a}",
+      r, shift right, swap] & a
+    \end{tikzcd}
+  \]
+  commuta, cioè \(i = 0_e^a \). Essendo 0 terminale, c'è esattamente
+  un \(e \to 0\). Il triangolo
+  \[
+    \begin{tikzcd}
+      0 \ar["{\exists!}", r] & a \\
+      e \ar["{\exists!}", u] \ar["i", ur, swap]
+    \end{tikzcd}
+  \]
+  commuta per come sono definiti i morfismi nulli.  Verifichiamo ora
+  che \(\id_a\) è cokernel di \(0 \to a\). Anzitutto
+  \[
+    \begin{tikzcd}
+      0 \ar["{\exists!}", r, shift left] \ar["{0_0^a}", r, shift
+      right, swap] & a \ar["{\id_a}", r] & a
+    \end{tikzcd}
+  \]
+  commuta poichè \(\cat C(0,a)\) è banale (\(0\) è iniziale). Sia
+  \(j:a \to q\) tale che
+  \[
+    \begin{tikzcd}
+      0 \ar["{\exists!}", r, shift left] \ar["{0_0^a}", r, shift
+      right, swap] & a \ar["{j}", r] & q
+    \end{tikzcd}
+  \]
+  commuta. Esiste uno e una sola freccia \(a \to q\) che fa commutare
+  \[
+    \begin{tikzcd}
+      a \ar["{\id_a}", r] \ar["j", dr, swap] & a \ar[d] \\
+      & q
+    \end{tikzcd}
+  \]
+  ed è \(j\) stessa.
+\end{proof}
+
+\begin{lemma}\label{lemma:KerCokerInjProj}
+  In una categoria additiva \(\cat C\) considerare il biprodotto
+  \[
+    \begin{tikzcd}
+      a \ar["{i_a}", r, shift right, swap] & a \oplus b \ar["{p_a}",
+      l, shift right, swap] \ar["{p_b}", r, shift left] & b
+      \ar["{i_b}", l, shift left]
+    \end{tikzcd}
+  \]
+  Allora
+  \[
+    \begin{tikzcd}[row sep=tiny]
+      a \ar["{i_a}", r] & a \oplus b \ar["{p_b}", r] & b \\
+      b \ar["{i_b}", r] & a \oplus b \ar["{p_a}", r] & a
+    \end{tikzcd}
+  \]
+  sono coppie ker-coker.
+\end{lemma}
+
+\begin{proof}
+  Facciamo la dimostrazione solo la prima coppia, la dimostrazione
+  dell'altra è simile. Il diagramma
+  \[
+    \begin{tikzcd}
+      a \ar["{i_a}", r] & a \oplus b \ar["{p_b}", r, shift left]
+      \ar["{0_{a \oplus b}^b}", r, shift right, swap] & b
+    \end{tikzcd}
+  \]
+  commuta, vedi Definizione~\ref{definition:Biprodotto}. Consideriamo
+  ora il diagramma commutativo
+  \[
+    \begin{tikzcd}
+      c \ar["{j}", r] & a \oplus b \ar["{p_p}", r, shift left]
+      \ar["{0_{a \oplus b}^b}", r, shift right, swap] & b
+    \end{tikzcd}
+  \]
+  Essendo \(i_a\) un monomorfismo, allora è sufficiente mostrare
+  costruire un morfismo \(c \to a\) che fa commutare
+  \[
+    \begin{tikzcd}
+      a \ar["{i_a}",r] & a \oplus b \\
+      c \ar[u] \ar["{j}", ur, swap]
+    \end{tikzcd}
+  \]
+  Ciò che possiamo prendere in esame con quello che abbiamo è
+  \[
+    p_a \circ j : c \functo{j} a \oplus b \functo{p_a} a
+  \]
+  Infatti
+  \begin{align*}
+    j &= \id_{a \oplus b} \circ j \underbrace{=}_{\text{\eqref{eqn:Biprod3}}}
+        (i_a \circ p_a + i_b \circ p_b) \circ j = \\
+      &= i_a \circ p_a \circ j + i_b \circ \underbrace{p_b \circ j}_{\mathclap{\cramped{= 0_{a \oplus b}^b
+        \circ j = 0_c^b}}} = i \circ p_a \circ j . \qedhere
+  \end{align*}
+\end{proof}
+
+\begin{lemma}\label{lemma:KerCokerOplus}
+  Siano in una categoria additiva \(\cat C\)
+  \[
+    \begin{tikzcd}[row sep=tiny, column sep=small]
+      a \ar["{f}", r] & b \ar["{g}", r] & c \\
+      a' \ar["{f'}", r, swap] & b' \ar["{g'}", r, swap] & c'
+    \end{tikzcd}
+  \]
+  con \(f\) e \(f'\) kernel di \(g\) e \(g'\) rispettivamente.  Allora
+  \(f \oplus f' : a \oplus a' \to b \oplus b'\) è kernel di
+  \(g \oplus g' : b \oplus b' \to c \oplus c'\). Dualizzando, si ha che se
+  \(g\) e \(g'\) sono cokernel di \(f\) e \(f'\) rispettivamente,
+  allora \(g \oplus g'\) è cokernel di \(f \oplus f'\).
+\end{lemma}
+
+\begin{proof}
+  Verifichiamo che
+  \[
+    \begin{tikzcd}
+      a \oplus a' \ar["{f \oplus f'}", r] & b \oplus b' \ar["{g \oplus g'}", r, shift
+      left] \ar["{0_{b \oplus b'}^{c \oplus c'}}", r, shift right, swap] & c \oplus
+      c'
+    \end{tikzcd}
+  \]
+  commuta. Poiché \(\otimes : \cat C \times \cat C \to \cat C\) è un bifuntore
+  {\color{red} [scrivere di questa cosa nell'introduzione]}, infatti
+  \[
+    (g \oplus g') \circ (f \oplus f') = (g \circ f) \otimes (g' \circ f) = 0_{a \oplus a'}^{c \oplus c'}
+  \]
+  Consideriamo ora un diagramma commutativo
+  \[
+    \begin{tikzcd}
+      d \ar["{h}", r] & b \oplus b' \ar["{g \oplus g'}", r, shift left]
+      \ar["{0_{b \oplus b'}^{c \oplus c'}}", r, shift right, swap] & c \oplus c'
+    \end{tikzcd}
+  \]
+  e troviamo un modo di costruire una freccia \(d \to a \oplus a'\) in modo
+  che commuti
+  \[
+    \begin{tikzcd}
+      a \oplus a' \ar["{f \oplus f'}", r] & b \oplus b' \\
+      d \ar["{h}", ur, swap] \ar["{}", u]
+    \end{tikzcd}
+  \]
+  Abbiamo le frecce
+  \begin{align*}
+    & p_b^{bb'} \circ h : d \to b \\
+    & p_{b'}^{bb'}\circ h : d \to b '
+  \end{align*}
+  che rendono commutativi i diagrammi
+  \[
+    \begin{tikzcd}
+      d \ar["{p_b^{bb'} \circ h}", r] & b \ar["{g}", r, shift left]
+      \ar["{0_b^c}", r, shift right, swap] & c
+    \end{tikzcd}
+  \]
+  e
+  \[
+    \begin{tikzcd}
+      d \ar["{p_{b'}^{bb'} \circ h}", r] & b' \ar["{g'}", r, shift left]
+      \ar["{0_{b'}^{c'}}", r, shift right, swap] & c'
+    \end{tikzcd}
+  \]
+  rispettivamente. Per la proprietà universale di equalizzatore,
+  esistono unici \(i : d \to a\) e \(j : d \to a'\) tali che
+  \begin{align*}
+    & f \circ i = p_b^{bb'} \circ h \\
+    & f' \circ j = p_{b'}^{bb'} \circ h .
+  \end{align*}
+  La proprietà universale di prodotto ci permette di introdurre
+  \((i,j) : d \to a \oplus a'\).  Calcoliamo ora:
+  \begin{align*}
+    & p_b^{bb'} \circ (f \oplus f') \circ (i,j) = f \circ p_a^{aa'} \circ (i,j) = f \circ i = p_b^{bb'} \circ h \\
+    & p_{b'}^{bb'} \circ (f \oplus f') \circ (i,j) = f' \circ p_{a'}^{aa'} \circ (i,j) = f' \circ j = p_{b'}^{bb'} \circ h
+  \end{align*}
+  Quindi, sempre per la proprietà universale di prodotto, possiamo
+  concludere che
+  \[
+    (f \oplus f') \circ (i,j) = h.
+  \]
+  La parte dell'unicità della freccia \(d \to a \oplus a'\) è immediata: \(f
+  \oplus f'\) è un monomorfismo essendo \(f\) oppure \(f'\) -- in questo
+  caso entrambi -- monici (ricorda che i kernel sono equalizzatori e
+  quindi sono monomorfismi).
+\end{proof}
+
 
 
 \section{Stutture e categorie esatte}
