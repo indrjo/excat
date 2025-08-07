@@ -170,7 +170,7 @@ I seguenti lemmi sono in preparazione alla successiva definizione.
     j &= \id_{a \oplus b} \circ j \underbrace{=}_{\text{\eqref{eqn:Biprod3}}}
         (i_a \circ p_a + i_b \circ p_b) \circ j = \\
       &= i_a \circ p_a \circ j + i_b \circ \underbrace{p_b \circ j}_{\mathclap{\cramped{= 0_{a \oplus b}^b
-        \circ j = 0_c^b}}} = i \circ p_a \circ j . \qedhere
+        \circ j = 0_c^b}}} = i_a \circ p_a \circ j . \qedhere
   \end{align*}
 \end{proof}
 
@@ -198,10 +198,10 @@ I seguenti lemmi sono in preparazione alla successiva definizione.
       c'
     \end{tikzcd}
   \]
-  commuta. Poiché \(\otimes : \cat C \times \cat C \to \cat C\) è un bifuntore
+  commuta. Poiché \(\oplus : \cat C \times \cat C \to \cat C\) è un bifuntore
   {\color{red} [scrivere di questa cosa nell'introduzione]}, infatti
   \[
-    (g \oplus g') \circ (f \oplus f') = (g \circ f) \otimes (g' \circ f) = 0_{a \oplus a'}^{c \oplus c'}
+    (g \oplus g') \circ (f \oplus f') = (g \circ f) \oplus (g' \circ f) = 0_{a \oplus a'}^{c \oplus c'}
   \]
   Consideriamo ora un diagramma commutativo
   \[

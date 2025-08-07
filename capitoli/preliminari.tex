@@ -2,10 +2,10 @@
 \chapter{Preliminari}
 
 In queste note si assume almeno la {\sc Teoria delle Categorie} che si
-può imparare da~\cite{leinster:categories}. Un altro validissimo testo
-che insegna le basi è anche~\cite{riehl:categories}. Nozioni sulle
-categorie preadditive si possono trovare in~\cite{maclane:categories}
-che è considerato un vero e proprio classico.
+può imparare da~\cite{leinster:categories}. Un altro validissimo testo è
+anche~\cite{riehl:categories}. Un vero e proprio classico che contiene
+anche nozioni sulle categorie preadditive è~\cite{maclane:categories}
+
 
 
 \section{Kernel e cokernel}
@@ -86,7 +86,7 @@ Comporre con un morfismo nullo dà un morfismo nullo. Più precisamente:
   iniettivo e suriettivo.
 \end{remark}
 
-\begin{example}[Kernel di omomorfismi di moduli]
+\begin{example}[Kernel di omomorfismi di moduli]\label{example:KernelInModR}
   In Algebra, si parla di {\em kernel} di morfismi in vari ambiti. Per
   esempio, se \(M\) e \(N\) sono due moduli su un fissato anello \(R\)
   e \(f : M \to N\) è un omomorfismo, allora
@@ -131,7 +131,7 @@ Comporre con un morfismo nullo dà un morfismo nullo. Più precisamente:
   % a causa dell'iniettività di \(i\).
 \end{example}
 
-\begin{example}[Cokernel di omomorfismi di moduli]
+\begin{example}[Cokernel di omomorfismi di moduli]\label{example:CokernelInModR}
   Se \(M\) e \(N\) sono due moduli su un fissato anello \(R\) e
   \(f : M \to N\) è un omomorfismo, allora
   \[
@@ -182,7 +182,7 @@ Comporre con un morfismo nullo dà un morfismo nullo. Più precisamente:
 
 \begin{definition}
   Una {\em categoria preadditiva} è una categoria \(\cat C\) in cui:
-  \begin{enumerate}
+  \begin{enumerate}[leftmargin=*]
   \item Per ogni \(a, b \in \obj{\cat C}\) la classe \(\cat C(a, b)\) è
     dotata di un'operazione interna
     \[
@@ -235,14 +235,11 @@ conflitto?  No.
   \]
 \end{proof}
 
-Ora parleremo di alcune peculiarità dei limiti e dei colimiti in categorie
-preadditive.
-
 \begin{remark}
-A tal proposito è utile osservare che se \(\cat C\) è
-una categoria preadditiva, anche il suo duale \(\opcat C\) lo è. La
-conseguenza più pratica per noi è che dimezza le dimostrazioni: una
-volta dimostrato un enunciato, quello duale è automatico.
+  A tal proposito è utile osservare che se \(\cat C\) è una categoria
+  preadditiva, anche il suo duale \(\opcat C\) lo è. La conseguenza più
+  pratica per noi è che dimezza le dimostrazioni: una volta dimostrato
+  un enunciato, quello duale è automatico.
 \end{remark}
 
 \begin{proposition}
@@ -340,9 +337,9 @@ In breve: in categorie preadditive si ha \(a \times b \cong a+b\).
 \begin{proof}
   Possiamo limitarci a dimostrare solo il primo fatto. Consideriamo un
   qualsiasi oggetto con morfismi
- \[
+  \[
     \begin{tikzcd}[column sep=small]
-      a \ar["f", r] & c & b  \ar["g", l, swap]
+      a \ar["f", r] & c & b \ar["g", l, swap]
     \end{tikzcd}
   \]
   e cerchiamo un modo di costruire un morfismo \(a \times b \to c\). Le
@@ -359,7 +356,7 @@ In breve: in categorie preadditive si ha \(a \times b \cong a+b\).
   commuta.
 \end{proof}
 
-\begin{definition}\label{definizione:Biprodotto}
+\begin{definition}\label{definition:Biprodotto}
   Un {\em biprodotto} in una categoria preadditiva consta di oggetti e frecce
   \[
     \begin{tikzcd}
