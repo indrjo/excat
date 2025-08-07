@@ -264,6 +264,267 @@ I seguenti lemmi sono in preparazione alla successiva definizione.
 
 \section{Stutture e categorie esatte}
 
+\begin{definition}\label{definition:CategorieEsatte}
+  Una {\em struttura esatta} per una categoria additiva \(\cat C\) è
+  una classe \(\cat E\) di coppie ker-coker in \(\cat C\) con le
+  seguenti proprietà:
+  \begin{enumerate}[leftmargin=*, label=(E\arabic*),
+    ref=Definizione~\ref{definition:CategorieEsatte}-E\arabic*]
+  \item \label{item:EO} Per ogni \(a \in \objcat C\), le coppie
+    ker-coker
+    \[
+      \begin{tikzcd}[column sep=small]
+        a \ar["{\id_a}", r] & a \ar["{\ast}", r] & \ast
+      \end{tikzcd}
+    \]
+    stanno in \(\cat E\).
+  \item \label{item:EOop} Per ogni \(a \in \objcat C\), le coppie
+    ker-coker
+    \[
+      \begin{tikzcd}[column sep=small]
+        \ast \ar["{\ast}", r] & a \ar["{\id_a}", r] & a
+      \end{tikzcd}
+    \]
+    stanno in \(\cat E\).
+  \item \label{item:E1} Se \(\cat E\) contiene le coppie ker-coker
+    \[
+      \begin{tikzcd}[column sep=small, row sep=tiny]
+        a \ar["{f}", r] & b \ar["{\ast}", r] & \ast \\
+        b \ar["{g}", r] & c \ar["{\ast}", r] & \ast
+      \end{tikzcd}
+    \]
+    allora contiene anche le coppie ker-coker
+    \[
+      \begin{tikzcd}[column sep=small]
+        a \ar["{g \circ f}", r] & c \ar["{\ast}", r] & \ast
+      \end{tikzcd}
+    \]
+  \item \label{item:E1op} Se \(\cat E\) contiene le coppie ker-coker
+    \[
+      \begin{tikzcd}[column sep=small, row sep=tiny]
+        \ast \ar["{\ast}", r] & a \ar["{f}", r] & b \\
+        \ast \ar["{\ast}", r] & b \ar["{g}", r] & c
+      \end{tikzcd}
+    \]
+    allora anche le coppie ker-coker
+    \[
+      \begin{tikzcd}[column sep=small]
+        \ast \ar["{\ast}", r] & a \ar["{g \circ f}", r] & c
+      \end{tikzcd}
+    \]
+    stanno in \(\cat E\).
+  \item \label{item:E2} Se
+    \[
+      \begin{tikzcd}[column sep=small]
+        a \ar["{i}", r] & b \ar["{\ast}", r] & \ast
+      \end{tikzcd}
+    \]
+    sta in \(\cat E\) e \(f : a \to a'\) è in \(\cat C\), il pushout di
+    \(i\) lungo \(f\) esiste in \(\cat C\) e, indicandolo con
+    \(i' : a' \to b'\), anche le coppie ker-coker
+    \[
+      \begin{tikzcd}[column sep=small]
+        a' \ar["{i'}", r] & b' \ar["{\ast}", r] & \ast
+      \end{tikzcd}
+    \]
+    stanno in \(\cat E\).
+  \item \label{item:E2op} Se
+    \[
+      \begin{tikzcd}[column sep=small]
+        \ast \ar["{\ast}", r] & a \ar["{p}", r] & b
+      \end{tikzcd}
+    \]
+    sta in \(\cat E\) e \(f : c' \to c\) è in \(\cat C\), il pullback di
+    \(p\) lungo \(f\) esiste in \(\cat C\) e, indicandolo con
+    \(p' : b' \to c'\), anche le coppie ker-coker
+    \[
+      \begin{tikzcd}[column sep=small]
+        \ast \ar["{\ast}", r] & a' \ar["{p'}", r] & b'
+      \end{tikzcd}
+    \]
+    stanno in \(\cat E\).
+  \end{enumerate}
+  Una {\em categoria esatta} è una coppia \((\cat C,\cat E)\) come
+  sopra e gli elementi di \(\cat E\) si chiamano {\em sequenze esatte
+    corte}.
+\end{definition}
+
+Primi esempi di sequenze esatte corte derivano coinvolgono le
+identità.
+
+\begin{proposition}\label{proposition:ExactId}
+  Sia \((\cat C,\cat E)\) una categoria esatta. Sono successioni
+  esatte corte
+  \[
+    \begin{tikzcd}[row sep=tiny, column sep=small]
+      0 \ar["{\exists!}", r] & a \ar["{\id_a}", r] & a \\
+      a \ar["{\id_a}", r] & a \ar["{\exists!}", r] & 0
+    \end{tikzcd}
+  \]
+\end{proposition}
+
+In \(\Modu_R\) questo vuol dire una cosa piuttosto semplice: il kernel
+dell'omomorfismo \(\id_M : M \to M\) è banale, mentre il cokernel è
+\(M\) stesso.
+
+\begin{proof}
+  Grazie al Lemma~\ref{lemma:KerCokerId}, le due coppie sono
+  ker-coker. Poi si invocano~\ref{item:EO} e~\ref{item:EOop}.
+\end{proof}
+
+\begin{recall}
+  In generale, in una categoria \(\cat C\) con oggetto terminale
+  \(1\) un pullback di
+  \[
+    \begin{tikzcd}
+      & a \ar["{\exists!}",d] \\
+      b \ar["{\exists!}", r, swap] & 1
+    \end{tikzcd}
+  \]
+  è un prodotto di \(a\) e \(b\). Dualmente, se \(C\) è una categoria
+  con oggetto iniziale \(0\), allora un pushout di
+  \[
+    \begin{tikzcd}
+      0 \ar["{\exists!}",r] \ar["{\exists!}", d, swap]  & a \\
+      b
+    \end{tikzcd}
+  \]
+  è un coprodotto di \(a\) e \(b\).
+\end{recall}
+
+\begin{proposition}\label{proposition:ExactInjProj}
+  Sia \((\cat C,\cat E)\) una categoria esatta e sia
+  \[
+    \begin{tikzcd}
+      a \ar["{i_a}", r, shift right, swap] & a \oplus b \ar["{p_a}", l,
+      shift right, swap] \ar["{p_b}", r, shift left] & b \ar["{i_b}",
+      l, shift left]
+    \end{tikzcd}
+  \]
+  un biprodotto. Allora
+  \[
+    \begin{tikzcd}[row sep=tiny]
+      a \ar["{i_a}", r] & a \oplus b \ar["{p_b}", r] & b \\
+      b \ar["{i_b}", r] & a \oplus b \ar["{p_a}", r] & a
+    \end{tikzcd}
+  \]
+  sono sequenze esatte corte, cioè coppie ker-coker in \(\cat E\).
+\end{proposition}
+
+Il Lemma~\ref{lemma:KerCokerInjProj} ci dava queste due coppie
+ker-coker. Questo proposizione invece dice che ogni struttura esatta
+contiene queste coppie ker-coker.
+
+\begin{proof}
+  Per il richiamo appena fatto,
+  \[
+    \begin{tikzcd}
+      a \oplus b \ar["{p_a}",r] \ar["{p_b}",d,swap] & a \ar["{\exists!}",d] \\
+      b \ar["{\exists!}", r, swap] & 0
+    \end{tikzcd}
+  \]
+  è un quadrato di pushout. Inoltre per la
+  Proposizione~\ref{proposition:ExactId}, la base di questo diagramma
+  è parte della sequenza esatta corta \begin{tikzcd}[cramped, column
+    sep=small] b \ar["{\id_b}", r] & b \ar["{\exists!}", r] & 0
+  \end{tikzcd}. Possiamo appellarci a \ref{item:E2op} ora: il pullback
+  di \(b \to 0\) lungo \(a \to 0\), va a dire \(p_a\), è tale che le
+  coppie ker-coker
+  \[
+    \begin{tikzcd}[column sep=small]
+      \ast \ar["{\ast}", r] & a \oplus b \ar["{p_a}", r] & a
+    \end{tikzcd}
+  \]
+  stanno in \(\cat E\). Il Lemma~\ref{lemma:KerCokerInjProj} ci dà quella
+  che ci serve.
+\end{proof}
+
+\begin{recall}
+  In generale, in una categoria \(\cat C\) con oggetto terminale
+  \(1\), se
+  \[
+    \begin{tikzcd}[column sep=small]
+      a & a \times 1 \ar["{p_a}", l, swap] \ar["{p_1}", r] & 1 
+    \end{tikzcd}
+  \]
+  è un prodotto, allora l'unico morfismo \(a \to a \times 1\) che fa
+  commutare
+  \[
+    \begin{tikzcd}
+      & a \ar["{\id_a}", dl, swap] \ar["{}", d]  \ar["{\exists!}",dr] \\
+      a & a \times 1 \ar["{p_a}", l] \ar["{p_1}", r, swap] & 1
+    \end{tikzcd}
+  \]
+  è un isomorfismo. Quindi, se \(\cat C\) è anche preadditiva, allora
+  questo isomorfismo è \(i_a : a \to a \oplus 0\) che ha inversa \(p_a : a \oplus
+  0 \to a\).
+\end{recall}
+
+\begin{proposition}
+  ``In una categoria esatta corta la somma di sequenze esatte corte è
+  esatta corta''. Vale a dire: in una categoria esatta
+  \((\cat C,\cat E)\), se
+  \[
+    \begin{tikzcd}[row sep=tiny, column sep=small]
+      a \ar["{f}", r] & b \ar["{g}", r] & c \\
+      a' \ar["{f'}", r, swap] & b' \ar["{g'}", r, swap] & c'
+    \end{tikzcd}
+  \]
+  sono sequenze esatte corte, allora anche
+  \begin{equation}
+    \label{cd:SumExactSeqs}
+    \begin{tikzcd}[row sep=small]
+      a \oplus b \ar["{f \oplus g}", r] & a' \oplus b' \ar["{f' \oplus
+        g'}", r] & a'' \oplus b''
+    \end{tikzcd}
+  \end{equation}
+  lo è.
+\end{proposition}
+
+Quindi \(\cat E\) è chiusa rispetto alla somma di sequenze esatte corte.
+
+\begin{proof}
+  Il piano per la dimostrazione si struttura su questa osservazione:
+  se riusciamo a dimostrare che
+  \begin{equation}
+    \begin{tikzcd}[row sep=tiny]
+      a \oplus b \ar["{f \oplus \id_b}", r] & a' \oplus b \ar["{f' \circ p_{a'}^{a'b}}",
+      r] & a'' \\
+      a' \oplus b \ar["{\id_a \oplus g}", r, swap] & a' \oplus b' \ar["{g' \circ
+        p_{b'}^{a'b'}}", r, swap] & b''
+    \end{tikzcd}
+    \label{cd:SumExactSeqsPieces}
+  \end{equation}
+  sono esatte corte allora, a causa di~\ref{item:E1op} sono sequenze
+  esatte le coppie ker-coker
+  \[
+    \begin{tikzcd}[column sep=small, row sep=tiny]
+      a \oplus b \ar["{f \oplus g}", r] & a' \oplus b' \ar["\ast",
+      r] & \ast \\
+    \end{tikzcd}
+  \]
+  A questo punto Lemma~\ref{lemma:KerCokerOplus} permette di
+  concludere l'opera.\newline Mostriamo solo che la prima
+  delle~\eqref{cd:SumExactSeqsPieces} è esatta corta, perché l'altra
+  si fa similmente. A causa del Lemma~\ref{lemma:KerCokerInjProj} e
+  della~\ref{item:E1op}, è sufficiente dimostrare che la prima
+  delle~\ref{cd:SumExactSeqsPieces} è una coppia ker-coker. Il
+  Lemma~\ref{lemma:KerCokerOplus} ci dà una coppia ker-coker che
+  coinvolge \(f \oplus \id_b\):
+  \[
+    \begin{tikzcd}
+      a \oplus b \ar["{f \oplus \id_b}", r] & a' \oplus b \ar["{f' \oplus 0_b^0}", r] &
+      a'' \oplus 0
+    \end{tikzcd}
+  \]
+  Ricordando ora che \(p_{a''}^{a''0} : a \oplus 0 \to a\) è un isomorfismo e
+  che
+  \(p_{a''}^{a''0} \circ \left( f' \oplus 0_b^0 \right) = f \circ p_{a'}^{a'b}\),
+  abbiamo finito.
+\end{proof}
+
+Adesso riprendiamo un discorso che avevamo iniziato nella Proposizione~\ref{proposition:FromPullbackToKernel}.
+
 
 %%% Local Variables:
 %%% mode: LaTeX
