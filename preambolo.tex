@@ -32,7 +32,7 @@
 
 \usepackage[no-math]{fontspec}
 \usepackage[rm,tt=false]{libertine}
-\usepackage[scale=.85]{sourcecodepro}
+\usepackage[scale=.8]{sourcecodepro}
 
 \usepackage{polyglossia}
 \setmainlanguage{italian}
@@ -46,6 +46,8 @@
 \usepackage{booktabs}
 
 \usepackage[bibstyle=alphabetic,citestyle=alphabetic,pluralothers=true,autolang=langname]{biblatex}
+\setcounter{biburllcpenalty}{7000}
+\setcounter{biburlucpenalty}{7000}
 \addbibresource{biblio.bib}
 
 \usepackage{libertinust1math}
@@ -75,10 +77,13 @@
 \tcolorboxenvironment{definition}{tile,
   left=2mm, right=2mm, top=2mm, bottom=2mm, colback=gray!30!white}
 \tcolorboxenvironment{lemma}{skin=emptymiddle,
-  borderline={1pt}{0pt}{gray}, top=0mm, left=2mm, right=2mm,
+  borderline west={1pt}{0pt}{gray}, top=0mm, left=1mm, right=2mm,
   bottom=0mm}
 \tcolorboxenvironment{proposition}{skin=emptymiddle,
-  borderline={1pt}{0pt}{gray}, top=0mm, left=2mm, right=2mm,
+  borderline west={1pt}{0pt}{gray}, top=0mm, left=1mm, right=0mm,
+  bottom=0mm}
+\tcolorboxenvironment{corollary}{skin=emptymiddle,
+  borderline west={1pt}{0pt}{gray}, top=0mm, left=1mm, right=0mm,
   bottom=0mm}
 
 \counterwithin{equation}{section}
