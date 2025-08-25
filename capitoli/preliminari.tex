@@ -4,7 +4,9 @@
 In queste note si assume almeno la {\sc Teoria delle Categorie} che si
 può imparare da~\cite{leinster:categories}. Un altro validissimo testo è
 anche~\cite{riehl:categories}. Un vero e proprio classico che contiene
-anche nozioni sulle categorie preadditive è~\cite{maclane:categories}
+anche nozioni sulle categorie preadditive
+è~\cite{maclane:categories}. In lingua italiana,
+esiste la playlist~\cite{itaca:categorie} realizzata dal {\em Progetto ItaCa}.
 
 
 
@@ -12,19 +14,19 @@ anche nozioni sulle categorie preadditive è~\cite{maclane:categories}
 
 Noi lavoreremo con categorie in cui sono presenti oggetti che sono sia
 terminali che iniziali. Oggetti di questo tipo sono detti {\em oggetti
-  zero}. Non si tratta di categorie come \(\Set\), \(\Top\) e
-\(\Ring\), ma è il caso di \(\Grp\) e \(\Modu_R\), con \(R\) anello.
+  zero}. Non si tratta di categorie come \(\Set\), \(\Top\) e \(\Ring\),
+ma è il caso di \(\Grp\) e \(\Modu_R\), con \(R\) anello.
 
 \begin{definition}
-  Sia \(\cat C\) una categoria con {\em oggetto zero} che indichiamo
-  con \(0\). Per \(a, b \in \obj{\cat C}\), il {\em morfismo nullo} o
-  {\em zero} da \(a\) a \(b\) è la composizione dei morfismi
+  Sia \(\cat C\) una categoria con {\em oggetto zero} che indichiamo con
+  \(0\). Per \(A, B \in \obj{\cat C}\), il {\em morfismo nullo} o {\em
+    zero} da \(A\) a \(B\) è la composizione dei morfismi
   \[
     \begin{tikzcd}[column sep=small]
-      a \ar["{\exists!}", r] & 0 \ar["{\exists!}", r] & b
+      A \ar["{\exists!}", r] & 0 \ar["{\exists!}", r] & B
     \end{tikzcd}
   \]
-  Scriveremo questo morfismo come \(0_a^b\) oppure, se dal contesto è
+  Scriveremo questo morfismo come \(0_A^B\) oppure, se dal contesto è
   chiaro, semplicemente \(0\).
 \end{definition}
 
@@ -40,14 +42,14 @@ Comporre con un morfismo nullo dà un morfismo nullo. Più precisamente:
 
 \begin{proposition}\label{lemma:CompCon0}
   Sia \(\cat C\) una categoria con {\em oggetto zero} \(0\), e
-  \(a, b, c \in \obj{\cat C}\). Allora per ogni \(f : b \to c\) di
+  \(A, B, C \in \obj{\cat C}\). Allora per ogni \(f : B \to C\) di
   \(\cat C\) si ha
   \[
-    f \circ 0_a^b = 0_a^c
+    f 0_A^B = 0_A^C
   \]
-  e per ogni \(g : c \to a\) di \(\cat C\) si ha
+  e per ogni \(g : C \to A\) di \(\cat C\) si ha
   \[
-    0_a^b \circ g = 0_c^b .
+    0_A^B g = 0_C^B .
   \]
 \end{proposition}
 
@@ -56,25 +58,23 @@ Comporre con un morfismo nullo dà un morfismo nullo. Più precisamente:
   simile. Consideriamo i morfismi
   \[
     \begin{tikzcd}[column sep=small]
-      a \ar["{\exists!}", r] & 0 \ar["{\exists!}", r] & b \ar["f", r] & c
+      A \ar["{\exists!}", r] & 0 \ar["{\exists!}", r] & B \ar["f", r] & C
     \end{tikzcd}
   \]
   Poiché \(0\) è iniziale, la composizione delle ultime due frecce è
-  l'unica che può esserci. Quindi \(f \circ 0_a^b\) è la composizione
-  della freccia \(a \to 0\) con la freccia \(0 \to c\), ed abbiamo
-  concluso.
+  l'unica che può esserci. Quindi \(f 0_A^B\) è la composizione della
+  freccia \(A \to 0\) con la freccia \(0 \to C\), ed abbiamo concluso.
 \end{proof}
 
-\begin{definition}[Kernel e cokernel]
-  In una categoria \(\cat C\) con oggetto zero \(0\), il {\em kernel}
-  di \(f : a \to b\) è uno qualsiasi degli equalizzatori di
+\begin{definition}
+  In una categoria \(\cat C\) con oggetto zero \(0\), il {\em kernel} di
+  \(f : A \to B\) è uno qualsiasi degli equalizzatori di
   \[
     \begin{tikzcd}
-      a \ar["f", shift left, r] \ar["{0_a^b}", shift right, swap, r] &
-      b
+      A \ar["f", shift left, r] \ar["{0_A^B}", shift right, swap, r] & B
     \end{tikzcd}
   \]
-  Dualmente, il {\em cokernel} di \(f : a \to b\) è uno qualsiasi dei
+  Dualmente, il {\em cokernel} di \(f : A \to B\) è uno qualsiasi dei
   coequalizzatori della stessa coppia di morfismi.
 \end{definition}
 
@@ -82,8 +82,8 @@ Comporre con un morfismo nullo dà un morfismo nullo. Più precisamente:
   Ricordiamo che in generale gli equalizzatori sono monomorfismi e i
   coequalizzatori sono epimorfismi. Questa informazione può dare delle
   indicazioni su come sono fatti i kernel e i cokernel in categorie in
-  cui monomorfismo ed epimorfismo significano rispettivamente
-  iniettivo e suriettivo.
+  cui monomorfismo ed epimorfismo significano rispettivamente iniettivo
+  e suriettivo.
 \end{remark}
 
 \begin{example}[Kernel di omomorfismi di moduli]\label{example:KernelInModR}
@@ -183,25 +183,29 @@ Comporre con un morfismo nullo dà un morfismo nullo. Più precisamente:
 \begin{definition}
   Una {\em categoria preadditiva} è una categoria \(\cat C\) in cui:
   \begin{enumerate}[leftmargin=*]
-  \item Per ogni \(a, b \in \obj{\cat C}\) la classe \(\cat C(a, b)\) è
+  \item Per ogni \(A, B \in \obj{\cat C}\) la classe \(\cat C(A, B)\) è
     dotata di un'operazione interna
     \[
-      +_{a,b} : \cat C (a, b) \times \cat C (a, b) \to \cat C (a, b)
+      +_{A,B} : \cat C (A, B) \times \cat C (A, B) \to \cat C (A, B)
     \]
-    e ha un elemento \(0_a^b : a \to b\) che lo rendono un gruppo
+    e ha un elemento \(0_A^B : A \to B\) che lo rendono un gruppo
     abeliano.
-  \item Per ogni \(a, b, c \in \obj{\cat C}\) e \(f : a \to b\) di
+  \item Per ogni \(A, B, C, D \in \obj{\cat C}\) e \(f : A \to B\) di
     \(\cat C\), le funzioni
     \begin{align*}
-      & f_\ast := \cat C(c, f) : \cat C(c, a) \to \cat C(c, b) \\
-      & f^\ast := \cat C(f, c) : \cat C(b, c) \to \cat C(a, c)
+      & f_\ast := \cat C(C, f) : \cat C(C, A) \to \cat C(C, B) \\
+      & f^\ast := \cat C(f, D) : \cat C(B, D) \to \cat C(A, D)
     \end{align*}
     sono omomorfismi di gruppi abeliani.
   \end{enumerate}
 \end{definition}
 
 \begin{recall}
-  Ricordiamo che \(f_\ast(g) := f \circ g\) mentre \(f^\ast(h) := h \circ f\).
+  Ricordiamo che
+  \begin{align*}
+    & f_\ast(g) := f g \\
+    & f^\ast(h) := h f
+  \end{align*}
 \end{recall}
 
 Spesso scriveremo semplicemente \(+\) senza pedici, perché in genere è
@@ -212,9 +216,12 @@ elemento neutro e per ogni \(f : a \to b\) è unico l'opposto. In
 coerenza con la notazione additiva indichiamo con \(- f\) l'opposto di
 \(f : a \to b\).
 
-Un'altra osservazione da fare è questa. Il simbolo \(0_a^b\) in una
+\begin{example}[\(\Modu_R\)] {\color{red} [Scrivere esempio.]}
+\end{example}
+
+Un'altra osservazione da fare è questa. Il simbolo \(0_A^B\) in una
 categoria \(\cat C\) con oggetto zero indica il morfismo zero
-\(a \to b\). Se \(\cat C\) è preaddittiva, non sono notazioni in
+\(A \to B\). Se \(\cat C\) è preaddittiva, non sono notazioni in
 conflitto?  No.
 
 \begin{proposition}
@@ -223,14 +230,14 @@ conflitto?  No.
 \end{proposition}
 
 \begin{proof}
-  Poiché \(0\) è iniziale, \(\cat C(0, b)\) è banale e in particolare
-  \(0_0^b\) è elemento neutro. L'omomorfismo
+  Poiché \(0\) è iniziale, \(\cat C(0, B)\) è banale e in particolare
+  \(0_0^B\) è elemento neutro. L'omomorfismo
   \[
-    \left(0_a^0\right)^\ast : \cat C(0, b) \to \cat C(a, b)
+    \left(0_A^0\right)^\ast : \cat C(0, B) \to \cat C(A, B)
   \]
   manda l'elemento neutro del dominio in quello del codominio, che è
   \[
-    \left(0_a^0\right)^\ast\left(0_0^b\right) = 0_0^b \circ 0_a^0 = 0_a^b
+    \left(0_A^0\right)^\ast\left(0_0^B\right) = 0_0^B 0_A^0 = 0_A^B
     . \qedhere
   \]
 \end{proof}
@@ -261,56 +268,61 @@ Quindi in una categoria preadditiva gli oggetti terminali e iniziali
 sono oggetti zero.
 
 \begin{proof}
-  Sia \(t\) un oggetto terminale di \(\cat C\). Se riusciamo a
-  mostrare che \(\cat C(t, a)\) è un gruppo banale per ogni oggetto
-  \(a\) di \(\cat C\), allora possiamo concludere.\newline Prendiamo un
-  \(f : t \to a\) qualsiasi in \(\cat C\) e guardiamo l'omomorfismo di
+  Sia \(T\) un oggetto terminale di \(\cat C\). Se riusciamo a mostrare
+  che \(\cat C(T, A)\) è un gruppo banale per ogni oggetto \(A\) di
+  \(\cat C\), allora possiamo concludere.\newline Prendiamo un
+  \(f : T \to A\) qualsiasi in \(\cat C\) e guardiamo l'omomorfismo di
   gruppi
   \[
-    f_\ast = \cat C(t, f) : \cat C(t, t) \to \cat C(t, a) .
+    f_\ast = \cat C(T, f) : \cat C(T, T) \to \cat C(T, A) .
   \]
-  Il dominio è un gruppo banale perché \(t\) è terminale; in
-  particolare, \(\id_t = 0_t^t\). Inoltre, trattandosi di omomorfismo,
+  Il dominio è un gruppo banale perché \(T\) è terminale; in
+  particolare, \(\id_T = 0_T^T\). Inoltre, trattandosi di omomorfismo,
   \[
-    \underbrace{f_\ast \left(\id_t\right)}_{= f} = f \circ 0_t^t = 0_t^a
+    \underbrace{f_\ast \left(\id_T\right)}_{= f} = f 0_T^T = 0_T^A
     . \qedhere
   \]
 \end{proof}
 
 
-\subsection{Prodotti e coprodotti}
+\subsection{Prodotti, coprodotti e biprodotti}
 
 Vediamo i prodotti e i coprodotti finiti ora.
 
-A proposito di notazioni, seguiamo~\cite{leinster:categories}
-e~\cite{riehl:categories}. Più precisamente, preso un prodotto
-\[
-  \begin{tikzcd}[column sep=small]
-    a & a \times b \ar["{p_a}", l, swap] \ar["{p_b}", r] & b
-  \end{tikzcd}
-\]
-il morfismo \(c \to a \times b\) che fa commutare il diagramma
-\[
-  \begin{tikzcd}
-    & c \ar["{f}", dl, swap] \ar[d] \ar["{g}", dr] \\
-    a & a \times b \ar["{p_a}", l] \ar["{p_b}", r, swap] & b
-  \end{tikzcd}
-\]
-è indicato con \((f, g)\); invece, dato un coprodotto
-\[
-  \begin{tikzcd}[column sep=small]
-    a \ar["{i_a}", r] & a + b & b \ar["{i_b}", l, swap]
-  \end{tikzcd}
-\]
-il morfismo \(a+b \to c\) rendo commutativo
-\[
-  \begin{tikzcd}
-    & a \\
-    a \ar["{i_a}", r, swap] \ar["{f}", ur] & a + b \ar[u] & b
-    \ar["{i_b}", l] \ar["{g}", ul, swap]
-  \end{tikzcd}
-\]
-è indicato con \([f, g]\).
+\begin{notation}
+  A proposito di notazioni, seguiamo~\cite{leinster:categories}
+  e~\cite{riehl:categories}. Più precisamente, preso un prodotto
+  \[
+    \begin{tikzcd}[column sep=small]
+      A & A \times B \ar["{p_A}", l, swap] \ar["{p_B}", r] & B
+    \end{tikzcd}
+  \]
+  il morfismo \(C \to A \times B\) che fa commutare il diagramma
+  \[
+    \begin{tikzcd}
+      & C \ar["{f}", dl, swap] \ar[d] \ar["{g}", dr] \\
+      A & A \times B \ar["{p_A}", l] \ar["{p_B}", r, swap] & B
+    \end{tikzcd}
+  \]
+  è indicato con \((f, g)\); invece, dato un coprodotto
+  \[
+    \begin{tikzcd}[column sep=small]
+      A \ar["{i_A}", r] & A + B & B \ar["{i_B}", l, swap]
+    \end{tikzcd}
+  \]
+  il morfismo \(A+B \to C\) che rende commutativo
+  \[
+    \begin{tikzcd}
+      & A \\
+      A \ar["{i_A}", r, swap] \ar["{f}", ur] & A + B \ar[u] & B
+      \ar["{i_B}", l] \ar["{g}", ul, swap]
+    \end{tikzcd}
+  \]
+  è indicato con \([f, g]\). Più in là avremo modo di introdurre una
+  notazione ``matriciale'', che è quella che
+  usa~\cite{buehler:exactcategories} e consente di fare alcuni conti
+  molto più facilmente.
+\end{notation}
 
 Più in là avremo modo di introdurre una notazione ``matriciale'', che è
 quella che usa~\cite{buehler:exactcategories} e consente di fare alcuni
@@ -320,84 +332,85 @@ conti molto più facilmente.
   Sia \(\cat C\) una categoria preadditiva con oggetto zero \(0\) e
   \[
     \begin{tikzcd}[column sep=small]
-      a & a \times b \ar["{p_a}", l, swap] \ar["{p_b}", r] & b
+      A & A \times B \ar["{p_A}", l, swap] \ar["{p_B}", r] & B
     \end{tikzcd}
   \]
   un prodotto in \(\cat C\).  Introduciamo anche le frecce
   \begin{equation}
     \label{eq:InjViaProj}
     \begin{aligned}
-      & i_a := \left( \id_a, 0_a^b \right) : a \to a \times b \\
-      & i_b := \left( 0_b^a, \id_b \right) : b \to a \times b
+      & i_A := \left( \id_A, 0_A^B \right) : A \to A \times B \\
+      & i_B := \left( 0_B^A, \id_B \right) : B \to A \times B
     \end{aligned}
   \end{equation}
   Allora
   \[
     \begin{tikzcd}[column sep=small]
-      a \ar["{i_a}", r] & a \times b & b \ar["{i_b}", l, swap]
+      A \ar["{i_A}", r] & A \times B & B \ar["{i_B}", l, swap]
     \end{tikzcd}
   \]
   è coprodotto in \(\cat C\). Dualmente, se
   \[
     \begin{tikzcd}[column sep=small]
-      a \ar["{i_a}", r] & a + b & b \ar["{i_b}", l, swap]
+      A \ar["{i_A}", r] & A + B & B \ar["{i_B}", l, swap]
     \end{tikzcd}
   \]
   è un coprodotto e se introduciamo anche i morfismi
   \begin{equation}
     \label{eq:ProjViaInj}
     \begin{aligned}
-      & p_a := \left[ \id_a, 0_b^a \right] : a + b \to a \\
-      & p_b := \left[ 0_a^b, \id_b \right] : a + b \to b
+      & p_A := \left[ \id_A, 0_B^A \right] : A + B \to A \\
+      & p_B := \left[ 0_A^B, \id_B \right] : A + B \to B
     \end{aligned}
   \end{equation}
   allora
   \[
     \begin{tikzcd}[column sep=small]
-      a & a + b \ar["{p_a}", l, swap] \ar["{p_b}", r] & b
+      A & A + B \ar["{p_A}", l, swap] \ar["{p_B}", r] & B
     \end{tikzcd}
   \]
   è un prodotto in \(\cat C\).
 \end{proposition}
 
-In breve: in categorie preadditive si ha \(a \times b \cong a+b\).
+In breve: in categorie preadditive si ha \(A \times B \cong A+B\).
 
 \begin{proof}
   Possiamo limitarci a dimostrare solo il primo fatto. Consideriamo un
   qualsiasi oggetto con morfismi
   \[
     \begin{tikzcd}[column sep=small]
-      a \ar["f", r] & c & b \ar["g", l, swap]
+      A \ar["f", r] & C & B \ar["g", l, swap]
     \end{tikzcd}
   \]
-  e cerchiamo un modo di costruire un morfismo \(a \times b \to c\). Le
-  frecce \(f \circ p_a\) e \(g \circ p_b\) sono di questo tipo, ma non vanno
-  bene per i nostri scopi. Invece la somma sì, perché il diagramma
+  e cerchiamo un modo di costruire un morfismo \(A \times B \to C\). Le
+  frecce \(f p_A\) e \(g p_B\) sono di questo tipo, ma non vanno bene
+  per i nostri scopi. Invece la somma sì: il diagramma
   \[
     \begin{tikzcd}[row sep=large]
-      & c \\
-      a \ar["{i_a}", r, swap] \ar["f", ur, bend left] & a + b \ar["{f \circ p_a + g \circ
-        p_b}" description, u] & b
-      \ar["{i_b}", l] \ar["g", ul, bend right, swap]
+      & C \\
+      A \ar["{i_A}", r, swap] \ar["f", ur, bend left] & A \times B
+      \ar["{f p_A + g p_B}" description, u] & B \ar["{i_B}", l] \ar["g",
+      ul, bend right, swap]
     \end{tikzcd}
   \]
   commuta.
 \end{proof}
 
 \begin{definition}\label{definition:Biprodotto}
-  Un {\em biprodotto} in una categoria preadditiva consta di oggetti e frecce
+  Un {\em biprodotto} in una categoria preadditiva consta di oggetti e
+  frecce
   \[
     \begin{tikzcd}
-      a \ar["{i_a}", r, shift right, swap] & c \ar["{p_a}", l, shift
-      right, swap] \ar["{p_b}", r, shift left] & b \ar["{i_b}", l,
-      shift left]
+      A \ar["{i_A}", r, shift right, swap] & C \ar["{p_A}", l, shift
+      right, swap] \ar["{p_B}", r, shift left] & B \ar["{i_B}", l, shift
+      left]
     \end{tikzcd}
   \]
   tali che
   \begin{align}
-    & p_a \circ i_a = \id_a \label{eqn:Biprod1} \\
-    & p_b \circ i_b = \id_b \label{eqn:Biprod2}\\
-    & i_a \circ p_a + i_b \circ p_b = \id_c \label{eqn:Biprod3}
+    & p_A i_A = \id_A \label{eqn:Biprod1} \\
+    & p_B i_B = \id_B \label{eqn:Biprod2}\\
+    & i_A p_A + i_B p_B = \id_C \label{eqn:Biprod3}
   \end{align}
 \end{definition}
 
@@ -405,38 +418,36 @@ In breve: in categorie preadditive si ha \(a \times b \cong a+b\).
   Dalle identità~\ref{eqn:Biprod1}, \ref{eqn:Biprod2}
   e~\ref{eqn:Biprod3} discendono
   \begin{align}
-    & p_a \circ i_b = 0_b^a \label{eqn:Biprod4} \\
-    & p_b \circ i_a = 0_a^b \label{eqn:Biprod5}
+    & p_A i_B = 0_B^A \label{eqn:Biprod4} \\
+    & p_B i_A = 0_A^B \label{eqn:Biprod5}
   \end{align}
   Proviamo solo la prima visto che l'altra si fa similmente.
   \[
-    p_a \underbrace{=}_{\mathclap{\eqref{eqn:Biprod3}}} p_a \circ \left(
-      i_a \circ p_a + i_b \circ p_b \right)
-    \underbrace{=}_{\mathclap{\eqref{eqn:Biprod1}}} p_a + p_a \circ i_b
-    \circ p_b
+    p_A \underbrace{=}_{\mathclap{\eqref{eqn:Biprod3}}} p_A \left( i_A
+      p_A + i_B p_B \right)
+    \underbrace{=}_{\mathclap{\eqref{eqn:Biprod1}}} p_A + p_A i_B p_B
   \]
   da cui
   \[
-    p_a \circ i_b \circ p_b = 0_c^a .
+    p_A i_B p_B = 0_C^A .
   \]
-  Postcomponendo con \(i_b\) e usando~\eqref{eqn:Biprod2}, concludiamo
-  \(p_a \circ i_b = 0_b^a\).
+  Postcomponendo con \(i_B\) e usando~\eqref{eqn:Biprod2}, concludiamo
+  \(p_A i_B = 0_B^A\).
 \end{remark}
 
 Un'altra proprietà utile per il futuro è questa.
 
 \begin{proposition}
-  I morfismi \(i_a\) e \(i_b\) della
+  I morfismi \(i_A\) e \(i_B\) della
   Definizione~\ref{definition:Biprodotto} sono monici. I morfismi
-  \(p_a\) e \(p_b\) invece sono epici.
+  \(p_A\) e \(p_B\) invece sono epici.
 \end{proposition}
 
 \begin{proof}
-  Ad esempio, sia \(i_a \circ f = i_a \circ g\). Precomponendo ambo i
-  mebri con \(p_a\), a causa di~\eqref{eqn:Biprod1}, si ha \(f =
-  g\). Sia ora \(k \circ p_a = h \circ p_a\). Postcomponendo ambi membri
-  per \(i_a\), sempre a causa di~\eqref{eqn:Biprod1}, si arriva a
-  \(h = k\).
+  Ad esempio, sia \(i_A f = i_A g\). Precomponendo ambo i mebri con
+  \(p_A\), a causa di~\eqref{eqn:Biprod1}, si ha \(f = g\). Sia ora
+  \(k p_A = h p_A\). Postcomponendo ambi membri per \(i_A\), sempre a
+  causa di~\eqref{eqn:Biprod1}, si arriva a \(h = k\).
 \end{proof}
 
 I biprodotti sono prodotti e coprodotti binari.
@@ -446,27 +457,27 @@ I biprodotti sono prodotti e coprodotti binari.
   biprodotto
   \[
     \begin{tikzcd}
-      a \ar["{i_a}", r, shift right, swap] & c \ar["{p_a}", l, shift
-      right, swap] \ar["{p_b}", r, shift left] & b \ar["{i_b}", l, shift
+      A \ar["{i_A}", r, shift right, swap] & C \ar["{p_A}", l, shift
+      right, swap] \ar["{p_B}", r, shift left] & B \ar["{i_B}", l, shift
       left]
     \end{tikzcd}
   \]
-  allora la coppia di frecce \(p_a\) e \(p_b\) è prodotto e la coppia
-  \(i_a\) e \(i_b\) è coprodotto.  In particolare, presi
-  \(d \in \obj{\cat C}\) e una coppia di frecce
-  uscenti \begin{tikzcd}[cramped, column sep=small] a & c \ar["{f}", l,
-    swap] \ar["{g}", r] & b
+  allora la coppia di frecce \(p_A\) e \(p_B\) è prodotto e la coppia
+  \(i_A\) e \(i_B\) è coprodotto.  In particolare, presi
+  \(D \in \obj{\cat C}\) e una coppia di frecce
+  uscenti \begin{tikzcd}[cramped, column sep=small] A & C \ar["{f}", l,
+    swap] \ar["{g}", r] & B
   \end{tikzcd},
   \[
-    (f, g) = i_a \circ f + i_b \circ g .
+    (f, g) = i_A \circ f + i_B \circ g .
   \]
   Invece presi \(e \in \obj{\cat C}\) e una coppia di
-  morfismi \begin{tikzcd}[cramped, column sep=small] a \ar["{h}", r] & c
-    & b \ar["{k}", l, swap]
+  morfismi \begin{tikzcd}[cramped, column sep=small] A \ar["{h}", r] & C
+    & B \ar["{k}", l, swap]
   \end{tikzcd},
-  \[ [h, k] = h \circ p_a + k \circ p_b .
+  \[ [h, k] = h \circ p_A + k \circ p_B .
   \]
-  Infine, notare anche che \(c \cong a \times b \cong a + b\).
+  Infine, notare anche che \(C \cong A \times B \cong A + B\).
 \end{proposition}
 
 \begin{proof}
@@ -474,17 +485,17 @@ I biprodotti sono prodotti e coprodotti binari.
   con un ragionamento non tanto diverso. Grazie a~\eqref{eqn:Biprod1}
   e~\eqref{eqn:Biprod4} abbiamo
   \begin{align*}
-    & p_a \circ \left( i_a \circ f + i_b \circ g \right) = f \\
-    & p_b \circ \left( i_a \circ f + i_b \circ g \right) = g
+    & p_A \circ \left( i_A \circ f + i_B \circ g \right) = f \\
+    & p_B \circ \left( i_A \circ f + i_B \circ g \right) = g
   \end{align*}
-  Ora se \(h : d \to c\) è tale che \(p_a \circ h = f\) e
-  \(p_b \circ h = g\), allora
+  Ora se \(h : D \to C\) è tale che \(p_A \circ h = f\) e
+  \(p_B \circ h = g\), allora
   \[
-    h = \id_{c} \circ h \underbrace{=}_{\mathclap{\eqref{eqn:Biprod3}}}
-    \left( i_a \circ p_a + i_b \circ p_b \right) \circ h = i_a \circ f +
-    i_b \circ g .
+    h = \id_C \circ h \underbrace{=}_{\mathclap{\eqref{eqn:Biprod3}}}
+    \left( i_A \circ p_A + i_B \circ p_B \right) \circ h = i_A \circ f +
+    i_B \circ g .
   \]
-  Possiamo quindi concludere che le frecce \(p_a\) e \(p_b\) formano un
+  Possiamo quindi concludere che le frecce \(p_A\) e \(p_B\) formano un
   prodotto.
 \end{proof}
 
@@ -494,33 +505,33 @@ Vale anche il viceversa.
   In una categoria preadditiva con oggetto zero \(0\), un prodotto
   \[
     \begin{tikzcd}[column sep=small]
-      a & a \times b \ar["{p_a}", l, swap] \ar["{p_b}", r] & b
+      A & A \times B \ar["{p_A}", l, swap] \ar["{p_B}", r] & B
     \end{tikzcd}
   \]
   dà un biprodotto
   \[
     \begin{tikzcd}
-      a \ar["{i_a}", r, shift right, swap] & a \times b \ar["{p_a}", l,
-      shift right, swap] \ar["{p_b}", r, shift left] & b \ar["{i_b}", l,
+      A \ar["{i_A}", r, shift right, swap] & A \times B \ar["{p_A}", l,
+      shift right, swap] \ar["{p_B}", r, shift left] & B \ar["{i_B}", l,
       shift left]
     \end{tikzcd}
   \]
-  in cui \(i_a\) e \(i_b\) sono introdotti come
+  in cui \(i_A\) e \(i_B\) sono introdotti come
   in~\eqref{eq:InjViaProj}. Dualmente, un coprodotto
   \[
     \begin{tikzcd}[column sep=small]
-      a \ar["{i_a}", r] & a + b & b \ar["{i_b}", l, swap]
+      A \ar["{i_A}", r] & A + B & B \ar["{i_B}", l, swap]
     \end{tikzcd}
   \]
   dà un biprodotto
   \[
     \begin{tikzcd}
-      a \ar["{i_a}", r, shift right, swap] & a+b \ar["{p_a}", l, shift
-      right, swap] \ar["{p_b}", r, shift left] & b \ar["{i_b}", l, shift
+      A \ar["{i_A}", r, shift right, swap] & A+B \ar["{p_A}", l, shift
+      right, swap] \ar["{p_B}", r, shift left] & B \ar["{i_B}", l, shift
       left]
     \end{tikzcd}
   \]
-  in cui \(p_a\) e \(p_b\) sono introdotti come
+  in cui \(p_A\) e \(p_B\) sono introdotti come
   in~\eqref{eq:ProjViaInj}.
 \end{proposition}
 
@@ -530,59 +541,59 @@ Vale anche il viceversa.
   esempio che i prodotti danno biprodotti. Le
   identità~\eqref{eqn:Biprod1}, \eqref{eqn:Biprod2}, \eqref{eqn:Biprod4}
   e~\eqref{eqn:Biprod5} discendono direttamente da come sono introdotte
-  \(i_a\) e \(i_b\). Consideriamo ora il morfismo
+  \(i_A\) e \(i_B\). Consideriamo ora il morfismo
   \[
-    i_a \circ p_a + i_b \circ p_b : a \times b \to a \times b .
+    (f, g) = i_A f + i_B g .
   \]
-  Componendo una volta con \(p_a\) e l'altra con \(p_b\) si ha
+  Componendo una volta con \(p_A\) e l'altra con \(p_B\) si ha
   \begin{align*}
-    & p_a \circ \left(i_a \circ p_a + i_b \circ p_b\right) = \underbrace{p_a \circ
-      i_a}_{= \id_a} \circ p_a + \underbrace{p_a
-      \circ i_b}_{= 0_b^a} \circ p_b = p_a \\
-    & p_b \circ \left(i_a \circ p_a + i_b \circ p_b\right) = \underbrace{p_b \circ
-      i_a}_{= 0_a^b} \circ p_a + \underbrace{p_b
-      \circ i_b}_{= \id_b} \circ p_b = p_b
+    & p_A \left( i_A f + i_B g \right) = f \\
+    & p_B \left( i_A f + i_B g \right) = g
   \end{align*}
-  Per la proprietà universale di prodotto, si può concludere che
+  Ora se \(h : D \to C\) è tale che \(p_A h = f\) e \(p_B h = g\),
+  allora
   \[
-    i_a \circ p_a + i_b \circ p_b = \id_{a \times b} . \qedhere
+    h = \id_C h \underbrace{=}_{\mathclap{\eqref{eqn:Biprod3}}} \left(
+      i_A p_A + i_B p_B \right) h = i_A f + i_B g .
   \]
+  Possiamo quindi concludere che le frecce \(p_A\) e \(p_B\) formano un
+  prodotto.
 \end{proof}
 
 La morale della storia è che in categorie preadditive esiste un modo
 piuttosto compatto di esprimere prodotti e coprodotti (che sono la
 stessa cosa) senza passare per le proprietà universali. E poiché
-\(a \times b \cong a + b\), si decide di indicare uno qualsiasi di
-questi oggetti con \(a \oplus b\).
+\(A \times B \cong A + B\), si decide di indicare uno qualsiasi di
+questi oggetti con \(A \oplus B\).
 
 \begin{definition}
   Una {\em categoria additiva} è una categoria che ha oggetto zero e che
-  per ogni coppia di oggetti \(a\) e \(b\) possiede biprodotto
+  per ogni coppia di oggetti \(A\) e \(B\) possiede biprodotto
   \[
     \begin{tikzcd}
-      a \ar["{i_a^{ab}}", r, shift right, swap] & a \oplus b
-      \ar["{p_a^{ab}}", l, shift right, swap] \ar["{p_b^{ab}}", r, shift
-      left] & b \ar["{i_b^{ab}}", l, shift left]
+      A \ar["{i_A^{AB}}", r, shift right, swap] & A \oplus B
+      \ar["{p_A^{AB}}", l, shift right, swap] \ar["{p_B^{AB}}", r, shift
+      left] & B \ar["{i_B^{AB}}", l, shift left]
     \end{tikzcd}
   \]
 \end{definition}
 
-Spesso è ovvio dal contesto e quindi scriveremo semplicemente \(p_a\) al
-posto di \(p_a^{ab}\) e così via.
+Spesso è ovvio dal contesto e quindi scriveremo semplicemente \(p_A\) al
+posto di \(p_A^{AB}\) e così via.
 
-Vedendo \(a \oplus b\) come \(a \times b\), presi due morfismi
-\(f : a \to b\) e \(g : c \to d\), definiamo
-\(f \oplus g : a \oplus c \to b \oplus d\) come \(f \times g\), cioè
-come l'unica freccia \(a \oplus c \to b \oplus d\) che fa commutare
+Vedendo \(A \oplus B\) come \(A \times B\), presi due morfismi
+\(f : A \to B\) e \(g : C \to D\), definiamo
+\(f \oplus g : A \oplus C \to B \oplus D\) come \(f \times g\), cioè
+come l'unica freccia \(A \oplus C \to B \oplus D\) che fa commutare
 \[
   \begin{tikzcd}
-    a \ar["{f}", d, swap] & a \oplus c \ar["{p_a^{ac}}", l, swap]
-    \ar["{}", d] \ar["{p_c^{ac}}", r] & c \ar["{g}", d] \\
-    b & b \oplus d \ar["{p_b^{bd}}", l] \ar["{p_d^{bd}}", r, swap] & d
+    A \ar["{f}", d, swap] & A \oplus C \ar["{p_A^{AC}}", l, swap]
+    \ar["{}", d] \ar["{p_C^{AC}}", r] & C \ar["{g}", d] \\
+    B & B \oplus D \ar["{p_B^{BD}}", l] \ar["{p_D^{BD}}", r, swap] & D
   \end{tikzcd}
 \]
 Sfruttando questa volta la proprietà universale di coprodotto, vedendo
-\(a \oplus b\) come \(a + b\), si può definire \(f \oplus g\) come
+\(A \oplus B\) come \(A + B\), si può definire \(f \oplus g\) come
 \(f + g\).
 
 
@@ -592,25 +603,22 @@ Parliamo dei pullback e dei pushout ora. Sia \(\cat C\) una categoria
 additiva e consideriamo in essa il quadrato commutativo
 \[
   \begin{tikzcd}
-    a \ar["{f}", r] \ar["{f'}", d, swap] & b \ar["{g}", d] \\
-    c \ar["{g'}", r, swap] & d
+    A \ar["{f}", r] \ar["{f'}", d, swap] & B \ar["{g}", d] \\
+    C \ar["{g'}", r, swap] & D
   \end{tikzcd}
 \]
 e ``schiacciamo'' il tutto in questo modo
 \[
   \begin{tikzcd}
-    a \ar["{(f, f')}", r] & b \oplus c \ar["{[g, -g']}", r] & d
+    A \ar["{(f, f')}", r] & B \oplus C \ar["{[g, -g']}", r] & D
   \end{tikzcd}
 \]
 Il motivo per cui è \([g, -g']\) e non \([g, g']\) viene spiegato
 subito. Grazie alla
 Proposizione~\ref{proposition:BiprodsAreProdsAndCoprods}, abbiamo
 un'espressione esplicita per \((f,f')\) e \([g,-g']\) e quindi:
-\begin{align*} [g, -g'] \circ (f, f') &= (g \circ p_b + (-g') \circ p_c)
-  \circ (i_b
-                                        \circ f + i_c \circ f') = \\
-                                      &= g \circ f - g' \circ f' = 0_a^d
-                                        .
+\begin{align*} [g, -g'] (f, f') &= (g p_B + (-g') p_C) (i_B f + i_C f') = \\
+                                &= g f - g' f' = 0_A^D .
 \end{align*}
 Quindi c'è la possibilità di inserirsi in un discorso in cui partecipano
 pullback/pushout e kernel/cokernel.
@@ -619,12 +627,14 @@ pullback/pushout e kernel/cokernel.
   In una categoria additiva \(\cat C\) il quadrato
   \[
     \begin{tikzcd}
-      a \ar["{f}", r] \ar["{f'}", d, swap] & b \ar["{g}", d] \\
-      c \ar["{g'}", r, swap] & d
+      A \ar["{f}", r] \ar["{f'}", d, swap] & B \ar["{g}", d] \\
+      C \ar["{g'}", r, swap] & D
     \end{tikzcd}
   \]
-  è di pullback se e solo se \((f, f') : a \to b \oplus c\) è kernel di
-  \([g, -g'] : b \oplus c \to d\).
+  è un quadrato di pullback se e solo se \((f, f') : A \to B \oplus C\)
+  è kernel di \([g, -g'] : B \oplus C \to D\). Dualmente, lo stesso
+  quadrato è di pushout se e solo se \([g, -g'] : B \oplus C \to D\) è
+  cokernel di \((f, f') : A \to B \oplus C\).
 \end{proposition}
 
 \begin{proof}
@@ -633,55 +643,49 @@ pullback/pushout e kernel/cokernel.
   (\(\Rightarrow\)) In questo parte del lavoro è già fatto. Sia quindi
   \[
     \begin{tikzcd}
-      e \ar["{h}", r] & b \oplus c \ar["{[g, -g']}", r, shift left]
-      \ar["{0_{b \oplus c}^d}", r, shift right, swap] & d
+      E \ar["{h}", r] & B \oplus C \ar["{[g, -g']}", r, shift left]
+      \ar["{0_{B \oplus C}^D}", r, shift right, swap] & D
     \end{tikzcd}
   \]
-  commutativo. Abbiamo cioè
-  \([g, -g'] \circ h = g \circ p_b \circ h - g' \circ p_c \circ h =
-  0_e^d\), vale a dire commuta il quadrato esterno in
+  commutativo. Abbiamo cioè \([g, -g'] h = g p_B h - g' p_C h = 0_E^D\),
+  vale a dire commuta il quadrato esterno in
   \[
     \begin{tikzcd}
-      e \ar["{p_b \circ h}", drr, bend left] \ar["{p_c \circ h}", ddr,
-      swap,
+      E \ar["{p_B h}", drr, bend left] \ar["{p_C h}", ddr, swap,
       bend right] \\
-      & {\color{gray} a} \ar["{f}" gray, gray, r, swap] \ar["{f'}" gray, gray, d] & b \ar["{g}", d] \\
-      & c \ar["{g'}", r, swap] & d
+      & {\color{gray} A} \ar["{f}" gray, gray, r, swap] \ar["{f'}" gray, gray, d] & B \ar["{g}", d] \\
+      & C \ar["{g'}", r, swap] & D
     \end{tikzcd}
   \]
   Per la proprietà universale di pullback, esiste un unico
-  \(k : e \to a\) per cui \(f \circ k = p_b \circ h\) e
-  \(f' \circ k = p_c \circ h\). Rimane quindi da verificare che
-  \((f, f') \circ k = h\):
+  \(k : E \to A\) per cui \(f k = p_B h\) e \(f' k = p_C h\). Rimane
+  quindi da verificare che \((f, f') k = h\):
   \begin{align*}
-    (f, f') \circ k &= i_b \circ \underbrace{f \circ
-                      k}_{\crampedclap{=p_b \circ h}} + i_c \circ \underbrace{f'
-                      \circ k}_{\crampedclap{=p_c \circ h}} = \\
-                    &= \underbrace{(i_b \circ p_b + i_c \circ
-                      p_c)}_{\id_{b \oplus c}} \circ h = h
+    (f, f') k &= i_B \underbrace{f k}_{\crampedclap{=p_B h}} + i_C \underbrace{f' k}_{\crampedclap{=p_C h}} = \\
+              &= \underbrace{(i_B p_B + i_C p_C)}_{\id_{B \oplus C}} h = h
   \end{align*}
-  \(k\) è l'unico a fare ciò. Se \(k' : e \to a\) è tale che
-  \((f, f') \circ k' = h\), allora precomponendo una volta per \(p_b\) e
-  un'altra per \(p_c\), abbiamo \(f \circ k' = p_b \circ h\) e
-  \(f' \circ k = p_c \circ h'\). Ma questo, per la proprietà universale
-  di pullback significa che \(k = k'\).\newline
+  \(k\) è l'unico a fare ciò. Se \(k' : E \to A\) è tale che
+  \((f, f') k' = h\), allora precomponendo una volta per \(p_B\) e
+  un'altra per \(p_C\), abbiamo \(f k' = p_B h\) e \(f' k = p_C h'\). Ma
+  questo, per la proprietà universale di pullback significa che
+  \(k = k'\).\newline
   % \item[(\(\Leftarrow\))]
   (\(\Leftarrow\)) Verifichiamo anzitutto che il quadrato è
   commutativo. Poiché \((f, f')\) è kernel di \([g, -g']\), allora
-  \([g, -g'] \circ (f, f') = 0_a^d\), e questo è un conto che abbiamo
-  già fatto. Prendiamo ora un qualsiasi quadrato commutativo
+  \([g, -g'] (f, f') = 0_A^D\), e questo è un conto che abbiamo già
+  fatto. Prendiamo ora un qualsiasi quadrato commutativo
   \[
     \begin{tikzcd}
-      e \ar["{s}", r] \ar["{s'}", d, swap] & b \ar["{g}", d] \\
-      c \ar["{g'}", r, swap] & d
+      E \ar["{s}", r] \ar["{s'}", d, swap] & B \ar["{g}", d] \\
+      C \ar["{g'}", r, swap] & D
     \end{tikzcd}
   \]
-  Come abbiamo visto sopra, possiamo ottenere
-  \([g, -g'] \circ (r, r') = 0_e^d = 0_{b \oplus c}^d \circ (h,
-  h')\). Per la proprietà universale di equalizzatore, abbiamo che
-  esiste uno e un solo \(s : e \to a\) tale che
-  \((f, f') \circ s = (r, r')\). Da qui, per concludere è sufficiente
-  precomporre una volta con \(p_b\) e un'altra con \(p_c\). %\qedhere
+  Come abbiamo visto, possiamo ottenere
+  \([g, -g'] (r, r') = 0_E^D = 0_{B \oplus C}^D (h, h')\). Per la
+  proprietà universale di equalizzatore, abbiamo che esiste uno e un
+  solo \(s : E \to A\) tale che \((f, f') s = (r, r')\). Da qui, per
+  concludere è sufficiente precomporre una volta con \(p_B\) e un'altra
+  con \(p_C\). %\qedhere
   % \end{itemize}
 \end{proof}
 
@@ -691,19 +695,19 @@ pullback/pushout e kernel/cokernel.
 Parliamo ora di equalizzatori e coequalizzatori. Il discorso è piuttosto
 semplice.
 
-\begin{proposition}
+\begin{proposition}\label{proposition:EqualizersAreKernels}
   In una categoria preadditiva \(\cat C\) con oggetto zero \(0\), gli
   equalizzatori di
   \[
     \begin{tikzcd}
-      a \ar["f", r, shift left] \ar["g", r, shift right, swap] & b
+      A \ar["f", r, shift left] \ar["g", r, shift right, swap] & B
     \end{tikzcd}
   \]
   sono equalizzatori di
   \[
     \begin{tikzcd}
-      a \ar["{f-g}", r, shift left] \ar["{0_a^b}", r, shift right, swap]
-      & b
+      A \ar["{f-g}", r, shift left] \ar["{0_A^B}", r, shift right, swap]
+      & B
     \end{tikzcd}
   \]
   e viceversa. Analogamente vale per i coequalizzatori.
@@ -716,15 +720,15 @@ della differenza dei due.
   Basta osservare che
   \[
     \begin{tikzcd}
-      e \ar["i", r] & a \ar["f", r, shift left] \ar["g", r, shift right,
-      swap] & b
+      E \ar["i", r] & A \ar["f", r, shift left] \ar["g", r, shift right,
+      swap] & B
     \end{tikzcd}
   \]
   commuta se e solo se commuta
   \[
     \begin{tikzcd}
-      e \ar["i", r] & a \ar["{f-g}", r, shift left] \ar["{0_a^b}", r,
-      shift right, swap] & b
+      E \ar["i", r] & A \ar["{f-g}", r, shift left] \ar["{0_A^B}", r,
+      shift right, swap] & B
     \end{tikzcd}
     \qedhere\]
 \end{proof}
