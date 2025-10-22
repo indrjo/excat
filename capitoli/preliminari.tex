@@ -171,6 +171,57 @@ Comporre con un morfismo nullo dà un morfismo nullo. Più precisamente:
   % \end{enumerate}
 \end{example}
 
+\begin{recall}[La categoria \(\Ban\)]
+  Uno {\em spazio di Banach} è uno spazio normato
+  \((X, \left\lVert \cdot \right\rVert)\) su un campo \(k\) (che spesso è
+  \(\mathbb{R}\) oppure \(\mathbb{C}\)) che è uno spazio metrico completo
+  rispetto alla distanza
+  \[
+    d : X \times X \to \mathbb{R} \,, \ d(x, y) := \left\lVert x-y \right\rVert .
+  \]
+  Un'applicazione lineare tra spazi normati
+  \(f : (X, \left\lVert \cdot \right\rVert_X) \to (Y, \left\lVert \cdot
+  \right\rVert_Y)\) è detta {\em limitata} qualora esiste \(M > 0\) per
+  cui
+  \[
+    \left\lVert f x \right\rVert \le M \left\lVert x \right\rVert_X
+    \quad\text{per ogni } x \in X .
+  \]
+  Indichiamo con \(\Ban\) la categoria degli spazi di Banach e delle
+  applicazioni lineari limitate. Poiché esiste un funtore dimenticante
+  fedele \(U : \Ban \to \Vect_k\), anche \(\Ban\) ha oggetto zero, lo
+  spazio vettoriale banale.
+\end{recall}
+
+\begin{example}
+  Anche in \(\Ban\), come in \(\Modu_R\), il kernel di un'applicazione
+  lineare limitata con l'inclusione forma un kernel nel senso della
+  nostra definizione.
+\end{example}
+
+\begin{recall}
+  Dato uno spazio di Banach \((X, \left\lVert \cdot \right\rVert)\) e un suo
+  sottospazio chiuso \(M\), allora lo spazio vettoriale quoziente
+  \(X/M\) diventa uno spazio di Banach se considerato insieme alla norma
+  indotta sul quoziente così definita:
+  \[
+    \lsem x + M \rsem := \inf_{m \in M} \left\lVert x+m \right\rVert .
+  \]
+  In generale, non è detto che il passaggio al quoziente per un
+  sottospazio non chiuso induca una norma e dia origine ad uno spazio di
+  Banach. Se si vuole uno spazio di Banach, quindi o ci si assicura che
+  il sottospazio in questione è chiuso oppure si prende la sua chiusura
+  (topologica).
+\end{recall}
+
+\begin{example}
+  Altra storia invece per i cokernel in \(\Ban\). Sia
+  \(f : (X, \left\lVert \cdot \right\rVert_X) \to (Y, \left\lVert \cdot
+  \right\rVert_Y)\) un'applicazione lineare limitata. Allora il cokernel
+  di \(f\) è la proiezione canonica al quoziente
+  \(Y \to {Y}{/}{\bar{\im f}}\).
+\end{example}
+
 \begin{remark}
   In Algebra, kernel e cokernel sono degli oggetti, mentre
   tecnicamente come sono definiti qui sono dei morfismi.
@@ -216,7 +267,20 @@ elemento neutro e per ogni \(f : a \to b\) è unico l'opposto. In
 coerenza con la notazione additiva indichiamo con \(- f\) l'opposto di
 \(f : a \to b\).
 
-\begin{example}[\(\Modu_R\)] {\color{red} [Scrivere esempio.]}
+\begin{example}
+  La categoria dei moduli su un fissato anello \(R\) è un semplice
+  esempio di categoria preadditiva. Infatti, gli insiemi
+  \(\Modu_R (M, N)\), con \(M\) e \(N\) moduli, sono gruppi abeliani con
+  l'operazione \(+\) in cui \(f + g\) è l'applicazione lineare
+  \(x \mapsto f(x) + g(x)\). Per questioni di linearità, segue anche che le
+  pre- e post-composizioni sono omomorfismi di gruppi abeliani.
+\end{example}
+
+\begin{example}
+  Anche \(\Ban\) è una categoria preadditiva con le operazioni di somma
+  di morfismi definite come in \(\Modu_R\): infatti se \(f, g
+  : E \to F\) sono applicazioni lineari limitate, allora anche \(f + g\)
+  lo è.
 \end{example}
 
 Un'altra osservazione da fare è questa. Il simbolo \(0_A^B\) in una
@@ -288,7 +352,7 @@ precauzione, anche nelle categorie preadditive.
 \end{proof}
 
 
-\section{Limiti e limiti}
+\section{Limiti e colimiti}
 
 Ora parleremo di alcune peculiarità dei limiti e dei colimiti in
 categorie preadditive.
@@ -617,6 +681,40 @@ questi oggetti con \(A \oplus B\).
 
 Spesso è ovvio dal contesto e quindi scriveremo semplicemente \(p_A\) al
 posto di \(p_A^{AB}\) e così via.
+
+\begin{example}
+  \(\Modu_R\) è una categoria additiva. Siano \(M\) e \(N\) due
+  \(R\)-moduli. Anche \(M \oplus N := M \times N\) con somma e moltiplicazione per
+  scalare definita per componenti è un \(R\)-modulo. Consideriamo
+  \[
+    \begin{tikzcd}
+      M \ar["{i_M}", r, shift right, swap] & M \oplus N
+      \ar["{p_M}", l, shift right, swap] \ar["{p_N}", r, shift
+      left] & N \ar["{i_N}", l, shift left]
+    \end{tikzcd}
+  \]
+  dove \(p_M(m, n) = m\), \(p_N(m, n) = n\), \(i_M (m) = (m, 0)\) e
+  \(i_N(n) = (0, n)\): questo è un biprodotto in \(\Modu_R\).
+\end{example}
+
+\begin{example}
+  Siano \((X, \left\lVert \cdot \right\rVert_X)\) e
+  \((Y, \left\lVert \cdot \right\rVert_Y)\) due spazi di Banach. Allora lo
+  spazio vettoriale \(X \oplus Y\) con la norma
+  \begin{align*}
+    & \left\lVert \cdot \right\rVert_{X \oplus Y} : (X \oplus Y)^2 \to \mathbb{R} \\
+    & \left\lVert (x, y)_{X \oplus Y} \right\rVert := \left\lVert x \right\rVert_X + \left\lVert y \right\rVert_Y
+  \end{align*}
+  è uno spazio di Banach. Un biprodotto in \(\Ban\) è della forma
+  \[
+    \begin{tikzcd}
+      X \ar["{i_X}", r, shift right, swap] & X \oplus Y \ar["{p_X}", l, shift
+      right, swap] \ar["{p_Y}", r, shift left] & Y \ar["{i_Y}", l, shift
+      left]
+    \end{tikzcd}
+  \]
+  con le proiezioni e le inclusioni definite come in \(\Modu_R\).
+\end{example}
 
 Vedendo \(A \oplus B\) come \(A \times B\), presi due morfismi
 \(f : A \to B\) e \(g : C \to D\), definiamo
