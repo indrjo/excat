@@ -634,6 +634,153 @@ Sfruttando questa volta la proprietà universale di coprodotto, vedendo
 \(f + g\).
 
 
+\subsection{Notazione matriciale}
+
+\begin{example}
+  In generale, se \(R\) è un anello, possiamo considerare il modulo
+  \[
+    R^n : = \underbrace{R \oplus \dots{} \oplus R}_{n \text{ volte}}.
+  \]
+  Allora per ogni funzione lineare \(f : R^m \to R^n\), esiste un'unica
+  matrice \(A\) ad entrate in \(R\) di tipo \(n \times m\) tale che
+  \[
+    f(x) = A x \text{ per ogni } x \in R^m .
+  \]
+  (Vedi~\cite{aluffi:algebra}.) Le entrate di \(A_{ij}\) sono elementi
+  di \(R\), ma non è un problema reimmaginare \(A_{ij}\) come la
+  funzione lineare
+  \[
+    R \to R\,,\ x \to A_{ij}x .
+  \]
+  Di conseguenza, \(A\) diventa una tabella di funzioni lineari
+  \(A_{ij} : R \to R\). In tale caso, se si hanno due matrici \(A\) e
+  \(B\) di tipo \(m \times n\) e \(n \times r\) e si vuole
+  moltiplicarle, allora il prodotto \(A_{ij} B_{jk}\) di elementi di
+  \(R\) può essere reinterpretato come composizione di due funzioni
+  lineari.
+\end{example}
+
+Nell'esempio precedente abbiamo usato come \(R\)-moduli oggetti del tipo
+\(R^n\). Tuttavia la notazione matriciale potrebbe essere esportata in
+un caso più generale, in cui le entrate delle matrici non sono
+endomorfismi di \(R\), ma in generale morfismi.
+
+È questo quello che facciamo adesso, almeno per matrici piccole, del
+tipo \(1 \times 2\), \(2 \times 1\) e \(2 \times 2\), e lo facciamo da
+subito in una categoria additiva \(\cat C\) qualsiasi.
+
+Dati due morfismi
+\(\begin{tikzcd}[column sep=small, cramped] A & C \ar["{f}", l, swap]
+  \ar["{g}", r] & B
+\end{tikzcd}\), rinominiamo \((f, g) : C \to A \oplus B\) come una {\em
+  matrice colonna}
+\[
+  \begin{pmatrix}
+    f \\
+    g
+  \end{pmatrix} .
+\]
+Similmente, presi due morfismi
+\(\begin{tikzcd}[column sep=small, cramped] A \ar["{f}", r] & C & B
+  \ar["{g}", l, swap]
+\end{tikzcd}\) riscriviamo \([f, g] : A \oplus B \to C\) come una {\em
+  matrice riga}
+\[
+  \begin{pmatrix}
+    f & g
+  \end{pmatrix} .
+\]
+La composizione dei morfismi
+\[
+  \begin{tikzcd}[ampersand replacement=\&]
+    C \ar["{\begin{psmallmatrix} f \\ g \end{psmallmatrix}}", r] \& A
+    \oplus B \ar["{\begin{psmallmatrix} f' & g' \end{psmallmatrix}}", r]
+    \& D
+  \end{tikzcd}
+\]
+ricorda veramente l'usuale prodotto di una matrice \(1 \times 2\) per
+una matrice \(2 \times 1\):
+\[
+  \begin{pmatrix}
+    f' & g'
+  \end{pmatrix} \begin{pmatrix}
+    f \\ g
+  \end{pmatrix}
+  = f' f + g g'
+\]
+Una dimostrazione di questo fatto discende direttamente dalla
+Proposizione~\ref{proposition:BiprodsAreProdsAndCoprods}
+
+In particolare, notiamo che (vedi
+Proposizione~\ref{proposition:BinProdsAreBinCoprods})
+\begin{align*}
+  & p_A =
+    \begin{pmatrix}
+      \id_A & 0_B^A
+    \end{pmatrix} \\
+  & p_B =
+    \begin{pmatrix}
+      0_A^B & \id_B
+    \end{pmatrix} \\
+  & i_A =
+    \begin{pmatrix}
+      \id_A \\ 0_A^B
+    \end{pmatrix} \\
+  & i_B =
+    \begin{pmatrix}
+      0_B^A \\ \id_B
+    \end{pmatrix}
+\end{align*}
+
+Ora consideriamo i morfismi
+\[
+  \begin{tikzcd}[column sep=large]
+    A \ar["{f_{AC}}", d, swap] \ar["{f_{AD}}" near start, dr] & B
+    \ar["{f_{BC}}" near end, dl] \ar["{f_{BD}}", d] \\
+    C & D
+  \end{tikzcd}
+\]
+Qui possiamo costruire le frecce
+% \begin{align*}
+%   & \left[ f_{AC}, f_{BC} \right] : A \oplus B \to C \\
+%   & \left[ f_{AD}, f_{BD} \right] : A \oplus B \to D
+% \end{align*}
+\begin{align*}
+  & \begin{pmatrix} f_{AC} & f_{BC} \end{pmatrix} : A \oplus B \to C \\
+  & \begin{pmatrix} f_{AD} & f_{BD} \end{pmatrix} : A \oplus B \to D
+\end{align*}
+da cui se ne origina un'altra
+% \[
+%   \left( \left[ f_{AC}, f_{BC} \right], \left[ f_{AD}, f_{BD} \right]
+%   \right) : A \oplus B \to C \oplus D .
+% \]
+\[
+  \begin{pmatrix}
+    \begin{pmatrix} f_{AC} & f_{BC} \end{pmatrix} \\
+    \begin{pmatrix} f_{AD} & f_{BD} \end{pmatrix}
+  \end{pmatrix} : A \oplus B \to C \oplus D .
+\]
+Una notazione migliore è una matrice:
+\[
+  \begin{pmatrix}
+    f_{AC} & f_{BC} \\
+    f_{AD} & f_{BD}
+  \end{pmatrix} : A \oplus B \to C \oplus D .
+\]
+In generale, scelti degli oggetti \(A_1, \dots, A_m\) e
+\(B_1, \dots, B_n\) e morfismi \(f_{ij} : A_i \to B_j\) in \(\cat C\),
+si può scrivere il morfismo indotto come sopra
+\[
+  \bigoplus_{i=1}^m A_i \to \bigoplus_{j=1}^n B_j
+\]
+come una matrice la cui entrata in posizione \((h, k)\) è
+\(f_{k h} : A_k \to B_h \). (Attenzione ai pedici!)
+
+Usando la definizione di biprodotto, si osserva facilmente che valgono
+le usuali regole di addizione e moltiplicazione.
+
+
+
 \subsection{Pullback e pushout}
 
 Parliamo dei pullback e dei pushout ora. Sia \(\cat C\) una categoria
