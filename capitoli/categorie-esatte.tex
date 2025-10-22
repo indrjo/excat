@@ -20,22 +20,24 @@ trovare in testi {\em elementari} come~\cite{buehler:exactcategories}.
   tali che \(i\) è un kernel di \(p\) e \(p\) è un cokernel di \(i\).
 \end{definition}
 
+Abbiamo visto che (Proposizione~\ref{proposition:MonoIsKerOfItsCoker})
+nelle categorie abeliane ogni monomorfismo (epimorfismo) è kernel
+(cokernel) del proprio cokernel (kernel). Quindi per questo tipo di
+categorie è molto facile trovare coppie ker-coker.
+
 \begin{example}
-  Sia in \(\Modu_R\) un omomorfismo \(f : M \to N\) e consideriamo la
-  proiezione al quoziente
+  Sia in \(\Modu_R\) un omomorfismo \(f : M \to N\) e consideriamo un
+  certo epimorfismo, la proiezione al quoziente
   \[
     \pi : M \to M/\ker f .
   \]
   Come si è visto (Esempio~\ref{example:KernelInModR}) il kernel è
-  \(\ker \pi = \ker f\) con l'inclusione. Viceversa
-  \[
-    i : \ker f \hookrightarrow M
-  \]
-  ha come cokernel \(\pi\) (Esempio~\ref{example:CokernelInModR}). Quindi
+  \(\ker \pi = \ker f\) con l'inclusione. Trattandosi di una categoria
+  abeliana, si ha che
   \[
     \begin{tikzcd}[column sep=small]
-      \ker f \ar["i", hookrightarrow, r] & M \ar["\pi", r] & \frac{M}{\ker
-        f}
+      \ker f \ar["i", hookrightarrow, r] & M \ar["\pi", r] &
+      \frac{M}{\ker f}
     \end{tikzcd}
   \]
   è una coppia ker-coker in \(\Modu_R\). In generale, se \(H\) è un
@@ -52,11 +54,11 @@ I seguenti lemmi sono in preparazione alla successiva definizione. Sono
 fatti la cui evidenza è sbalorditiva quando si tiene a mente una
 categoria additiva come \(\Modu_R\).
 
-Qual è il kernel dell'omomorfismo \(\id_M : M \to M\)? Il modulo banale. E
-il cokernel di \(0 \to M\)? È \(\frac{M}{\{0\}} \cong M\). Il kernel di
-\(M \to 0\)? \(M\) stesso. Il cokernel di \(\id_M : M \to M\)?
-\(\frac{M}{M} \cong 0\). Ecco come si scrive in un contesto astratto come
-questo.
+Qual è il kernel dell'omomorfismo \(\id_M : M \to M\)? Il modulo
+banale. E il cokernel di \(0 \to M\)? È \(\frac{M}{\{0\}} \cong M\). Il
+kernel di \(M \to 0\)? \(M\) stesso. Il cokernel di \(\id_M : M \to M\)?
+\(\frac{M}{M} \cong 0\). Ecco come si scrive in un contesto astratto
+come questo.
 
 \begin{lemma}\label{lemma:KerCokerId}
   In una categoria additiva \(\cat C \),
@@ -78,8 +80,8 @@ questo.
   Il diagramma
   \[
     \begin{tikzcd}
-      0 \ar["{\exists!}", r] & A \ar["{\id_A}", r, shift left] \ar["{0_A^A}",
-      r, shift right, swap] & A
+      0 \ar["{\exists!}", r] & A \ar["{\id_A}", r, shift left]
+      \ar["{0_A^A}", r, shift right, swap] & A
     \end{tikzcd}
   \]
   commuta perché \(\cat C(0,A)\) è banale, essendo \(0\) iniziale. Sia
@@ -114,11 +116,11 @@ questo.
       swap] & A \ar["{j}", r] & Q
     \end{tikzcd}
   \]
-  commuta. Esiste uno e una sola freccia \(A \to Q\) che fa commutare
+  commuta. Esiste un'unica freccia \(A \to Q\) che fa commutare
   \[
     \begin{tikzcd}
       A \ar["{\id_A}", r] \ar["j", dr, swap] & A \ar[d] \\
-      & q
+      & Q
     \end{tikzcd}
   \]
   ed è \(j\) stessa.
@@ -128,9 +130,9 @@ Abbiamo visto che in un biprodotto le iniezioni
 \(i_A : A \to A \oplus B\) e \(i_B : B \to A \oplus B\) sono
 monomorfismi, mentre le proiezioni \(p_A : A \oplus B \to A\) e
 \(p_B : A \oplus B \to B\) sono epimorfismi. Per di più, a causa della
-Definizione~\ref{definition:Biprodotto} si ha che
-\(p_B i_A = 0_A^B\) e \(p_A i_B = 0_B^A\). E quindi è lecito
-chiedersi se anche in questo caso si può avere qualche coppia ker-coker.
+Definizione~\ref{definition:Biprodotto} si ha che \(p_B i_A = 0_A^B\) e
+\(p_A i_B = 0_B^A\). E quindi è lecito chiedersi se anche in questo caso
+si può avere qualche coppia ker-coker.
 
 \begin{lemma}\label{lemma:KerCokerInjProj}
   Consideriamo in una categoria additiva \(\cat C\) il biprodotto
@@ -152,13 +154,13 @@ chiedersi se anche in questo caso si può avere qualche coppia ker-coker.
 \end{lemma}
 
 In effetti, sempre guardando a \(\Modu_R\), abbiamo che
-\(\ker \pi_A = A \oplus 0 \cong A\) mentre
+\(\ker p_B = A \oplus 0 \cong A\) mentre
 \(\coker i_A = \frac{A \oplus B}{\im i_A} = \frac{A \oplus B}{A \oplus
   0} \cong B\).
 
 \begin{proof}
-  Facciamo la dimostrazione solo la prima coppia, la dimostrazione
-  dell'altra è simile. Il diagramma
+  Dimostriamo solo che \(i_A\) è kernel di \(p_B\), perché le altre
+  dimostrazioni sono simili. Il diagramma
   \[
     \begin{tikzcd}
       A \ar["{i_A}", r] & A \oplus B \ar["{p_B}", r, shift left]
@@ -169,7 +171,7 @@ In effetti, sempre guardando a \(\Modu_R\), abbiamo che
   ora il diagramma commutativo
   \[
     \begin{tikzcd}
-      C \ar["{j}", r] & A \oplus B \ar["{p_p}", r, shift left]
+      C \ar["{j}", r] & A \oplus B \ar["{p_B}", r, shift left]
       \ar["{0_{A \oplus B}^B}", r, shift right, swap] & B
     \end{tikzcd}
   \]
@@ -194,7 +196,7 @@ In effetti, sempre guardando a \(\Modu_R\), abbiamo che
 \end{proof}
 
 In \(\Modu_R\), sapresti calcolare il kernel di
-\(g \oplus g' : N \oplus N' \to R \oplus R'\)? La risposta è abbastanza
+\(g \oplus g' : N \oplus N' \to T \oplus T'\)? La risposta è abbastanza
 semplice:
 \[
   \ker (g \oplus g') = \ker g \oplus \ker g' .
@@ -207,30 +209,28 @@ difficoltà
                          \im f'} \cong \\
                        &\cong\frac{N}{\im f} \oplus \frac{N'}{\im f'} = \coker f \oplus \coker f' . 
 \end{align*}
-È l'intuizione che ci basta per esportare questo discorso ad un contesto
-più generale. Ecco come suona:
+È l'intuizione che ci serve, ecco come suona:
 
 \begin{lemma}\label{lemma:KerCokerOplus}
-  Siano in una categoria additiva \(\cat C\)
+  Siano in una categoria additiva \(\cat C\) due coppie ker-coker
   \[
     \begin{tikzcd}[row sep=tiny, column sep=small]
       A \ar["{f}", r] & B \ar["{g}", r] & C \\
       A' \ar["{f'}", r] & B' \ar["{g'}", r] & C'
     \end{tikzcd}
   \]
-  con \(f\) e \(f'\) kernel di \(g\) e \(g'\) rispettivamente.  Allora
-  \(f \oplus f' : A \oplus A' \to B \oplus B'\) è kernel di
-  \(g \oplus g' : B \oplus B' \to C \oplus C'\). Dualizzando, si ha che se
-  \(g\) e \(g'\) sono cokernel di \(f\) e \(f'\) rispettivamente, allora
-  \(g \oplus g'\) è cokernel di \(f \oplus f'\). In particolare, se i
-  diagrammi qui sopra sono coppie ker-coker, allora anche
+  % con \(f\) e \(f'\) kernel di \(g\) e \(g'\) rispettivamente.
+  Allora \(f \oplus f' : A \oplus A' \to B \oplus B'\) è kernel di
+  \(g \oplus g' : B \oplus B' \to C \oplus C'\). Dualizzando, si ha che
+  se \(g\) e \(g'\) sono cokernel di \(f\) e \(f'\) rispettivamente,
+  allora \(g \oplus g'\) è cokernel di \(f \oplus f'\). In particolare,
+  se i diagrammi qui sopra sono coppie ker-coker, allora lo è anche
   \[
     \begin{tikzcd}
       A \oplus A' \ar["{f \oplus f'}", r] & B \oplus B' \ar["{g \oplus
         g'}", r] & C \oplus C'
     \end{tikzcd}
   \]
-  lo è.
 \end{lemma}
 
 Quindi ``la somma di due coppie ker-coker è una coppia ker-coker.''
@@ -245,11 +245,10 @@ Quindi ``la somma di due coppie ker-coker è una coppia ker-coker.''
     \end{tikzcd}
   \]
   commuta. Poiché \(\oplus : \cat C \times \cat C \to \cat C\) è un
-  bifuntore {\color{red} [scrivere di questa cosa nell'introduzione]},
-  infatti
+  bifuntore, infatti
   \[
-    (g \oplus g') (f \oplus f') = (g f) \oplus (g' f)
-    = 0_{A \oplus A'}^{C \oplus C'}
+    (g \oplus g') (f \oplus f') = (g f) \oplus (g' f) = 0_{A \oplus
+      A'}^{C \oplus C'}
   \]
   Consideriamo ora un diagramma commutativo
   \[
@@ -304,9 +303,8 @@ Quindi ``la somma di due coppie ker-coker è una coppia ker-coker.''
     (f \oplus f') (i,j) = h.
   \]
   La parte dell'unicità della freccia \(D \to A \oplus A'\) è immediata:
-  \(f \oplus f'\) è un monomorfismo essendo \(f\) oppure \(f'\) -- in
-  questo caso entrambi -- monici (ricorda che i kernel sono
-  equalizzatori e quindi sono monomorfismi).
+  \(f \oplus f'\) è un monomorfismo essendo \(f\) e \(f'\) monici
+  (ricorda che i kernel sono equalizzatori e quindi sono monomorfismi).
 \end{proof}
 
 
@@ -338,7 +336,8 @@ Quindi ``la somma di due coppie ker-coker è una coppia ker-coker.''
     per cui commuta
     \[
       \begin{tikzcd}
-        A \ar["{f}", r] \ar["{\alpha}", d, swap] & B \ar["{g}", r] \ar["{\beta}",
+        A \ar["{f}", r] \ar["{\alpha}", d, swap] & B \ar["{g}", r]
+        \ar["{\beta}",
         d, swap] & C \ar["{\gamma}", d, swap] \\
         A' \ar["{f'}", r, swap] & B' \ar["{g'}", r, swap] & C'
       \end{tikzcd}
@@ -355,8 +354,8 @@ Quindi ``la somma di due coppie ker-coker è una coppia ker-coker.''
     \(i : A \to B\) per le quali esiste \(p : B \to C\) tale che
     \(\begin{tikzcd}[column sep=small, cramped] A \ar["{i}", r] & B
       \ar["{p}", r] & C \end{tikzcd}\) appartiene ad \(\cat E\). Useremo
-    \(\mono\) al posto di \(\to\) per indicare monomomorfismi ammissibili
-    nei diagrammi commutativi.
+    \(\mono\) al posto di \(\to\) per indicare monomomorfismi
+    ammissibili nei diagrammi commutativi.
   \item Chiamiamo {\em epimorfismi ammissibili} le frecce
     \(p : B \to C\) per le quali esiste \(i : A \to B\) tale che
     \(\begin{tikzcd}[column sep=small, cramped] A \ar["{i}", r] & B
@@ -375,10 +374,10 @@ Quindi ``la somma di due coppie ker-coker è una coppia ker-coker.''
       \ar["{p'}", r] & C' \end{tikzcd}\) come oggetto di
     \(\cat C^{\to\to}\), allora anche quest'ultima coppia di frecce è in
     \(\cat E\).
-  \item \label{item:EO} \(\id_A : A \to A\) è un monomorfismo ammissibile
-    per ogni \(A \in \obj{\cat C}\).
-  \item \label{item:EOop} \(\id_A : A \to A\) è un epimorfismo ammissibile
-    per ogni \(A \in \obj{\cat C}\).
+  \item \label{item:EO} \(\id_A : A \to A\) è un monomorfismo
+    ammissibile per ogni \(A \in \obj{\cat C}\).
+  \item \label{item:EOop} \(\id_A : A \to A\) è un epimorfismo
+    ammissibile per ogni \(A \in \obj{\cat C}\).
   \item \label{item:E1} La composizione di due monomorfismi ammissibili
     è un monomorfismo ammissibile.
   \item \label{item:E1op} La composizione di due epimorfismi ammissibili
@@ -498,12 +497,12 @@ Primi esempi di successioni esatte corte coinvolgono le identità.
       B \ar["{i_B}", r] & A \oplus B \ar["{p_A}", r] & A
     \end{tikzcd}
   \]
-  sono sequenze esatte corte, cioè coppie ker-coker in \(\cat E\).
+  sono successioni esatte corte, cioè coppie ker-coker in \(\cat E\).
 \end{proposition}
 
-Il Lemma~\ref{lemma:KerCokerInjProj} ci dava queste due coppie
-ker-coker. Questo proposizione invece dice che ogni struttura esatta
-contiene queste coppie ker-coker.
+% Il Lemma~\ref{lemma:KerCokerInjProj} ci dava queste due coppie
+% ker-coker. Qui diciamo che ogni struttura esatta contiene queste
+% coppie ker-coker.
 
 \begin{proof}
   Per il richiamo appena fatto,
@@ -518,9 +517,9 @@ contiene queste coppie ker-coker.
   parte della successione esatta corta \begin{tikzcd}[cramped, column
     sep=small] B \ar["{\id_B}", r] & B \ar["{\exists!}", r] & 0
   \end{tikzcd}. Possiamo appellarci a \ref{item:E2op} ora: il pullback
-  di \(B \to 0\) lungo \(A \to 0\), vale a dire \(p_A\), è un epimorfismo
-  ammissibile. Il Lemma~\ref{lemma:KerCokerInjProj} ci dà un coppia
-  ker-coker: essendo chiusa per isomorfismo, questa coppia sta in
+  di \(B \to 0\) lungo \(A \to 0\), vale a dire \(p_A\), è un
+  epimorfismo ammissibile. Il Lemma~\ref{lemma:KerCokerInjProj} ci dà un
+  coppia ker-coker: essendo chiusa per isomorfismo, questa coppia sta in
   \(\cat E\).
 \end{proof}
 
@@ -555,44 +554,41 @@ contiene queste coppie ker-coker.
       A' \ar["{f'}", r, swap] & B' \ar["{g'}", r, swap] & C'
     \end{tikzcd}
   \]
-  sono sequenze esatte corte, allora anche
+  sono successioni esatte corte, allora anche
   \begin{equation}
     \label{cd:SumExactSeqs}
-    % \begin{tikzcd}[row sep=small]
-    %   A \oplus B \ar["{f \oplus g}", r] & A' \oplus B' \ar["{f' \oplus
-    %     g'}", r] & A'' \oplus B''
-    % \end{tikzcd}
     \begin{tikzcd}[row sep=small]
-      A \oplus A' \ar["{f \oplus g}", r] & B \oplus B' \ar["{f' \oplus
+      A \oplus A' \ar["{f \oplus f'}", r] & B \oplus B' \ar["{g \oplus
         g'}", r] & C \oplus C'
     \end{tikzcd}
   \end{equation}
   lo è.
 \end{proposition}
 
-Quindi \(\cat E\) è chiusa rispetto alla somma di sequenze esatte corte.
+Quindi \(\cat E\) è chiusa rispetto alla somma di successioni esatte
+corte.
 
 \begin{proof}
   Il piano per la dimostrazione si struttura su questa osservazione: se
   riusciamo a dimostrare che
   \begin{equation}
     \begin{tikzcd}[row sep=tiny]
-      A \oplus A' \ar["{f \oplus \id_{A'}}", r] & B \oplus A' \ar["{f' p_{A'}^{BA'}}",
+      A \oplus A' \ar["{f \oplus \id_{A'}}", r] & B \oplus A' \ar["{g
+        p_{B}^{BA'}}",
       r] & C \\
-      B \oplus A' \ar["{\id_B \oplus g}", r, swap] & B \oplus B' \ar["{g'
-        p_{B'}^{BB'}}", r, swap] & C'
+      B \oplus A' \ar["{\id_B \oplus g}", r, swap] & B \oplus B'
+      \ar["{g' p_{B'}^{BB'}}", r, swap] & C'
     \end{tikzcd}
     \label{cd:SumExactSeqsPieces}
   \end{equation}
-  sono esatte corte allora, a causa di~\ref{item:E1op} sono sequenze
-  esatte le coppie ker-coker
+  sono esatte corte allora, a causa di~\ref{item:E1op},
   \[
     \begin{tikzcd}[column sep=small, row sep=tiny]
-      A \oplus A' \ar["{f \oplus g}", r] & B \oplus B' \ar["\ast",
-      r] & \ast \\
+      A \oplus A' \ar["{f \oplus f'}", r] & B \oplus B'
     \end{tikzcd}
   \]
-  A questo punto Lemma~\ref{lemma:KerCokerOplus} permette di concludere
+  è un monomorfismo ammissibile.  A questo punto
+  Lemma~\ref{lemma:KerCokerOplus} permette di concludere
   l'opera.\newline Mostriamo solo che la prima
   delle~\eqref{cd:SumExactSeqsPieces} è esatta corta, perché l'altra si
   fa similmente. A causa del Lemma~\ref{lemma:KerCokerInjProj} e
@@ -913,8 +909,7 @@ sono una l'inversa dell'altra.
 \begin{remark}
   Si chiama ``{\em assioma} oscuro'' perché in alcune trattazioni (in
   Quillen, per esempio) faceva parte della definizione di categoria
-  esatta. Tuttavia viene provata la sua ridondanza da Yoneda e
-  Keller.
+  esatta. Tuttavia viene provata la sua ridondanza da Yoneda e Keller.
 \end{remark}
 
 \begin{proof}
@@ -951,14 +946,14 @@ sono una l'inversa dell'altra.
   \[
     \begin{tikzcd}[row sep=small, ampersand replacement=\&]
       \& B \ar["{\begin{psmallmatrix} \id_B \\
-          0_B^C \end{psmallmatrix}}", dd]
-      \ar["{p}", r] \& D \ar["{\begin{psmallmatrix} \id_D \\ 0_D^C \end{psmallmatrix}}", dd] \\
-      A \ar["{i}", ur] \ar["{\begin{psmallmatrix} i \\ 0_A^C \end{psmallmatrix}}", dr, swap] \\
-      \& B \oplus C \ar["{p \oplus \id_C}", r, swap] \& D \oplus C
-    \end{tikzcd}
-  \]
-  Qui il quadrato di destra è un pullback, di conseguenza \(p\) è un
-  epimorfismo ammissibile e \(i\) è un kernel di \(p\)
+        0_B^C \end{psmallmatrix}}", dd]
+    \ar["{p}", r] \& D \ar["{\begin{psmallmatrix} \id_D \\ 0_D^C \end{psmallmatrix}}", dd] \\
+    A \ar["{i}", ur] \ar["{\begin{psmallmatrix} i \\ 0_A^C \end{psmallmatrix}}", dr, swap] \\
+    \& B \oplus C \ar["{p \oplus \id_C}", r, swap] \& D \oplus C
+  \end{tikzcd}
+\]
+Qui il quadrato di destra è un pullback, di conseguenza \(p\) è un
+epimorfismo ammissibile e \(i\) è un kernel di \(p\)
 \end{proof}
 
 
@@ -966,34 +961,35 @@ sono una l'inversa dell'altra.
 \section{Alcuni teoremi classici}
 
 \begin{proposition}\label{prop:decompose-morphisms-of-exact-sequences}
-  Sia \((\cat C,\cat E)\) una categoria esatta. Un
-  morfismo di successioni esatte corte (vedi definizione di \(\cat
-  C^{\to\to}\))
+  Sia \((\cat C,\cat E)\) una categoria esatta. Un morfismo di
+  successioni esatte corte (vedi definizione di \(\cat C^{\to\to}\))
   \[
     \begin{tikzcd}
-      A' \ar["{a}", d, swap] \ar["{f'}", rightarrowtail, r] & B' \ar["{b}", d] \ar["{g'}",
+      A' \ar["{a}", d, swap] \ar["{f'}", rightarrowtail, r] & B'
+      \ar["{b}", d] \ar["{g'}",
       twoheadrightarrow, r] & C' \ar["{c}", d] \\
       A \ar["{f}", rightarrowtail, r, swap] & B \ar["{g}",
       twoheadrightarrow, r, swap] & C
     \end{tikzcd}
   \]
-  si fattorizza attraverso una successione esatta corta \(A \to D \to C'\)
+  si fattorizza attraverso una successione esatta corta
+  \(A \to D \to C'\)
   \begin{equation}
     \begin{tikzcd}
       A' \ar["{a}", d, swap] \ar["{BC}" description, phantom, dr]
       \ar["{f'}", rightarrowtail, r] & B' \ar["{b'}", d] \ar["{g'}",
       twoheadrightarrow, r] & C' \ar["{\id_{C'}}", d] \\
-      A \ar["{\id_A}", d, swap] \ar["{m}",
-      rightarrowtail, r, swap] & D \ar["{b''}", d,
-      swap] \ar["{BC}" description, phantom, dr] \ar["{e}", twoheadrightarrow, r] & C'
+      A \ar["{\id_A}", d, swap] \ar["{m}", rightarrowtail, r, swap] & D
+      \ar["{b''}", d, swap] \ar["{BC}" description, phantom, dr]
+      \ar["{e}", twoheadrightarrow, r] & C'
       \ar["c", d] \\
       A \ar["{f}", rightarrowtail, r, swap] & B \ar["{g}",
       twoheadrightarrow, r, swap] & C
     \end{tikzcd}
     \label{cd:decompose-morphisms-of-exact-sequences}
   \end{equation}
-  in modo tale che i due quadrati contrassegnati con {\em BC}
-  sono bicartesiani. In particolare, esiste un isomorfismo canonico
+  in modo tale che i due quadrati contrassegnati con {\em BC} sono
+  bicartesiani. In particolare, esiste un isomorfismo canonico
   \(A \cup_{A'} B' \cong B \times_{C} C'\).
 \end{proposition}
 
@@ -1001,8 +997,9 @@ sono una l'inversa dell'altra.
   Il pushout di \(f' : A' \mono B'\) lungo \(a\) dà i morfismi
   \(m : A \mono D\) e \(b' : B' \to D\). Attraverso la proprietà
   universale di pushout, introduciamo il morfismo \(e : D \to C'\) tale
-  che \(e b' = \id_{C'} g' = g'\) e \(e m = 0\) e sia \(b'': D \to B\) il
-  morfismo tale che \(b'' b' = b: B' \to B\) e \(b'' m = f \id_A = f\). La
+  che \(e b' = \id_{C'} g' = g'\) e \(e m = 0\) e sia \(b'': D \to B\)
+  il morfismo tale che \(b'' b' = b: B' \to B\) e
+  \(b'' m = f \id_A = f\). La
   Proposizione~\ref{proposition:pushout-exact-bicart} ci consente di
   dire che \(e\) è un cokernel di \(m\). Guardiamo il quadrato in basso
   a destra. Abbiamo
@@ -1017,31 +1014,34 @@ sono una l'inversa dell'altra.
       gb''m = gf = 0
     \end{cases}
   \]
-  Per la proprietà universale di pushout del quadrato in alto a
-  sinistra concludiamo che \(ce = g b''\).  Sempre a causa della
+  Per la proprietà universale di pushout del quadrato in alto a sinistra
+  concludiamo che \(ce = g b''\).  Sempre a causa della
   Proposizione~\ref{proposition:pushout-exact-bicart}, possiamo
   concludere che anche questo è bicartesiano.
 \end{proof}
 
 \begin{corollary}[``Five Lemma'']
   \label{cor:five-lemma}
-  In una categoria esatta considera un morfismo di successioni esatte corte
+  In una categoria esatta considera un morfismo di successioni esatte
+  corte
   \[
     \begin{tikzcd}
       A' \ar["{a}", d, swap] \ar["{}", rightarrowtail, r] & B' \ar["{b}", d] \ar["{}", twoheadrightarrow, r] & C' \ar["{c}", d] \\
-      A \ar["{}", rightarrowtail, r] & B \ar["{}", twoheadrightarrow, r] & C
+      A \ar["{}", rightarrowtail, r] & B \ar["{}", twoheadrightarrow, r]
+      & C
     \end{tikzcd}
   \]
-  Se \(a\) e \(c\) sono isomorfismi, monomorfismi ammissibili oppure epimorfismi
-  ammissibili, allora anche \(b\) è dello stesso tipo.
+  Se \(a\) e \(c\) sono isomorfismi, monomorfismi ammissibili oppure
+  epimorfismi ammissibili, allora anche \(b\) è dello stesso tipo.
 \end{corollary}
 
 \begin{proof}
   Assumiamo prima che \(a\) e \(c\) siano isomorfismi. Poiché gli
   isomorfismi preservano pullback e pushout e guardando la
   fattorizzazione~\eqref{cd:decompose-morphisms-of-exact-sequences}, si
-  ha che \(b\) è la composizione di due isomorfismi \(B' \to D \to B\). Se
-  \(a\) e \(c\) sono entrambi monici ammissibili, sempre guardando il
+  ha che \(b\) è la composizione di due isomorfismi \(B' \to D \to
+  B\). Se \(a\) e \(c\) sono entrambi monici ammissibili, sempre
+  guardando il
   diagramma~\eqref{cd:decompose-morphisms-of-exact-sequences}, si ha che
   \(b\) è la composizione di due monomorfismi ammissibili (per la
   freccia \(D \to B\) vedi la
@@ -1069,14 +1069,14 @@ sono una l'inversa dell'altra.
 \end{lemma}
 
 \begin{proof}
-  Il morfismo \(X \to Y\) esiste unico poiché la prima riga è esatta e la
-  composizione \(A \to C \to Y\) è zero, mentre il morfismo \(Y \to Z\) esiste
-  unico poiché la seconda riga è esatta e la composizione
-  \(B \to C \to Z\) si annulla. Per la
+  Il morfismo \(X \to Y\) esiste unico poiché la prima riga è esatta e
+  la composizione \(A \to C \to Y\) è zero, mentre il morfismo
+  \(Y \to Z\) esiste unico poiché la seconda riga è esatta e la
+  composizione \(B \to C \to Z\) si annulla. Per la
   Proposizione~\ref{proposition:pushout-exact-bicart}, il quadrato
-  contenente \(X \to Y\) è bicartesiano. Ne consegue che \(X \to Y\) è un
-  monico ammissibile e che \(Y \to Z\) è il suo cokernel, sempre a causa
-  della stessa proposizione.
+  contenente \(X \to Y\) è bicartesiano. Ne consegue che \(X \to Y\) è
+  un monico ammissibile e che \(Y \to Z\) è il suo cokernel, sempre a
+  causa della stessa proposizione.
 \end{proof}
 
 \begin{corollary}[Lemma \(3 \times 3\)]
@@ -1130,8 +1130,8 @@ sono una l'inversa dell'altra.
   Proposizione~\ref{proposition:pushout-exact-bicart}, il morfismo
   \(i': D \to A''\) determinato da \(i'i = 0\) e \(i'\bar{f} = a'\) è un
   cokernel di \(i\) e il morfismo \(j': B \epi C''\) dato da
-  \(j' = c'g = g'' b'\) è un cokernel di \(j\).\newline Se sappiamo che il
-  diagramma
+  \(j' = c'g = g'' b'\) è un cokernel di \(j\).\newline Se sappiamo che
+  il diagramma
   \[
     \begin{tikzcd}
       B' \ar["{\id_{B'}}", d, swap] \ar["{i}", rightarrowtail, r] & D
@@ -1150,13 +1150,13 @@ sono una l'inversa dell'altra.
   \(b = ji\) e \(g''b' = j'\) sono valide per costruzione. Osserviamo il
   quadrato \(A'B'AD\). Abbiamo
   \[
-    (f'' i') i = 0 = b'b = (b'j) i \quad \text{e} \quad (b'j)\bar{f} = b'f = f''
-    a' = (f''i') \bar{f} .
+    (f'' i') i = 0 = b'b = (b'j) i \quad \text{e} \quad (b'j)\bar{f} =
+    b'f = f'' a' = (f''i') \bar{f} .
   \]
   % che insieme a
   % \[
-  %   (f''i'\bar{f})a = (f''i'i)f' = 0 \qquad \text{e} \qquad (b'j\bar{f})a =
-  %   f''a'a = 0 = b'bf' = (b'ji)f'
+  %   (f''i'\bar{f})a = (f''i'i)f' = 0 \qquad \text{e} \qquad
+  %   (b'j\bar{f})a = f''a'a = 0 = b'bf' = (b'ji)f'
   % \]
   Per la proprietà universale di pushout, possiamo concludere che
   \(f''i' = b'j\).
@@ -1257,8 +1257,8 @@ dimostra che le categorie abeliane sono quasi-abeliane.
   \[
     \begin{tikzcd}[ampersand replacement=\&]
       A \ar["{\begin{psmallmatrix} f \\ m \end{psmallmatrix}}", r] \& A'
-      \oplus B \ar["{\begin{psmallmatrix} m' & -f' \end{psmallmatrix}}", r]
-      \& B'
+      \oplus B \ar["{\begin{psmallmatrix} m' & -f' \end{psmallmatrix}}",
+      r] \& B'
     \end{tikzcd}
   \]
   dove la seconda freccia è cokernel della prima. A patto di dimenticare
@@ -1309,12 +1309,13 @@ esatte. Più precisamente:
   commutativo, usando la proprietà universale di kernel. Si può
   facilmente verificare che il quadrato in alto a destra è un
   pullback. Ne segue che \(v\) è un cokernel perché pullback del
-  cokernel \(f\) e $u$ è il suo kernel.\newline Per concludere, mostriamo che
-  \(h\) è cokernel di \(i_h\). Sia \(h' : A \to X\) tale che
-  \(h'i_h = 0_H^X\). Poiché \(i_f = i_h u\), allora \(h'i_f =
-  0_F^X\). Poiché \(f\) è cokernel di \(i_f\), sia \(f' : B \to X\) tale
-  che \(f'f = h'\). Per costruire un morfismo \(C \to X\), mostriamo che
-  \(f' i_g = 0_G^X\). Questa uguaglianza segue da
+  cokernel \(f\) e $u$ è il suo kernel.\newline Per concludere,
+  mostriamo che \(h\) è cokernel di \(i_h\). Sia \(h' : A \to X\) tale
+  che \(h'i_h = 0_H^X\). Poiché \(i_f = i_h u\), allora
+  \(h'i_f = 0_F^X\). Poiché \(f\) è cokernel di \(i_f\), sia
+  \(f' : B \to X\) tale che \(f'f = h'\). Per costruire un morfismo
+  \(C \to X\), mostriamo che \(f' i_g = 0_G^X\). Questa uguaglianza
+  segue da
   \[
     f' i_g v = f' f i_h = h' i_h = 0_H^X
   \]
