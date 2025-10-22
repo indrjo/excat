@@ -1,13 +1,6 @@
 
 \chapter{Preliminari}
 
-In queste note si assume almeno la {\sc Teoria delle Categorie} che si
-può imparare da~\cite{leinster:categories}. Un altro validissimo testo è
-anche~\cite{riehl:categories}. Un vero e proprio classico che contiene
-anche nozioni sulle categorie preadditive
-è~\cite{maclane:categories}. In lingua italiana,
-esiste la playlist~\cite{itaca:categorie} realizzata dal {\em Progetto ItaCa}.
-
 
 
 \section{Kernel e cokernel}
@@ -32,10 +25,11 @@ ma è il caso di \(\Grp\) e \(\Modu_R\), con \(R\) anello.
 
 \begin{example}
   In casi come \(\Grp\) e \(\Modu_R\), il morfismo nullo è quello che
-  manda tutti gli elementi del dominio nell'identità. Anche \(\Ring\)
-  possiede omomorfismi come questi; tuttavia in \(\Ring\) l'oggetto
-  iniziale è \(\mathbb{Z}\) che non è terminale mentre i morfismi zero sono
-  definiti attraverso oggetti zero.
+  manda tutti gli elementi del dominio nell'identità. % Anche \(\Ring\)
+  % possiede omomorfismi come questi; tuttavia in \(\Ring\) l'oggetto
+  % iniziale è \(\mathbb{Z}\) che non è terminale mentre i morfismi zero sono
+  % definiti attraverso oggetti zero. {\color{red} [I morfismi di anelli
+  %   preservano l'identità\dots{} Rivedere.]}
 \end{example}
 
 Comporre con un morfismo nullo dà un morfismo nullo. Più precisamente:
@@ -79,96 +73,44 @@ Comporre con un morfismo nullo dà un morfismo nullo. Più precisamente:
 \end{definition}
 
 \begin{remark}
-  Ricordiamo che in generale gli equalizzatori sono monomorfismi e i
-  coequalizzatori sono epimorfismi. Questa informazione può dare delle
-  indicazioni su come sono fatti i kernel e i cokernel in categorie in
-  cui monomorfismo ed epimorfismo significano rispettivamente iniettivo
-  e suriettivo.
+  In generale gli equalizzatori sono monomorfismi e i
+  coequalizzatori sono epimorfismi.
 \end{remark}
 
-\begin{example}[Kernel di omomorfismi di moduli]\label{example:KernelInModR}
+\begin{example}[Kernel di omomorfismi di
+  moduli]\label{example:KernelInModR}
   In Algebra, si parla di {\em kernel} di morfismi in vari ambiti. Per
-  esempio, se \(M\) e \(N\) sono due moduli su un fissato anello \(R\)
-  e \(f : M \to N\) è un omomorfismo, allora
+  esempio, se \(M\) e \(N\) sono due moduli su un fissato anello \(R\) e
+  \(f : M \to N\) è un omomorfismo, allora
   \[
     \ker f := \set{x \in M \mid f(x) = 0_N}
   \]
   è un sottomodulo di \(M\). Per entrare nel linguaggio della {\sc
-    Teoria delle Categorie},
-  \begin{quotation}
-    l'omomorfismo inclusione \(i : \ker f \hookrightarrow M\) è un equalizzatore
-    della coppia di omomorfismi
-    \[
-      \begin{tikzcd}
-        M \ar["f", shift left, r] \ar["{0_M^N}", shift right, swap, r]
-        & N
-      \end{tikzcd}
-    \]
-  \end{quotation}
-  % Verifichiamo l'affermazione. Anzitutto, è facile vedere che
-  % \(f \circ i = 0_M^N \circ i\), poiché per la
-  % Proposizione~\ref{lemma:CompCon0} si ha che
-  % \(0_M^N \circ i = 0_{\ker f}^N\). Consideriamo ora invece un qualsiasi
-  % diagramma commutativo
-  % \[
-  %   \begin{tikzcd}
-  %     E \ar["j", r] & M \ar["f", shift left, r] \ar["{0_M^N}", shift
-  %     right, swap, r] & N
-  %   \end{tikzcd}
-  % \]
-  % Questo implica che \(f(j(x)) = 0_M^N (j(x)) = 0_N\) per ogni
-  % \(x \in E\). Questo significa che le immagini di \(j\) stanno in
-  % \(\ker f\), quindi è possibile la fattorizzazione \(j = i \circ k\) dove
-  % \(k : E \hookrightarrow \ker f\) è una semplice inclusione. Per finire
-  % \(k\) è l'unico omomorfismo \(E \to \ker f\) per cui commuta il
-  % triangolo
-  % \[
-  %   \begin{tikzcd}
-  %     \ker f \ar["i", r] & M \\
-  %     E \ar[u] \ar["j", ur, swap]
-  %   \end{tikzcd}
-  % \]
-  % a causa dell'iniettività di \(i\).
+    Teoria delle Categorie}, l'omomorfismo inclusione
+  \(i : \ker f \hookrightarrow M\) è un equalizzatore della coppia di omomorfismi
+  \[
+    \begin{tikzcd}
+      M \ar["f", shift left, r] \ar["{0_M^N}", shift right, swap, r] & N
+    \end{tikzcd}
+  \]
 \end{example}
 
-\begin{example}[Cokernel di omomorfismi di moduli]\label{example:CokernelInModR}
+\begin{example}[Cokernel di omomorfismi di
+  moduli]\label{example:CokernelInModR}
   Se \(M\) e \(N\) sono due moduli su un fissato anello \(R\) e
   \(f : M \to N\) è un omomorfismo, allora
   \[
     \coker f := \frac{N}{\im f}
   \]
   è un sottomodulo di \(M\) chiamato {\em cokernel} di \(f\). Questa
-  nozione è il duale di kernel, nel senso che
-  \begin{quotation}
-    l'omomorfismo di proiezione canonica al quoziente
-    \(\pi_N : N \to \coker f\) è un coequalizzatore della coppia di
-    omomorfismi
-    \[
-      \begin{tikzcd}
-        M \ar["f", shift left, r] \ar["{0_M^N}", shift right, swap, r]
-        & N
-      \end{tikzcd}
-    \]
-  \end{quotation}
-  % Per dimostrare questo fatto si può usare un teorema di omomorfismo,
-  % oppure un argomento categoriale come questo.
-  % \begin{enumerate}
-  % \item Considerare il funtore dimenticante \(U : \Modu_R \to \Set\) che
-  %   è fedele.
-  % \item In \(\Set\) un coequalizzatore di
-  %   \[
-  %     \begin{tikzcd}
-  %       X \ar["f", r, shift left] \ar["g", r, shift right, swap] & Y
-  %     \end{tikzcd}
-  %   \]
-  %   è la proiezione canonica al quoziente \(p : Y \to Y{/}\sim\) dove
-  %   \(\sim\) è la relazione di equivalenza generata da
-  %   \(f(a) \sim f(b)\) al variare di \(a, b \in X\).
-  % \item Se \(M\) è un modulo su \(R\) e \(H\) è un suo sottomodulo, il
-  %   modulo quoziente \(\frac{M}{H}\) è ottenuto quozientando \(M\) con
-  %   la relazione di equivalenza \(\sim\) generata da \(x+h \sim x\) per
-  %   \(x \in M, h \in H\).
-  % \end{enumerate}
+  nozione è il duale di kernel, nel senso che l'omomorfismo di
+  proiezione canonica al quoziente \(\pi_N : N \to \coker f\) è un
+  coequalizzatore della coppia di omomorfismi
+  \[
+    \begin{tikzcd}
+      M \ar["f", shift left, r] \ar["{0_M^N}", shift right, swap, r] & N
+    \end{tikzcd}
+  \]
 \end{example}
 
 \begin{recall}[La categoria \(\Ban\)]
@@ -223,8 +165,8 @@ Comporre con un morfismo nullo dà un morfismo nullo. Più precisamente:
 \end{example}
 
 \begin{remark}
-  In Algebra, kernel e cokernel sono degli oggetti, mentre
-  tecnicamente come sono definiti qui sono dei morfismi.
+  In Algebra, kernel e cokernel sono degli oggetti, mentre tecnicamente
+  come sono definiti qui sono dei morfismi.
 \end{remark}
 
 
@@ -259,13 +201,13 @@ Comporre con un morfismo nullo dà un morfismo nullo. Più precisamente:
   \end{align*}
 \end{recall}
 
-Spesso scriveremo semplicemente \(+\) senza pedici, perché in genere è
-chiaro di quali frecce stiamo sommando.
+Noi scriveremo semplicemente \(+\) senza pedici, perché in genere è
+chiaro in base a quali frecce stiamo sommando.
 
 Inoltre, come nei primi teoremi di Algebra, il morfismo zero è l'unico
-elemento neutro e per ogni \(f : a \to b\) è unico l'opposto. In
-coerenza con la notazione additiva indichiamo con \(- f\) l'opposto di
-\(f : a \to b\).
+elemento neutro e per ogni \(f : A \to B\) è unico l'opposto. In
+coerenza con la notazione additiva, indichiamo con \(- f : A \to B\)
+l'opposto di \(f : A \to B\).
 
 \begin{example}
   La categoria dei moduli su un fissato anello \(R\) è un semplice
@@ -388,8 +330,6 @@ sono oggetti zero.
 
 \subsection{Prodotti, coprodotti e biprodotti}
 
-Vediamo i prodotti e i coprodotti finiti ora.
-
 \begin{notation}
   A proposito di notazioni, seguiamo~\cite{leinster:categories}
   e~\cite{riehl:categories}. Più precisamente, preso un prodotto
@@ -424,10 +364,6 @@ Vediamo i prodotti e i coprodotti finiti ora.
   usa~\cite{buehler:exactcategories} e consente di fare alcuni conti
   molto più facilmente.
 \end{notation}
-
-Più in là avremo modo di introdurre una notazione ``matriciale'', che è
-quella che usa~\cite{buehler:exactcategories} e consente di fare alcuni
-conti molto più facilmente.
 
 \begin{proposition}\label{proposition:BinProdsAreBinCoprods}
   Sia \(\cat C\) una categoria preadditiva con oggetto zero \(0\) e
@@ -494,7 +430,23 @@ In breve: in categorie preadditive si ha \(A \times B \cong A+B\).
       ul, bend right, swap]
     \end{tikzcd}
   \]
-  commuta.
+  commuta a causa di come sono introdotti \(i_A\) e \(i_B\)
+  in~\ref{eq:ProjViaInj}. Vediamo l'unicità ora. Supponiamo
+  \(h : A \times B \to C\) tale che \(h i_A = f\) e \(h i_B =
+  g\). Allora
+  \[
+    f p_A + g p_B = h i_A p_A + h i_B p_B = h (i_A p_A + i_B p_B) .
+  \]
+  Mostriamo che \(i_A p_A + i_B p_B : A \times B \to A \times B\) è
+  l'identità. Precomponendo una volta per \(p_A\) e l'altra per \(p_B\)
+  e usando di nuovo~\ref{eq:ProjViaInj}, si ha
+  \begin{align*}
+    & p_A (i_A p_A + i_B p_B) = \underbrace{p_A i_A}_{\id_A} p_A +
+      \underbrace{p_A i_B}_{0_B^A} p_B = p_A \\
+    & p_B (i_A p_A + i_B p_B) = \underbrace{p_B i_A}_{0_A^B} p_A +
+      \underbrace{p_B i_B}_{\id_B} p_B = p_B .
+  \end{align*}
+  La proprietà universale di prodotto ci consente di concludere.
 \end{proof}
 
 \begin{definition}\label{definition:Biprodotto}
@@ -536,8 +488,6 @@ In breve: in categorie preadditive si ha \(A \times B \cong A+B\).
   \(p_A i_B = 0_B^A\).
 \end{remark}
 
-Un'altra proprietà utile per il futuro è questa.
-
 \begin{proposition}
   I morfismi \(i_A\) e \(i_B\) della
   Definizione~\ref{definition:Biprodotto} sono monici. I morfismi
@@ -551,56 +501,11 @@ Un'altra proprietà utile per il futuro è questa.
   causa di~\eqref{eqn:Biprod1}, si arriva a \(h = k\).
 \end{proof}
 
-I biprodotti sono prodotti e coprodotti binari.
-
-\begin{proposition}\label{proposition:BiprodsAreProdsAndCoprods}
-  In una categoria preadditiva con oggetto zero \(0\) consideriamo il
-  biprodotto
-  \[
-    \begin{tikzcd}
-      A \ar["{i_A}", r, shift right, swap] & C \ar["{p_A}", l, shift
-      right, swap] \ar["{p_B}", r, shift left] & B \ar["{i_B}", l, shift
-      left]
-    \end{tikzcd}
-  \]
-  allora la coppia di frecce \(p_A\) e \(p_B\) è prodotto e la coppia
-  \(i_A\) e \(i_B\) è coprodotto.  In particolare, presi
-  \(D \in \obj{\cat C}\) e una coppia di frecce
-  uscenti \begin{tikzcd}[cramped, column sep=small] A & C \ar["{f}", l,
-    swap] \ar["{g}", r] & B
-  \end{tikzcd},
-  \[
-    (f, g) = i_A \circ f + i_B \circ g .
-  \]
-  Invece presi \(e \in \obj{\cat C}\) e una coppia di
-  morfismi \begin{tikzcd}[cramped, column sep=small] A \ar["{h}", r] & C
-    & B \ar["{k}", l, swap]
-  \end{tikzcd},
-  \[ [h, k] = h \circ p_A + k \circ p_B .
-  \]
-  Infine, notare anche che \(C \cong A \times B \cong A + B\).
-\end{proposition}
-
-\begin{proof}
-  Facciamo solo la parte che riguarda il prodotto, perché l'altra si fa
-  con un ragionamento non tanto diverso. Grazie a~\eqref{eqn:Biprod1}
-  e~\eqref{eqn:Biprod4} abbiamo
-  \begin{align*}
-    & p_A \circ \left( i_A \circ f + i_B \circ g \right) = f \\
-    & p_B \circ \left( i_A \circ f + i_B \circ g \right) = g
-  \end{align*}
-  Ora se \(h : D \to C\) è tale che \(p_A \circ h = f\) e
-  \(p_B \circ h = g\), allora
-  \[
-    h = \id_C \circ h \underbrace{=}_{\mathclap{\eqref{eqn:Biprod3}}}
-    \left( i_A \circ p_A + i_B \circ p_B \right) \circ h = i_A \circ f +
-    i_B \circ g .
-  \]
-  Possiamo quindi concludere che le frecce \(p_A\) e \(p_B\) formano un
-  prodotto.
-\end{proof}
-
-Vale anche il viceversa.
+Osserviamo come le
+equazioni~\ref{eqn:Biprod1},~\ref{eqn:Biprod2},~\ref{eqn:Biprod3},~\ref{eqn:Biprod4}
+e~\ref{eqn:Biprod5} sono già state incontrate nella
+Proposizione~\ref{proposition:BinProdsAreBinCoprods} e nella relativa
+dimostrazione. Non è un caso infatti.
 
 \begin{proposition}\label{proposition:ProdsAndCoprodsAreBiprods}
   In una categoria preadditiva con oggetto zero \(0\), un prodotto
@@ -637,16 +542,63 @@ Vale anche il viceversa.
 \end{proposition}
 
 \begin{proof}
-  Questa è una prosecuzione della dimostrazione della
-  Proposizione~\ref{proposition:BinProdsAreBinCoprods}. Verifichiamo ad
-  esempio che i prodotti danno biprodotti. Le
+  % Questa è una prosecuzione della dimostrazione della
+  % Proposizione~\ref{proposition:BinProdsAreBinCoprods}.
+  Verifichiamo ad esempio che i prodotti danno biprodotti. Le
   identità~\eqref{eqn:Biprod1}, \eqref{eqn:Biprod2}, \eqref{eqn:Biprod4}
   e~\eqref{eqn:Biprod5} discendono direttamente da come sono introdotte
-  \(i_A\) e \(i_B\). Consideriamo ora il morfismo
+  \(i_A\) e \(i_B\). Sempre nella dimostrazione della
+  Proposizione~\ref{proposition:BinProdsAreBinCoprods} abbiamo visto che
+  \(i_A p_A + i_B p_B = \id_{A \times B}\).
+  % Consideriamo ora il morfismo
+  % \[
+  %   i_A p_A + i_B p_B : A \times B \to A \times B .
+  % \]
+  % Componendo una volta con \(p_A\) e l'altra con \(p_B\) si ha
+  % \begin{align*}
+  %   & p_A \left(i_A p_A + i_B p_B\right) = \underbrace{p_A i_A}_{= \id_A} p_A + \underbrace{p_A i_B}_{= 0_B^A} p_B = p_A \\
+  %   & p_B \left(i_A p_A + i_B p_B\right) = \underbrace{p_B i_A}_{= 0_A^B} p_A + \underbrace{p_B i_B}_{= \id_B} p_B = p_B
+  % \end{align*}
+  % Per la proprietà universale di prodotto, si può concludere che
+  % \[
+  %   i_A p_A + i_B p_B = \id_{A \times B} . \qedhere
+  % \]
+\end{proof}
+
+Vale anche il viceversa.
+
+\begin{proposition}\label{proposition:BiprodsAreProdsAndCoprods}
+  In una categoria preadditiva con oggetto zero \(0\) consideriamo il
+  biprodotto
+  \[
+    \begin{tikzcd}
+      A \ar["{i_A}", r, shift right, swap] & C \ar["{p_A}", l, shift
+      right, swap] \ar["{p_B}", r, shift left] & B \ar["{i_B}", l, shift
+      left]
+    \end{tikzcd}
+  \]
+  allora la coppia di frecce \(p_A\) e \(p_B\) è prodotto e la coppia
+  \(i_A\) e \(i_B\) è coprodotto.  In particolare, presi
+  \(D \in \obj{\cat C}\) e una coppia di frecce
+  uscenti \begin{tikzcd}[cramped, column sep=small] A & D \ar["{f}", l,
+    swap] \ar["{g}", r] & B
+  \end{tikzcd},
   \[
     (f, g) = i_A f + i_B g .
   \]
-  Componendo una volta con \(p_A\) e l'altra con \(p_B\) si ha
+  Invece presi \(E \in \obj{\cat C}\) e una coppia di
+  morfismi \begin{tikzcd}[cramped, column sep=small] A \ar["{h}", r] & E
+    & B \ar["{k}", l, swap]
+  \end{tikzcd},
+  \[ [h, k] = h p_A + k p_B .
+  \]
+  Infine, notare anche che \(C \cong A \times B \cong A + B\).
+\end{proposition}
+
+\begin{proof}
+  Facciamo solo la parte che riguarda il prodotto, perché l'altra si fa
+  con un ragionamento duale. Grazie a~\eqref{eqn:Biprod1}
+  e~\eqref{eqn:Biprod4} abbiamo
   \begin{align*}
     & p_A \left( i_A f + i_B g \right) = f \\
     & p_B \left( i_A f + i_B g \right) = g
@@ -906,7 +858,7 @@ Quindi c'è la possibilità di inserirsi in un discorso in cui partecipano
 pullback/pushout e kernel/cokernel.
 
 \begin{proposition}\label{proposition:FromPullbackToKernel}
-  In una categoria additiva \(\cat C\) il quadrato
+  In una categoria additiva,
   \[
     \begin{tikzcd}
       A \ar["{f}", r] \ar["{f'}", d, swap] & B \ar["{g}", d] \\
@@ -920,8 +872,6 @@ pullback/pushout e kernel/cokernel.
 \end{proposition}
 
 \begin{proof}
-  % \begin{itemize}
-  % \item[(\(\Rightarrow\))]
   (\(\Rightarrow\)) In questo parte del lavoro è già fatto. Sia quindi
   \[
     \begin{tikzcd}
@@ -948,34 +898,31 @@ pullback/pushout e kernel/cokernel.
   \end{align*}
   \(k\) è l'unico a fare ciò. Se \(k' : E \to A\) è tale che
   \((f, f') k' = h\), allora precomponendo una volta per \(p_B\) e
-  un'altra per \(p_C\), abbiamo \(f k' = p_B h\) e \(f' k = p_C h'\). Ma
+  un'altra per \(p_C\), abbiamo \(f k' = p_B h\) e \(f' k' = p_C h\). Ma
   questo, per la proprietà universale di pullback significa che
-  \(k = k'\).\newline
-  % \item[(\(\Leftarrow\))]
-  (\(\Leftarrow\)) Verifichiamo anzitutto che il quadrato è
+  \(k = k'\).\newline (\(\Leftarrow\)) Verifichiamo anzitutto che il quadrato è
   commutativo. Poiché \((f, f')\) è kernel di \([g, -g']\), allora
   \([g, -g'] (f, f') = 0_A^D\), e questo è un conto che abbiamo già
   fatto. Prendiamo ora un qualsiasi quadrato commutativo
   \[
     \begin{tikzcd}
-      E \ar["{s}", r] \ar["{s'}", d, swap] & B \ar["{g}", d] \\
+      E \ar["{r}", r] \ar["{r'}", d, swap] & B \ar["{g}", d] \\
       C \ar["{g'}", r, swap] & D
     \end{tikzcd}
   \]
   Come abbiamo visto, possiamo ottenere
-  \([g, -g'] (r, r') = 0_E^D = 0_{B \oplus C}^D (h, h')\). Per la
-  proprietà universale di equalizzatore, abbiamo che esiste uno e un
-  solo \(s : E \to A\) tale che \((f, f') s = (r, r')\). Da qui, per
-  concludere è sufficiente precomporre una volta con \(p_B\) e un'altra
-  con \(p_C\). %\qedhere
-  % \end{itemize}
+  \([g, -g'] (r, r') = 0_E^D = 0_{B \oplus C}^D (r, r')\). Per la proprietà
+  universale di kernel, abbiamo che esiste uno e un solo \(s : E \to A\)
+  tale che \((f, f') s = (r, r')\). Da qui, per concludere è sufficiente
+  comporre una volta con \(p_B\) e un'altra con \(p_C\) entrambi i membri
+  di quest'ultima uguaglianza.
 \end{proof}
 
 
 \subsection{Equalizzatori e coequalizzatori}
 
-Parliamo ora di equalizzatori e coequalizzatori. Il discorso è piuttosto
-semplice.
+% Parliamo ora di equalizzatori e coequalizzatori. Il discorso è piuttosto
+% semplice.
 
 \begin{proposition}\label{proposition:EqualizersAreKernels}
   In una categoria preadditiva \(\cat C\) con oggetto zero \(0\), gli
@@ -999,7 +946,8 @@ Quindi un (co)equalizzatore di una coppia di morfismi è un (co)kernel
 della differenza dei due.
 
 \begin{proof}
-  Basta osservare che
+  Basta osservare che, preso \(i : E \to A\), si ha \(fi = gi\) se e solo se \((f-g)i = 0_EB\).
+\end{proof}
 
 
 
