@@ -6,4 +6,5 @@ main.pdf: $(shell find . -type f -name \*.tex) biblio.bib
 
 clean:
 > @latexmk -c
+> @rm -fr auto/
 

@@ -1,5 +1,6 @@
 
 \documentclass[ structure      = book
+              , fontsize       = 11pt
               , maketitlestyle = standard
               %, partfont       = smallcaps
               %, partstyle      = parright 
@@ -20,7 +21,7 @@
              }
 
 % \newenvironment{tcbenum}
-%   {\begin{enumerate}[leftmargin=*, ref=\arabic*]}
+%   {\begin{enumerate}[leftmargin=*]}
 %   {\end{enumerate}}
 
 % \newenvironment{tcbitem}
@@ -56,6 +57,8 @@
 \let\underbrace\LaTeXunderbrace
 \let\overbrace\LaTeXoverbrace
 \usepackage[bb=stix]{mathalfa}
+
+%\renewenvironment{pmatrix}{\begin{pmatrix*}}{\end{pmatrix*}}
 
 \usepackage{amsthm}
 \newcounter{coun} % Find a nicer name for the counter...
