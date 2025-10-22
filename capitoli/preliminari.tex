@@ -249,6 +249,43 @@ conflitto?  No.
   un enunciato, quello duale è automatico.
 \end{remark}
 
+Un mantra dell'Algebra è che un omomorfismo è iniettivo se e solo se è
+il suo kernel è banale. Questo continua a valere, con qualche
+precauzione, anche nelle categorie preadditive.
+
+\begin{proposition}\label{proposition:MonoIffKerIsTrivial}
+  Sia \(\cat C\) una categoria preadditiva con oggetto zero
+  \(0\). Allora \(f : A \to B\) è monomorfismo se e solo se
+  \(\begin{tikzcd}[column sep=small, cramped] 0 \ar["{\exists!}", r] &
+    A \end{tikzcd}\) è kernel di \(f\).
+\end{proposition}
+
+\begin{proof}
+  (\Rightarrow) Questa implicazione è valida in qualsiasi categoria con
+  oggetto zero. Sia
+  \[
+    \begin{tikzcd}
+      E \ar["{i}", r] & A \ar["{f}", r, shift left] \ar["{0_A^B}", r,
+      shift right, swap] & B
+    \end{tikzcd}
+  \]
+  commutativo. Allora
+  \[
+    f i = 0_A^B i = 0_E^B = f 0_E^A
+  \]
+  Essendo \(f\) un monomorfismo, allora \(i = 0_E^A\). Pertanto \(i\)
+  fattorizza attraverso \(0 \to A\) in un unico modo (\(0\) è terminale):
+  \[
+    \begin{tikzcd}
+      0 \ar["{\exists!}", r] & A \\
+      E \ar["{\exists!}", u] \ar["{i = 0_E^A}", ur, swap]
+    \end{tikzcd}
+  \]
+  (\Leftarrow) Siano \(h, k : A' \to A\) tali che \(f h = f k\). Questo
+  vuol dire che \(f (h-k) = 0_E^B = 0_A^B (h-k)\). Per la definizione di
+  kernel, esiste un e un solo morfismo \(j : A' \to 0\) tale che
+  \(h-k = 0_0^A j = 0_{A'}^A\). In conclusione, \(h = k\).
+\end{proof}
 
 
 \section{Limiti e limiti}
