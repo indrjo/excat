@@ -902,19 +902,154 @@ della differenza dei due.
 
 \begin{proof}
   Basta osservare che
+
+
+
+\section{Categorie abeliane}
+
+\begin{definition}\label{definition:AbelianCategories}
+  Una {\em categoria abeliana} è una categoria additiva in cui:
+  \begin{enumerate}[leftmargin=*]
+  \item Ogni morfismo ha un kernel e un cokernel.
+  \item Ogni monomorfismo è un kernel e ogni epimorfismo è un cokernel.
+  \end{enumerate}
+\end{definition}
+
+\begin{example}
+  Vediamo che il solito \(\Modu_R\) è una categoria abeliana. Abbiamo
+  già visto che ogni omomorfismo ha kernel e cokernel. Sia
+  \(f : M \to N\) un monomorfismo e cerchiamo \(g : N \to N'\) che abbia
+  \(f\) come kernel. Se prendiamo \(N' = \frac{N}{\im f}\) e
+  \(g = \pi_N\), abbiamo che \(\ker g = \im f\). I monomorfismi di
+  \(\Modu_R\) sono iniettivi, quindi \(\ker g \cong N\). Ora invece sia
+  \(f : M \to N\) epimorfismo di \(\Modu_R\), e quindi suriettivo e
+  consideriamo
   \[
-    \begin{tikzcd}
-      E \ar["i", r] & A \ar["f", r, shift left] \ar["g", r, shift right,
-      swap] & B
+    \begin{tikzcd}[column sep=small]
+      \ker f \ar["{}", r, hookrightarrow] & M \ar["{f}", r] & N
     \end{tikzcd}
   \]
-  commuta se e solo se commuta
+  Abbiamo visto anche in questo caso che il cokernel dell'inclusione è
+  \(\frac{M}{\ker f} \cong \im f = N\).
+\end{example}
+
+\begin{recall}
+  In generale, una categoria \(\cat C\) che possiede oggetto terminale,
+  prodotti binari e equalizzatori è {\em finitamente completa} (cioè:
+  ogni diagramma \(X : \cat I \to \cat C\), con \(\cat I\) categoria con
+  un numero finito di morfismi, ha un limite). Dualmente, una categoria
+  che possiede oggetto iniziale, coprodotti binari e coequalizzatori è
+  {\em finitamente cocompleta}.
+\end{recall}
+
+\begin{proposition}
+  Le categorie abeliane sono finitamente complete e finitamente
+  cocomplete.
+\end{proposition}
+
+\begin{proof}
+  Le categorie abeliane hanno oggetto zero, biprodotti (cioè prodotti e
+  coprodotti) e kernel e cokernel (cioè equalizzatori e coequalizzatori,
+  vedi Proposizione~\ref{proposition:EqualizersAreKernels}).
+\end{proof}
+
+In generale, gli isomorfismi sono morfismi monici ed epici e il
+viceversa non vale sempre. Le categorie abeliane sono categoria in cui
+vale il viceversa.
+
+\begin{recall}
+  In generale, un equalizzatore epico è un isomorfismo; dualmente, un
+  coequalizzatore monico è un isomorfismo.
+\end{recall}
+
+\begin{proposition}
+  In una categoria abeliana, un morfismo monico ed epico è un
+  isomorfismo.
+\end{proposition}
+
+\begin{proof}
+  Sia \(f : A \to B\) monico ed epico: a causa della definizione di
+  categoria abeliana, \(f\) è un certo equalizzatore e un certo
+  coequalizzatore.
+\end{proof}
+
+\begin{recall}
+  Se \(X\) e \(Y\) sono spazi topologici, \(Y\) è di Hausdorff, \(A\) è
+  un sottospazio denso di \(X\), e \(f, g : X \to Y\) funzioni continue
+  sono tali che
+  \[
+    f(x) = g(x) \text{ per ogni } x \in A
+  \]
+  allora \(f = g\). Ricordiamo anche che gli spazi di Banach sono spazi
+  di Hausdorff.
+\end{recall}
+
+\begin{example}
+  Al contrario di \(\Modu_R\), la categoria additiva \(\Ban\) non è
+  abeliana. Sia \(M\) un sottospazio denso proprio di uno spazio di
+  Banach \(X\): l'inclusione \(i : M \hookrightarrow X\) è monica ed epica, ma non è
+  un isomorfismo. Ad esempio, \(C_c([a, b])\) è un sottospazio denso proprio di
+  \(L^p([a, b])\).
+\end{example}
+
+\begin{proposition}\label{proposition:MonoIsKerOfItsCoker} 
+  In una categoria abeliana, i monomorfismi sono kernel del rispettivo
+  cokernel; dualmente, ogni epimorfismo è cokernel del rispettivo kernel.
+\end{proposition}
+
+\begin{proof}
+  Sia \(f : A \to B\) un monomorfismo e \(p : B \to C\) tale che \(f\) è
+  kernel di \(p\). Sia ora \(q : B \to D\) cokernel di \(f\). Poiché
+  \(p f = 0_A^C\), allora a causa della proprietà universale di cokernel
+  esiste \(r : D \to C\) per cui commuta il triangolo in
+  \[
+    \begin{tikzcd}[row sep=small]
+      & & C \\
+      A \ar["{f}", r] & B \ar["{p}", ur] \ar["{q}", dr, swap] \\
+      & & D \ar["{r}", uu, swap]
+    \end{tikzcd}
+  \]
+  Per provare che \(f : A \to B\) è kernel di \(q\) sia
   \[
     \begin{tikzcd}
-      E \ar["i", r] & A \ar["{f-g}", r, shift left] \ar["{0_A^B}", r,
-      shift right, swap] & B
+      A' \ar["{f'}", r] & B \ar["{q}", r, shift left] \ar["{0_B^D}", r,
+      shift right, swap] & D
     \end{tikzcd}
-    \qedhere\]
+  \]
+  commutativo. In tal caso \(pf' = rqf' = r 0_{A'}^D = 0_{A'}^C\), da
+  cui, essendo \(f\) kernel di \(p\), si ha \(f' = f e\) per un
+  \(e : A' \to A\). Per l'unicità, basta ricordare che \(f\) è monico: se
+  \(f' = fe'\) con \(e' : A' \to A\), allora \(e = e'\).
+\end{proof}
+
+\begin{proposition}\label{proposition:PushotMonoIsMono}
+  In una categoria abeliana, il pushout di un monomorfismo è un
+  monomorfismo; dualmente, il pullback di un epimorfismo è un epimorfismo.
+\end{proposition}
+
+\begin{proof}
+  Sia \(f : A \to B\) monico e
+  \[
+    \begin{tikzcd}
+      A \ar["{g}", d, swap] \ar["{f}", r] & B \ar["{g'}", d] \\
+      A' \ar["{f'}", r, swap] & B'
+    \end{tikzcd}
+  \]
+  un quadrato di pushout. Grazie alla
+  Proposizione~\ref{proposition:FromPullbackToKernel}, segue che
+  \([f', -g'] : A' \oplus B \to B'\) è cokernel di
+  \((g, f) : A \to A' \oplus B\). Tuttavia di quest'ultima freccia,
+  possiamo dire che è un monomorfismo perché \(f\) lo è. Invocando la
+  Proposizione~\ref{proposition:MonoIsKerOfItsCoker}, \((g, f)\) deve
+  essere anche kernel di \([f', -g']\).\newline Passiamo a mostrare che
+  \(f'\) è un monomorfismo. Sia \(h : E \to A'\) tale che \(f'h = 0_E^{B'}\)
+  e mostriamo che \(h = 0_E^{A'}\). Abbiamo quindi
+  \(0_E^{B'} = f'h = [f', -g']i_{A'}h\) da cui segue che
+  \(i_{A'} h = (g, f) u\) per un \(u : E \to A\), essendo
+  \((g, f)\) kernel di \([f', -g']\). Applicando \(p_B\) ad entrambi i
+  membri, otteniamo \(fu = 0_E^B\) che a sua volta implica che \(u =
+  0_E^A\). Quindi anche \(i_{A'} h = 0_E^A\), da
+  cui segue, applicando \(p_{A'}\), che \(h = 0_E^{A'}\).
 \end{proof}
 
 
