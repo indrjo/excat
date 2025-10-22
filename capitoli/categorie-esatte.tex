@@ -313,91 +313,137 @@ Quindi ``la somma di due coppie ker-coker è una coppia ker-coker.''
 
 \section{Stutture e categorie esatte}
 
+\begin{recall}
+  Sia \(\cat C\) una categoria. Definiamo \(\cat C^{\to\to}\) la
+  categoria in cui
+  \begin{itemize}
+  \item Gli oggetti sono coppie di frecce
+    \(\begin{tikzcd}[column sep=small, cramped] A \ar["{f}", r] & B
+      \ar["{g}", r] & C \end{tikzcd}\) di \(\cat C\).
+  \item I morfismi da
+    \(\begin{tikzcd}[column sep=small, cramped] A \ar["{f}", r] & B
+      \ar["{g}", r] & C \end{tikzcd}\) a
+    \(\begin{tikzcd}[column sep=small, cramped] A' \ar["{f'}", r] & B'
+      \ar["{g'}", r] & C' \end{tikzcd}\) sono triple di frecce di
+    \(\cat C\)
+    \[
+      \left(
+        \begin{tikzcd}[row sep=small, cramped] A \ar["{\alpha}", d, swap] \\
+          A' \end{tikzcd},
+        \begin{tikzcd}[row sep=small, cramped] B \ar["{\beta}", d, swap] \\
+          B' \end{tikzcd},
+        \begin{tikzcd}[row sep=small, cramped] C \ar["{\gamma}", d, swap] \\
+          C' \end{tikzcd} \right)
+    \]
+    per cui commuta
+    \[
+      \begin{tikzcd}
+        A \ar["{f}", r] \ar["{\alpha}", d, swap] & B \ar["{g}", r] \ar["{\beta}",
+        d, swap] & C \ar["{\gamma}", d, swap] \\
+        A' \ar["{f'}", r, swap] & B' \ar["{g'}", r, swap] & C'
+      \end{tikzcd}
+    \]
+  \item La composizione avviene per componenti.
+  \end{itemize}
+\end{recall}
+
 \begin{definition}\label{definition:CategorieEsatte}
   Una {\em struttura esatta} per una categoria additiva \(\cat C\) è una
-  classe \(\cat E\) di coppie ker-coker in \(\cat C\) con le seguenti
-  proprietà:
+  classe \(\cat E\) di coppie ker-coker di \(\cat C\) in cui:
+  \begin{itemize}[leftmargin=*]
+  \item Chiamiamo {\em monomorfismi ammissibili} le frecce
+    \(i : A \to B\) per le quali esiste \(p : B \to C\) tale che
+    \(\begin{tikzcd}[column sep=small, cramped] A \ar["{i}", r] & B
+      \ar["{p}", r] & C \end{tikzcd}\) appartiene ad \(\cat E\). Useremo
+    \(\mono\) al posto di \(\to\) per indicare monomomorfismi ammissibili
+    nei diagrammi commutativi.
+  \item Chiamiamo {\em epimorfismi ammissibili} le frecce
+    \(p : B \to C\) per le quali esiste \(i : A \to B\) tale che
+    \(\begin{tikzcd}[column sep=small, cramped] A \ar["{i}", r] & B
+      \ar["{p}", r] & C \end{tikzcd}\) appartiene ad \(\cat E\). Useremo
+    \(\epi\) al posto di \(\to\) per indicare epimomorfismi ammissibili
+    nei diagrammi commutativi.
+  \end{itemize}
+  che rispetta le seguenti proprietà:
   \begin{enumerate}[leftmargin=*, label=(E\arabic*),
-    ref=Definizione~\ref{definition:CategorieEsatte}-E\arabic*]
-  \item \label{item:EO} Per ogni \(a \in \objcat C\), le coppie
-    ker-coker
+    % ref=Definizione~\ref{definition:CategorieEsatte}-E\arabic*
+    ref=(E\arabic*)]
+  \item \(\cat E\) è chiusa per isomorfismo, cioè se
+    \(\begin{tikzcd}[column sep=small, cramped] A \ar["{i}", r] & B
+      \ar["{p}", r] & C \end{tikzcd}\) è in \(\cat E\) ed è isomorfo a
+    \(\begin{tikzcd}[column sep=small, cramped] A' \ar["{i'}", r] & B'
+      \ar["{p'}", r] & C' \end{tikzcd}\) come oggetto di
+    \(\cat C^{\to\to}\), allora anche quest'ultima coppia di frecce è in
+    \(\cat E\).
+  \item \label{item:EO} \(\id_A : A \to A\) è un monomorfismo ammissibile
+    per ogni \(A \in \obj{\cat C}\).
+  \item \label{item:EOop} \(\id_A : A \to A\) è un epimorfismo ammissibile
+    per ogni \(A \in \obj{\cat C}\).
+  \item \label{item:E1} La composizione di due monomorfismi ammissibili
+    è un monomorfismo ammissibile.
+  \item \label{item:E1op} La composizione di due epimorfismi ammissibili
+    è un epimorfismo ammissibile.
+  \item \label{item:E2} Il pushout di un monomorfismo ammissibile lungo
+    un qualsiasi morfismo di \(\cat C\) esiste ed è un monomorfismo
+    ammissibile.
     \[
-      \begin{tikzcd}[column sep=small]
-        A \ar["{\id_A}", r] & A \ar["{\ast}", r] & \ast
+      \begin{tikzcd}
+        A \ar["{f}", d, swap] \ar["{PO}" description, dr, phantom] \ar["{i}", rightarrowtail, r] & B \ar["{}", d] \\
+        A' \ar["{i'}", rightarrowtail, r, swap] & B'
       \end{tikzcd}
     \]
-    stanno in \(\cat E\).
-  \item \label{item:EOop} Per ogni \(a \in \objcat C\), le coppie
-    ker-coker
+  \item \label{item:E2op} Il pullback di un epimorfismo ammissibile
+    lungo un qualsiasi morfismo di \(\cat C\) esiste ed è un epimorfismo
+    ammissibile.
     \[
-      \begin{tikzcd}[column sep=small]
-        \ast \ar["{\ast}", r] & A \ar["{\id_A}", r] & A
+      \begin{tikzcd}
+        B' \ar["{}", d] \ar["{PB}" description, dr, phantom] \ar["{p'}", twoheadrightarrow, r] & C' \ar["{f}", d] \\
+        B \ar["{p}", twoheadrightarrow, r, swap] & C
       \end{tikzcd}
     \]
-    stanno in \(\cat E\).
-  \item \label{item:E1} Se \(\cat E\) contiene le coppie ker-coker
-    \[
-      \begin{tikzcd}[column sep=small, row sep=tiny]
-        A \ar["{f}", r] & B \ar["{\ast}", r] & \ast \\
-        B \ar["{g}", r] & C \ar["{\ast}", r] & \ast
-      \end{tikzcd}
-    \]
-    allora contiene anche le coppie ker-coker
-    \[
-      \begin{tikzcd}[column sep=small]
-        A \ar["{g \circ f}", r] & C \ar["{\ast}", r] & \ast
-      \end{tikzcd}
-    \]
-  \item \label{item:E1op} Se \(\cat E\) contiene le coppie ker-coker
-    \[
-      \begin{tikzcd}[column sep=small, row sep=tiny]
-        \ast \ar["{\ast}", r] & A \ar["{f}", r] & B \\
-        \ast \ar["{\ast}", r] & B \ar["{g}", r] & C
-      \end{tikzcd}
-    \]
-    allora anche le coppie ker-coker
-    \[
-      \begin{tikzcd}[column sep=small]
-        \ast \ar["{\ast}", r] & A \ar["{g \circ f}", r] & C
-      \end{tikzcd}
-    \]
-    stanno in \(\cat E\).
-  \item \label{item:E2} Se
-    \[
-      \begin{tikzcd}[column sep=small]
-        A \ar["{i}", r] & B \ar["{\ast}", r] & \ast
-      \end{tikzcd}
-    \]
-    sta in \(\cat E\) e \(f : A \to A'\) è in \(\cat C\), il pushout di
-    \(i\) lungo \(f\) esiste in \(\cat C\) e, indicandolo con
-    \(i' : A' \to B'\), anche le coppie ker-coker
-    \[
-      \begin{tikzcd}[column sep=small]
-        A' \ar["{i'}", r] & B' \ar["{\ast}", r] & \ast
-      \end{tikzcd}
-    \]
-    stanno in \(\cat E\).
-  \item \label{item:E2op} Se
-    \[
-      \begin{tikzcd}[column sep=small]
-        \ast \ar["{\ast}", r] & A \ar["{p}", r] & B
-      \end{tikzcd}
-    \]
-    sta in \(\cat E\) e \(f : C' \to C\) è in \(\cat C\), il pullback di
-    \(p\) lungo \(f\) esiste in \(\cat C\) e, indicandolo con
-    \(p' : B' \to C'\), anche le coppie ker-coker
-    \[
-      \begin{tikzcd}[column sep=small]
-        \ast \ar["{\ast}", r] & A' \ar["{p'}", r] & B'
-      \end{tikzcd}
-    \]
-    stanno in \(\cat E\).
   \end{enumerate}
   Una {\em categoria esatta} è una coppia \((\cat C,\cat E)\) come sopra
-  e gli elementi di \(\cat E\) si chiamano {\em sequenze esatte corte}.
+  e gli elementi di \(\cat E\) si chiamano {\em successioni esatte
+    corte}.
 \end{definition}
 
-Primi esempi di sequenze esatte corte derivano coinvolgono le identità.
+% \begin{example}
+%   Nota come gli assiomi~\ref{item:E2} e~\ref{item:E2op} replicano la
+%   Proposizione~\ref{proposition:PushotMonoIsMono}. Infatti sia
+%   \(\cat C\) una categoria abeliana. A causa della
+%   Proposizione~\ref{proposition:MonoIsKerOfItsCoker}, è molto semplice
+%   figurarsi una struttura esatta: si può prender la classe dei
+%   monomorfismi di \(\cat C\) e attaccare a ciascuno i rispettivi
+%   cokernel.
+% \end{example}
+
+\begin{proposition}
+  In categorie esatte gli isomorfismi sono monomomorfismi ed epimorfismi
+  ammissibili.
+\end{proposition}
+
+\begin{proof}
+  Se \(f : A \to B\) è un isomorfismo, allora abbiamo un quadrato di
+  pushout e uno di pullback
+  \[
+    \begin{tikzcd}
+      B \ar["{f^{-1}}", d, swap] \ar["{PO}" description, dr, phantom] \ar["{\id_B}", r] & B \ar["{\id_B}", d] \\
+      A \ar["{f}", r, swap] & B
+    \end{tikzcd}
+    % \]
+    % è di pushout, mentre
+    % \[
+    \qquad
+    \begin{tikzcd}
+      A \ar["{\id_A}", d, swap] \ar["{PB}" description, dr, phantom] \ar["{f}", r] & B \ar["{f^{-1}}", d] \\
+      A \ar["{\id_A}", r, swap] & A
+    \end{tikzcd}
+  \]
+  Grazie a~\ref{item:EO}, \ref{item:EOop}, \ref{item:E2}
+  e~\ref{item:E2op}, possiamo concludere.
+\end{proof}
+
+Primi esempi di successioni esatte corte coinvolgono le identità.
 
 \begin{proposition}\label{proposition:ExactId}
   Sia \((\cat C,\cat E)\) una categoria esatta. Sono successioni esatte
@@ -408,11 +454,8 @@ Primi esempi di sequenze esatte corte derivano coinvolgono le identità.
       A \ar["{\id_A}", r] & A \ar["{\exists!}", r] & 0
     \end{tikzcd}
   \]
+  Cioè coppie ker-coker in \(\cat E\).
 \end{proposition}
-
-% In \(\Modu_R\) questo vuol dire una cosa piuttosto semplice: il kernel
-% dell'omomorfismo \(\id_M : M \to M\) è banale, mentre il cokernel è
-% \(M\) stesso.
 
 \begin{proof}
   Grazie al Lemma~\ref{lemma:KerCokerId}, le due coppie sono
@@ -470,20 +513,15 @@ contiene queste coppie ker-coker.
       B \ar["{\exists!}", r, swap] & 0
     \end{tikzcd}
   \]
-  è un quadrato di pushout. Inoltre per la
+  è un quadrato di pullback. Inoltre per la
   Proposizione~\ref{proposition:ExactId}, la base di questo diagramma è
-  parte della sequenza esatta corta \begin{tikzcd}[cramped, column
+  parte della successione esatta corta \begin{tikzcd}[cramped, column
     sep=small] B \ar["{\id_B}", r] & B \ar["{\exists!}", r] & 0
   \end{tikzcd}. Possiamo appellarci a \ref{item:E2op} ora: il pullback
-  di \(B \to 0\) lungo \(A \to 0\), va a dire \(p_A\), è tale che le
-  coppie ker-coker
-  \[
-    \begin{tikzcd}[column sep=small]
-      \ast \ar["{\ast}", r] & A \oplus B \ar["{p_A}", r] & A
-    \end{tikzcd}
-  \]
-  stanno in \(\cat E\). Il Lemma~\ref{lemma:KerCokerInjProj} ci dà
-  quella che ci serve.
+  di \(B \to 0\) lungo \(A \to 0\), vale a dire \(p_A\), è un epimorfismo
+  ammissibile. Il Lemma~\ref{lemma:KerCokerInjProj} ci dà un coppia
+  ker-coker: essendo chiusa per isomorfismo, questa coppia sta in
+  \(\cat E\).
 \end{proof}
 
 \begin{recall}
@@ -508,7 +546,7 @@ contiene queste coppie ker-coker.
 \end{recall}
 
 \begin{proposition}\label{proposition:SumExactSeqsIsExact}
-  ``In una categoria esatta corta la somma di sequenze esatte corte è
+  ``In una categoria esatta la somma di successioni esatte corte è
   esatta corta''. Vale a dire: in una categoria esatta
   \((\cat C,\cat E)\), se
   \[
@@ -564,17 +602,732 @@ Quindi \(\cat E\) è chiusa rispetto alla somma di sequenze esatte corte.
   coinvolge \(f \oplus \id_{A'}\):
   \[
     \begin{tikzcd}
-      A \oplus A' \ar["{f \oplus \id_{A'}}", r] & B \oplus A' \ar["{g \oplus
-        0_{A'}^0}", r] & C \oplus 0
+      A \oplus A' \ar["{f \oplus \id_{A'}}", r] & B \oplus A' \ar["{g
+        \oplus 0_{A'}^0}", r] & C \oplus 0
     \end{tikzcd}
   \]
-  Ricordando ora che \(p_{C}^{C0} : C \oplus 0 \to C\) è un isomorfismo e che
-  \(p_{C}^{C0} \left( g \oplus 0_{A'}^0 \right) = g p_{B}^{BA'}\), abbiamo
-  finito.
+  Ricordando ora che \(p_{C}^{C0} : C \oplus 0 \to C\) è un isomorfismo
+  e che \(p_{C}^{C0} \left( g \oplus 0_{A'}^0 \right) = g p_{B}^{BA'}\),
+  abbiamo finito.
 \end{proof}
 
-Adesso riprendiamo un discorso che avevamo iniziato nella
-Proposizione~\ref{proposition:FromPullbackToKernel}.
+% Adesso riprendiamo un discorso che avevamo iniziato nella
+% Proposizione~\ref{proposition:FromPullbackToKernel}.
+
+\begin{proposition}\label{proposition:pushout-exact-bicart}
+  Sia \((\cat C, \cat E)\) una categoria esatta e consideriamo il
+  diagramma commutativo
+  \[
+    \begin{tikzcd}
+      A \ar["{f}", d, swap] \ar["{i}", rightarrowtail, r] & B \ar["{f'}", d] \\
+      A' \ar["{i'}", rightarrowtail, r, swap] & B'
+    \end{tikzcd}
+  \]
+  in cui le frecce orizzontali sono monomorfismi ammissibili. Allora
+  sono equivalenti:
+  \begin{enumerate}[leftmargin=*, label=(\roman*), ref=(\roman*)]
+  \item\label{item:1} Il quadrato è di pushout.
+  \item\label{item:2} La successione
+    \[
+      \begin{tikzcd}[ampersand replacement=\&]
+        A \ar["{\begin{psmallmatrix} i \\ f \end{psmallmatrix}}", r] \&
+        B \oplus A' \ar["{\begin{psmallmatrix} f' &
+            -i' \end{psmallmatrix}}", r] \& B'
+      \end{tikzcd}
+    \]
+    è esatta corta.
+  \item\label{item:3} Il quadrato è bicartesiano (cioè di pullback e di
+    pushout).
+  \item\label{item:4} Il quadrato è parte del diagramma commutativo
+    \[
+      \begin{tikzcd}[row sep=tiny]
+        A \ar["{f}", dd, swap] \ar["{i}", rightarrowtail, r] & B
+        \ar["{f'}", dd, swap]
+        \ar["{p}", twoheadrightarrow, dr] \\
+        & & C \\
+        A' \ar["{i'}", rightarrowtail, r, swap] & B' \ar["{p'}",
+        twoheadrightarrow, ur, swap]
+      \end{tikzcd}
+    \]
+    dove \((i, p)\) e \((i', p')\) sono successioni esatte corte.
+  \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+  \ref{item:1} \Rightarrow \ref{item:2}. La
+  Proposizione~\ref{proposition:FromPullbackToKernel} ci dice che
+  \(\begin{psmallmatrix} f' & -i' \end{psmallmatrix}\) è cokernel di
+  \(\begin{psmallmatrix} i \\ f \end{psmallmatrix}\). Quindi il piano è
+  verificare che quest'ultimo morfismo è un monomorfismo
+  ammissibile. Usiamo un po' di calcolo matriciale:
+  \[
+    \begin{pmatrix} i \\ f \end{pmatrix} = \underbrace{\begin{pmatrix} i
+        & 0_{A'}^B \\ 0_A^{A'} & \id_{A'} \end{pmatrix}}_{i \oplus
+      \id_{A'}}
+    \begin{pmatrix} \id_A & 0_{A'}^A \\ f & \id_{A'} \end{pmatrix}
+    \underbrace{\begin{pmatrix} \id_A \\
+      0_A^{A'} \end{pmatrix}}_{i_A}
+\]
+Come abbiamo visto \(i_A\) è monomorfismo ammissibile
+(Proposizione~\ref{proposition:ExactInjProj}) così come
+\(i \oplus \id_{A'}\)
+(Proposizione~\ref{proposition:SumExactSeqsIsExact}). Il morfismo in
+mezzo è un isomorfismo (calcola esplicitamente l'inverso) e quindi è un
+monomorfismo ammissibile. In definitiva, \(\begin{psmallmatrix} i \\
+  f \end{psmallmatrix}\) è ammissibile perché è composizione di
+  monomorfismi ammissibili.
+
+  \ref{item:2} \Rightarrow \ref{item:3}. Questa è ovvia, sempre a causa
+  della Proposizione~\ref{proposition:FromPullbackToKernel}.
+
+  \ref{item:3} \Rightarrow \ref{item:1}. Anche questa è ovvia.
+  
+  \ref{item:1} \Rightarrow \ref{item:4}. Sia \(p : B \to C\) un cokernel
+  di \(i : A \to B\) e, attraverso la proprietà universale di pushout,
+  sia \(p' : B' \to C\) la freccia tale che \(p = f' p'\) e
+  \(0_{A'}^C = p' i'\)
+  \[
+    \begin{tikzcd}
+      A \ar["{f}", d, swap] \ar["{i}", r] & B \ar["{f'}", d, swap]
+      \ar["{p}", ddr, bend left] \\
+      A' \ar["{i'}", r] \ar["{0_{A'}^C}", drr, bend right, swap] &
+      B' \ar["{p'}", dr] \\
+      & & C
+    \end{tikzcd}
+  \]
+  Per come abbiamo scelto \(p\), la successione
+  \(\begin{tikzcd}[column sep=small, cramped] A \ar["{i}", r] & B
+    \ar["{p}", r] & C \end{tikzcd}\) è esatta corta. Per provare che
+  anche
+  \(\begin{tikzcd}[column sep=small, cramped] A' \ar["{i'}", r] & B'
+    \ar["{p'}", r] & C \end{tikzcd}\) lo è, mostriamo che \(p'\) è
+  cokernel di \(i'\). Sia \(h : B' \to X\) tale che
+  \(h i' = h 0_{A'}^{B'} = 0_{A'}^X\). Allora ne segue che
+  \[
+    h f' i = h i' f = 0_A^X .
+  \]
+  Poiché \(p : B \to C\) è cokernel di \(i : A \to B\), allora
+  \(h f' = k p\) per un unico morfismo \(k : C \to X\). A questo punto
+  abbiamo
+  \begin{align*}
+    & h f' = k p = k p' f' \\
+    & k p' i' = 0_{A'}^X = h i'
+  \end{align*}
+  che, per la proprietà universale di pushout, dà \(k p' = h\). Per
+  concludere, ricordiamo che essendo \(p = p' f'\) un epimorfismo, anche
+  \(p'\) lo è. Questo ci permette di dire che se \(k' : C \to X\) è tale
+  che \(h = k' p'\), allora \(k = k'\).
+
+  \ref{item:4} \Rightarrow \ref{item:2}. Il piano sarà di costruire in
+  qualche modo una successione esatta corta \(A \mono D \epi B'\) in cui
+  \(D \cong B \oplus A'\) e per cui commmuta
+  \[
+    \begin{tikzcd}[row sep=small, ampersand replacement=\&]
+      \& D \ar["{\cong}" description, dd] \ar["{}", twoheadrightarrow, dr] \\
+      A \ar["{}", rightarrowtail, ur] \ar["{\begin{psmallmatrix} i \\
+        f \end{psmallmatrix}}", dr, swap] \& \& B' \\
+    \& B \oplus A' \ar["{\begin{psmallmatrix} f' &
+        -i' \end{psmallmatrix}}", ur, swap]
+  \end{tikzcd}
+\]
+Questo basta per dimostrare ciò che ci serve visto che la classe delle
+successioni esatte corte è chiusa per isomorfismi.\newline Incominciamo
+con le costruzioni. Sia il quadrato di pullback
+\[
+  \begin{tikzcd}
+    D \ar["{q}", twoheadrightarrow, d, swap] \ar["{q'}",
+    twoheadrightarrow, r] & B \ar["{p}", twoheadrightarrow, d] \\
+    B' \ar["{p'}", r, twoheadrightarrow, swap] & C
+  \end{tikzcd}
+\]
+in cui osserviamo che \(q\) e \(q'\) sono epimorfismi ammissibili in
+quanto pullback di epimorfismi ammissibili. Sfruttando il duale della
+implicazione \ref{item:1} \Rightarrow \ref{item:4}, possiamo disegnare
+\[
+  \begin{tikzcd}
+    & & A \ar["{j}", rightarrowtail, dl, swap] \ar["{i}", rightarrowtail, d] \\
+    & D \ar["{q}", twoheadrightarrow, d] \ar["{q'}",
+    twoheadrightarrow, r, swap] & B \ar["{p}", twoheadrightarrow, d] \\
+    A' \ar["{j'}", rightarrowtail, ur] \ar["{i'}", rightarrowtail, r,
+    swap] & B' \ar["{p'}", r, twoheadrightarrow, swap] & C
+  \end{tikzcd}
+\]
+Ecco la successione esatta corta
+\(\begin{tikzcd}[column sep=small, cramped] A \ar["{j}", rightarrowtail,
+  r] & D \ar["{q}", twoheadrightarrow, r] & B' \end{tikzcd}\) che
+avevamo annunciato.\newline Per la proprietà universale di pullback, sia
+\(k : B \to D\) tale che \(q'k = \id_B\) e \(qk = f'\). In particolare
+\(q'(\id_D-kq') = 0_D^B\). Poiché \(j'\) è kernel di \(q'\), sia
+\(l : D \to A'\) il morfismo tale che \(j'l =
+\id_D-kq'\). Postcomponendo ambo i membri di questa equazione una volta
+per \(k\) e un'altra per \(j'\) e ricordando che \(j'\) è monico,
+deriviamo che \(lk = 0_B^{A'}\) e \(lj' = \id_{A'}\). Inoltre
+\(i'lj = -i'f\) (per calcolo diretto) da cui segue che \(lj = -f\)
+perché \(i'\) e monico.\newline Si può mostrare finalmente che
+\[
+  \begin{pmatrix} k & j' \end{pmatrix} : B \oplus A' \to D
+  \quad \begin{pmatrix} q' \\ l \end{pmatrix} : D \to B \oplus A'
+\]
+sono una l'inversa dell'altra.
+\end{proof}
+
+\begin{recall}[Il lemma dei pullback]\label{recall:PBLemma}
+  In una categoria \(\cat C\) consideriamo il diagramma
+  \[
+    \begin{tikzcd}
+      \bullet \ar["{}", d] \ar["{Q_1}" description, phantom, dr]
+      \ar["{}", r] & \bullet \ar["{}", d] \ar["{Q_2}" description,
+      phantom, dr] \ar["{}", r] & \bullet
+      \ar["{}", d] \\
+      \bullet \ar["{}", r] & \bullet \ar["{}", r] & \bullet
+    \end{tikzcd}
+  \]
+  Allora:
+  \begin{enumerate}
+  \item Se \(Q_1\) e \(Q_2\) sono di pullback, allora il rettangolo
+    esterno è di pullback.
+  \item Se il rettangolo e \(Q_2\) sono di pullback, allora \(Q_1\) lo
+    è.
+  \end{enumerate}
+\end{recall}
+
+\begin{corollary}
+  \label{corollary:gluing-pb-po}
+  In una categoria esatta \((\cat C, \cat E)\), il rettangolo esterno in
+  un diagramma
+  \[
+    \begin{tikzcd}
+      A \ar[d, "i", swap] \ar["{f}", twoheadrightarrow, r] \ar["{PB}"
+      description, phantom, dr] & B \ar[d, "j"] \ar["{PO}" description,
+      phantom, dr]
+      \ar["{g}", rightarrowtail, r] & C \ar["{k}", d] \\
+      A' \ar["{f'}", twoheadrightarrow, r, swap] & B' \ar["{g'}",
+      rightarrowtail, r, swap] & C'
+    \end{tikzcd}
+  \]
+  è bicartesiano e
+  \begin{equation}
+    \begin{tikzcd}[ampersand replacement=\&, column sep=large]
+      A \ar[r, "{\begin{pmatrix} i \\ gf \end{pmatrix}}"] \& A \oplus C
+      \ar[r, "{\begin{pmatrix} g' f' & -k \end{pmatrix}}"] \& C'
+    \end{tikzcd}
+    \label{cd:gluing-pb-po-exact}
+  \end{equation}
+  è una successione esatta corta.
+\end{corollary}
+
+\begin{proof}
+  Ne consegue dalla Proposizione~\ref{proposition:pushout-exact-bicart}
+  che entrambi i quadrati sono bicartesiani. Grazie al lemma dei
+  pullback (Richiamo~\ref{recall:PBLemma}), incollare i due quadrati
+  produce un altro quadrato bicartesiano. Per la
+  Proposizione~\ref{proposition:FromPullbackToKernel}, i morfismi
+  in~\eqref{cd:gluing-pb-po-exact} formano una coppia ker-coker. Per
+  concludere proviamo che questa coppia appartiene a \(\cat E\).
+  \[
+    \begin{pmatrix}
+      g' f' & -k
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+      g' & -k
+    \end{pmatrix}
+    \underbrace{
+      \begin{pmatrix}
+        f' & 0 \\
+        0 & \id_C
+      \end{pmatrix}
+    }_{f' \oplus \id_C}
+  \]
+  mostra \(\begin{pmatrix} g' f' & k \end{pmatrix}\) come una
+  composizione di epimorfismi ammissibili secondo la
+  Proposizione~\ref{proposition:SumExactSeqsIsExact} e la
+  Proposizione~\ref{proposition:pushout-exact-bicart}.
+\end{proof}
+
+\begin{proposition}\label{proposition:PbAdmMonicIsAdmMonic}
+  In una categoria esatta il pullback di un monomorfismo ammissibile
+  lungo un epimorfismo ammissibile produce un monomorfismo ammissibile.
+\end{proposition}
+
+\begin{proof}
+  Sia \(i : A \to B\) un monomorfismo ammissibile e \(e : B ' \to B\) un
+  epimorfismo ammissibile. A causa di~\ref{item:E2op} abbiamo il
+  quadrato di pullback
+  % \[
+  %   \begin{tikzcd}
+  %     A' \ar[d, "{e'}", swap] \ar[r, "{i'}"] \ar["{PB}" description,
+  %     phantom, dr] & B' \ar["{e}", twoheadrightarrow, d] \\
+  %     A \ar["{i}", rightarrowtail, r, swap] & B
+  %   \end{tikzcd}
+  % \]
+  \[
+    \begin{tikzcd}
+      A' \ar["{i'}", d, swap] \ar["{PB}" description, dr, phantom]
+      \ar["{e'}", twoheadrightarrow, r] & A \ar["{i}", rightarrowtail, d] \\
+      B' \ar["{e}", twoheadrightarrow, r, swap] & B
+    \end{tikzcd}
+  \]
+  Quindi dobbiamo dimostrare che \(i'\) è un monomorfismo
+  ammissibile.\newline Guardiamo il diagramma
+  \[
+    \begin{tikzcd}[row sep=tiny]
+      A' \ar[dd, "{e'}", swap] \ar[r, "{i'}"] \ar["{PB}" description,
+      phantom,
+      ddr] & B' \ar["{e}", dd] \ar["{pe}", dr] \\
+      & & C \\
+      A \arrow[r, "{i}", swap] & B \ar["{p}", ur, swap]
+    \end{tikzcd}
+  \]
+  dove \(p\) è un cokernel di \(i\). Qui \(p\) è un epimorfismo
+  ammissibile e lo è anche \(pe\) per la~\ref{item:E1op}. Per vedere che
+  \(i'\) è un monomorfismo ammissibile, è sufficiente dimostrare che
+  \(i'\) è un kernel di \(pe\).\newline Anzitutto
+  \(pei' = pie' = 0_{A'}^C\). Supponiamo che \(g':X \to B'\) sia tale
+  che \(peg' = 0_X^C\) e cerchiamo un modo di costruire una freccia
+  \(X \to A'\) per cui commuta il triangolo in
+  \[
+    \begin{tikzcd}
+      A' \ar["{i'}", r] & B' \ar["{pe}", r] & C \\
+      X \ar["{}", u] \ar["{g'}", ur, swap]
+    \end{tikzcd}
+  \]
+  Essendo \(i\) kernel di \(p\), esiste una sola \(f: X \to A\) per cui
+  \(eg' = if\). Applicando la proprietà universale del quadrato del
+  pullback, sia \(f': X \to A'\) tale che \(e'f' = f\) e \(i'f' = g'\):
+  è l'ultima identità che ci serve.\newline Vediamo l'unicità. In
+  generale in una categoria qualsiasi, il pullback di un monomorfismo è
+  un monomorfismo: nel nostro caso, questo significa che \(i'\) è monico
+  perché \(i\) lo è. \(f'\) è l'unico morfismo tale che \(i'f' = g'\) e
+  abbiamo finito.
+\end{proof}
+
+\begin{proposition}[Assioma Oscuro]
+  \label{proposition:ObscureAxiom}
+  In una categoria esatta, supponiamo che \(i: A \to B\) sia un morfismo
+  che ammette un cokernel. Se esiste un morfismo \(j: B \to C\) in
+  \(\cat C\) tale che \(ji : A \to C\) è un monomorfismo ammissibile,
+  allora \(i\) è un monomorfismo ammissibile.
+\end{proposition}
+
+\begin{remark}
+  Si chiama ``{\em assioma} oscuro'' perché in alcune trattazioni (in
+  Quillen, per esempio) faceva parte della definizione di categoria
+  esatta. Tuttavia viene provata la sua ridondanza da Yoneda e
+  Keller.
+\end{remark}
+
+\begin{proof}
+  Sia \(p: B \to D\) un cokernel di \(i\) e consideriamo un quadrato di
+  pushout (che esiste a causa di~\ref{item:E2})
+  \[
+    \begin{tikzcd}
+      A \ar["{i}", d, swap] \ar["{PO}" description, phantom, dr]
+      \ar["{ji}", rightarrowtail, r] & C \ar["{}", d] \\
+      B \ar["{}", rightarrowtail, r] & E
+    \end{tikzcd}
+  \]
+  Inoltre, grazie alla
+  Proposizione~\ref{proposition:pushout-exact-bicart}, abbiamo che
+  \(\begin{psmallmatrix} i \\ ji \end{psmallmatrix}: A \to B \oplus C\)
+  è un monomorfismo ammissibile. Ora osserviamo anche che
+  \(\begin{psmallmatrix} \id_B & 0_C^B \\ -j & \id_C \end{psmallmatrix}:
+  B \oplus C \to B \oplus C\) è un isomorfismo (l'inversa si può
+  calcolare direttamente), in particolare è un monomorfismo
+  ammissibile. A causa di~\ref{item:E1} anche la freccia
+  \(\begin{psmallmatrix} i \\ 0_A^C \end{psmallmatrix} =
+  \begin{psmallmatrix}
+    \id_B & 0_C^B \\
+    - j & \id_C
+  \end{psmallmatrix}
+  \begin{psmallmatrix}
+    i \\
+    ji
+  \end{psmallmatrix}\)
+  è un monomorfismo ammissibile. Osserviamo inoltre che \(p \oplus \id_C : B
+  \oplus C \to D \oplus C\) è un cokernel di~\(\begin{psmallmatrix} i \\
+    0_A^C \end{psmallmatrix}\) (infatti \(p \oplus \id_C\) è coker di \(i \oplus 0_0^C\)), quindi è un
+  epimorfismo ammissibile. Considera il seguente diagramma
+  \[
+    \begin{tikzcd}[row sep=small, ampersand replacement=\&]
+      \& B \ar["{\begin{psmallmatrix} \id_B \\
+          0_B^C \end{psmallmatrix}}", dd]
+      \ar["{p}", r] \& D \ar["{\begin{psmallmatrix} \id_D \\ 0_D^C \end{psmallmatrix}}", dd] \\
+      A \ar["{i}", ur] \ar["{\begin{psmallmatrix} i \\ 0_A^C \end{psmallmatrix}}", dr, swap] \\
+      \& B \oplus C \ar["{p \oplus \id_C}", r, swap] \& D \oplus C
+    \end{tikzcd}
+  \]
+  Qui il quadrato di destra è un pullback, di conseguenza \(p\) è un
+  epimorfismo ammissibile e \(i\) è un kernel di \(p\)
+\end{proof}
+
+
+
+\section{Alcuni teoremi classici}
+
+\begin{proposition}\label{prop:decompose-morphisms-of-exact-sequences}
+  Sia \((\cat C,\cat E)\) una categoria esatta. Un
+  morfismo di successioni esatte corte (vedi definizione di \(\cat
+  C^{\to\to}\))
+  \[
+    \begin{tikzcd}
+      A' \ar["{a}", d, swap] \ar["{f'}", rightarrowtail, r] & B' \ar["{b}", d] \ar["{g'}",
+      twoheadrightarrow, r] & C' \ar["{c}", d] \\
+      A \ar["{f}", rightarrowtail, r, swap] & B \ar["{g}",
+      twoheadrightarrow, r, swap] & C
+    \end{tikzcd}
+  \]
+  si fattorizza attraverso una successione esatta corta \(A \to D \to C'\)
+  \begin{equation}
+    \begin{tikzcd}
+      A' \ar["{a}", d, swap] \ar["{BC}" description, phantom, dr]
+      \ar["{f'}", rightarrowtail, r] & B' \ar["{b'}", d] \ar["{g'}",
+      twoheadrightarrow, r] & C' \ar["{\id_{C'}}", d] \\
+      A \ar["{\id_A}", d, swap] \ar["{m}",
+      rightarrowtail, r, swap] & D \ar["{b''}", d,
+      swap] \ar["{BC}" description, phantom, dr] \ar["{e}", twoheadrightarrow, r] & C'
+      \ar["c", d] \\
+      A \ar["{f}", rightarrowtail, r, swap] & B \ar["{g}",
+      twoheadrightarrow, r, swap] & C
+    \end{tikzcd}
+    \label{cd:decompose-morphisms-of-exact-sequences}
+  \end{equation}
+  in modo tale che i due quadrati contrassegnati con {\em BC}
+  sono bicartesiani. In particolare, esiste un isomorfismo canonico
+  \(A \cup_{A'} B' \cong B \times_{C} C'\).
+\end{proposition}
+
+\begin{proof}
+  Il pushout di \(f' : A' \mono B'\) lungo \(a\) dà i morfismi
+  \(m : A \mono D\) e \(b' : B' \to D\). Attraverso la proprietà
+  universale di pushout, introduciamo il morfismo \(e : D \to C'\) tale
+  che \(e b' = \id_{C'} g' = g'\) e \(e m = 0\) e sia \(b'': D \to B\) il
+  morfismo tale che \(b'' b' = b: B' \to B\) e \(b'' m = f \id_A = f\). La
+  Proposizione~\ref{proposition:pushout-exact-bicart} ci consente di
+  dire che \(e\) è un cokernel di \(m\). Guardiamo il quadrato in basso
+  a destra. Abbiamo
+  \[
+    \begin{cases}
+      ceb' = cg' \\
+      cem  = 0
+    \end{cases}
+    \qquad
+    \begin{cases}
+      gb''b' = gb = cg' \\
+      gb''m = gf = 0
+    \end{cases}
+  \]
+  Per la proprietà universale di pushout del quadrato in alto a
+  sinistra concludiamo che \(ce = g b''\).  Sempre a causa della
+  Proposizione~\ref{proposition:pushout-exact-bicart}, possiamo
+  concludere che anche questo è bicartesiano.
+\end{proof}
+
+\begin{corollary}[``Five Lemma'']
+  \label{cor:five-lemma}
+  In una categoria esatta considera un morfismo di successioni esatte corte
+  \[
+    \begin{tikzcd}
+      A' \ar["{a}", d, swap] \ar["{}", rightarrowtail, r] & B' \ar["{b}", d] \ar["{}", twoheadrightarrow, r] & C' \ar["{c}", d] \\
+      A \ar["{}", rightarrowtail, r] & B \ar["{}", twoheadrightarrow, r] & C
+    \end{tikzcd}
+  \]
+  Se \(a\) e \(c\) sono isomorfismi, monomorfismi ammissibili oppure epimorfismi
+  ammissibili, allora anche \(b\) è dello stesso tipo.
+\end{corollary}
+
+\begin{proof}
+  Assumiamo prima che \(a\) e \(c\) siano isomorfismi. Poiché gli
+  isomorfismi preservano pullback e pushout e guardando la
+  fattorizzazione~\eqref{cd:decompose-morphisms-of-exact-sequences}, si
+  ha che \(b\) è la composizione di due isomorfismi \(B' \to D \to B\). Se
+  \(a\) e \(c\) sono entrambi monici ammissibili, sempre guardando il
+  diagramma~\eqref{cd:decompose-morphisms-of-exact-sequences}, si ha che
+  \(b\) è la composizione di due monomorfismi ammissibili (per la
+  freccia \(D \to B\) vedi la
+  Proposizione~\ref{proposition:PbAdmMonicIsAdmMonic}). Il caso degli
+  epimorfismi ammissibili è duale.
+\end{proof}
+
+\begin{lemma}[Isomorfismo di Noether \(C/B \cong (C/A) / (B / A)\)]
+  \label{lem:c/b=(c/a)/(b/a)}
+  In una categoria esatta, sia il diagramma commutativo
+  \[
+    \begin{tikzcd}
+      A \ar["{\id_A}", d, swap] \ar["{}", rightarrowtail, r] & B
+      \ar["{}", rightarrowtail, d] \ar["{}", twoheadrightarrow, r] & X
+      \ar["{}", dashed, rightarrowtail, d] \\
+      A \ar["{}", rightarrowtail, r] & C \ar["{}", twoheadrightarrow, d]
+      \ar["{}", twoheadrightarrow, r] & Y \ar["{}", dashed, twoheadrightarrow, d] \\
+      & Z \ar["{\id_Z}", r, swap] & Z
+    \end{tikzcd}
+  \]
+  in cui le prime due righe orizzontali e la colonna centrale sono
+  esatte corte. Allora la terza colonna esiste, è esatta corta e è
+  unicamente determinata dalla condizione che rende il diagramma
+  commutativo. Inoltre, il quadrato in alto a destra è bicartesiano.
+\end{lemma}
+
+\begin{proof}
+  Il morfismo \(X \to Y\) esiste unico poiché la prima riga è esatta e la
+  composizione \(A \to C \to Y\) è zero, mentre il morfismo \(Y \to Z\) esiste
+  unico poiché la seconda riga è esatta e la composizione
+  \(B \to C \to Z\) si annulla. Per la
+  Proposizione~\ref{proposition:pushout-exact-bicart}, il quadrato
+  contenente \(X \to Y\) è bicartesiano. Ne consegue che \(X \to Y\) è un
+  monico ammissibile e che \(Y \to Z\) è il suo cokernel, sempre a causa
+  della stessa proposizione.
+\end{proof}
+
+\begin{corollary}[Lemma \(3 \times 3\)]
+  \label{cor:3x3-lemma}
+  In una categoria esatta, considera un diagramma commutativo
+  \[
+    \begin{tikzcd}[cramped]
+      A' \ar["{a}", rightarrowtail, d, swap] \ar["{f'}", r] & B'
+      \ar["{b}", rightarrowtail, d]
+      \ar["{g'}", r] & C' \ar["{c}", rightarrowtail, d] \\
+      A \ar["{a'}", twoheadrightarrow, d, swap] \ar["{f}", r] & B
+      \ar["{b'}", twoheadrightarrow, d]
+      \ar["{g}", r] & C \ar["{c'}", twoheadrightarrow, d] \\
+      A'' \ar["{f''}", r, swap] & B'' \ar["{g''}", r, swap] & C''
+    \end{tikzcd}
+  \]
+  in cui le colonne sono esatte corte e si assume inoltre che una delle
+  seguenti condizioni sia vera:
+  \begin{enumerate}[label=(\roman*), ref=(\roman*), leftmargin=*]
+  \item \label{item:3x3-lemma-1} la riga centrale e una delle righe
+    esterne è esatta corta;
+  \item \label{item:3x3-lemma-2} le due righe esterne sono esatte corte
+    e \(gf = 0\).
+  \end{enumerate}
+  Allora anche la riga rimanente è esatta corta.
+\end{corollary}
+
+\begin{proof}
+  Assumiamo~\ref{item:3x3-lemma-1}. Le due possibilità sono duali l'una
+  all'altra, quindi dobbiamo considerare solo il caso in cui le prime
+  due righe sono esatte. Applichiamo la
+  Proposizione~\ref{prop:decompose-morphisms-of-exact-sequences} alle
+  prime due righe per ottenere il diagramma commutativo
+  \[
+    \begin{tikzcd}
+      A' \ar["{a}", d, swap] \ar["{BC}" description, phantom, dr]
+      \ar["{f'}", rightarrowtail, r] & B' \ar["{i}", d] \ar["{g'}",
+      twoheadrightarrow, r] & C' \ar["{\id_{C'}}", d] \\
+      A \ar["{\id_A}", d, swap] \ar["{\bar f}", rightarrowtail, r, swap]
+      & D \ar["{j}", d, swap] \ar["{BC}" description, phantom, dr]
+      \ar["{\bar g}", twoheadrightarrow, r] & C'
+      \ar["c", d] \\
+      A \ar["{f}", rightarrowtail, r, swap] & B \ar["{g}",
+      twoheadrightarrow, r, swap] & C
+    \end{tikzcd}
+  \]
+  dove \(ji = b\). Notiamo che \(i\) e \(j\) sono monici ammissibili
+  rispettivamente perché pushout di un monomorfismo ammissibile e a
+  causa della Proposizione~\ref{proposition:PbAdmMonicIsAdmMonic},
+  rispettivamente. Per la
+  Proposizione~\ref{proposition:pushout-exact-bicart}, il morfismo
+  \(i': D \to A''\) determinato da \(i'i = 0\) e \(i'\bar{f} = a'\) è un
+  cokernel di \(i\) e il morfismo \(j': B \epi C''\) dato da
+  \(j' = c'g = g'' b'\) è un cokernel di \(j\).\newline Se sappiamo che il
+  diagramma
+  \[
+    \begin{tikzcd}
+      B' \ar["{\id_{B'}}", d, swap] \ar["{i}", rightarrowtail, r] & D
+      \ar["{j}", rightarrowtail, d] \ar["{i'}",
+      twoheadrightarrow, r] & A'' \ar["{f''}", d] \\
+      B' \ar["{b}", rightarrowtail, r] & B \ar["{j'}",
+      twoheadrightarrow, d, swap] \ar["{b'}",
+      twoheadrightarrow, r] & B'' \ar["{g''}", d] \\
+      & C'' \ar["{\id_{C''}}", r, swap] & C ''
+    \end{tikzcd}
+  \]
+  è commutativo, possiamo concludere grazie al
+  Lemma~\ref{lem:c/b=(c/a)/(b/a)} che \((f'',g'')\) è una successione
+  esatta corta.\newline Rimane quindi da dimostrare che
+  \(f'' i' = b' j\) poiché le altre relazioni di commutatività
+  \(b = ji\) e \(g''b' = j'\) sono valide per costruzione. Osserviamo il
+  quadrato \(A'B'AD\). Abbiamo
+  \[
+    (f'' i') i = 0 = b'b = (b'j) i \quad \text{e} \quad (b'j)\bar{f} = b'f = f''
+    a' = (f''i') \bar{f} .
+  \]
+  % che insieme a
+  % \[
+  %   (f''i'\bar{f})a = (f''i'i)f' = 0 \qquad \text{e} \qquad (b'j\bar{f})a =
+  %   f''a'a = 0 = b'bf' = (b'ji)f'
+  % \]
+  Per la proprietà universale di pushout, possiamo concludere che
+  \(f''i' = b'j\).
+  % Per dimostrare~(ii) iniziamo formando il pushout sotto \(g'\) e
+  % \(b\) in modo da avere il seguente diagramma commutativo con righe e
+  % colonne esatte
+  % \[
+  %   \xymatrix{ A' \ar@{ >->}[r]^{f'} \ar@{=}[d] & B' \ar@{->>}[r]^{g'}
+  %   \ar@{ >->}[d]^{b} \ar@{}[dr]|{\text{PO}} &
+  %   C' \ar@{ >->}[d]^{k} \\
+  %   A \ar@{ >->}[r]^{i} & B \ar@{->>}[r]^{j} \ar@{->>}[d]^{b'} &
+  %   D \ar@{->>}[d]^{k'} \\
+  %   & B'' \ar@{=}[r] & B'' }
+  % \]
+  % in cui il cokernel \(k'\) di \(k\) è determinato da \(k'j = b'\) e
+  % \(k'k = 0\), mentre \(i = bf'\) è un kernel dell'epico ammissibile
+  % \(j\), vedi la Osservazione~{\color{red} !!! FIX REF !!!} e la
+  % Proposizione~{\color{red} !!! FIX REF !!!}.  La proprietà del
+  % pushout del quadrato \(B'C'BD\) applicata al quadrato \(B'C'BC\)
+  % produce un morfismo unico \(d': D \to C\) tale che \(d'k = c\) e
+  % \(d'j = g\).  Il diagramma
+  % \[
+  %   \xymatrix{ C' \ar@{=}[d] \ar@{ >->}[r]^{k} & D \ar[d]^{d'}
+  %   \ar@{->>}[r]^{k'} &
+  %   B'' \ar@{->>}[d]^{g''} \\
+  %   C' \ar@{ >->}[r]^{c} & C \ar@{->>}[r]^{c'} & C'' }
+  % \]
+  % ha righe esatte ed è commutativo: Infatti, \(c = d'k\) è valido per
+  % costruzione di~\(d'\), mentre \(c'd' = g''k'\) segue da
+  % \(c'd'j = c'g = g''b' = g''k'j\) e dal fatto che \(j\) è
+  % epico. Concludiamo dalla Proposizione~{\color{red} !!! FIX REF !!!}
+  % che \(DCB''C''\) è un pullback, quindi \(d'\) è un epico ammissibile
+  % e anche \(g = d'j\). Il morfismo unico \(d: A'' \to D\) tale che
+  % \(k'd = f''\) e \(d'd = 0\) è un kernel di \(d'\). Per la proprietà
+  % del pullback di \(DCB''C''\), il diagramma
+  % \[
+  %   \xymatrix{ A' \ar@{=}[r] \ar@{ >->}[d]^{a} &
+  %   A' \ar@{ >->}[d]^{i} \\
+  %   A \ar[r]^{f} \ar@{->>}[d]^{a'} & B \ar@{->>}[r]^{g}
+  %   \ar@{->>}[d]^{j} &
+  %   C \ar@{=}[d] \\
+  %   A'' \ar@{ >->}[r]^{d} & D \ar@{->>}[r]^{d'} & C }
+  % \]
+  % è commutativo poiché \(k'(da') = f''a' = b'f = k'(jf)\) e
+  % \(d'(da') = 0 = gf = d'(jf)\). Nota che l'ipotesi che \(gf = 0\)
+  % entra in questo punto dell'argomento.  Ne consegue dal duale della
+  % Proposizione~{\color{red} !!! FIX REF !!!} che \(ABA''D\) è
+  % bicartesiano, quindi \(f\) è un kernel di \(g\) per la
+  % Proposizione~{\color{red} !!! FIX REF !!!}.
+\end{proof}
+
+
+
+\section{Categorie quasi-abeliane}
+
+\begin{definition}
+  Una {\em categoria quasi-abeliana} è una categoria additiva in cui:
+  \begin{enumerate}[leftmargin=*]
+  \item Ogni morfismo ha kernel e cokernel.
+  \item Il pushout di un kernel lungo un qualsiasi morfismo è esso
+    stesso un kernel e il pushout di un cokernel lungo un qualsiasi
+    morfismo è esso stesso un cokernel.
+  \end{enumerate}
+\end{definition}
+
+Nelle categorie abeliane sappiamo, grazie alla
+Proposizione~\ref{proposition:PushotMonoIsMono}, che il pushout di un
+kernel è un kernel e il pullback di un cokernel è un cokernel. E questo
+dimostra che le categorie abeliane sono quasi-abeliane.
+
+\begin{remark}
+  In \(\Ban\)
+  \begin{enumerate}
+  \item i monomorfismi sono esattamente le applicazioni lineare limitate
+    iniettive;
+  \item gli epimorfismi sono esattamente le applicazioni lineari
+    limitate con immagine densa;
+  \item un monomorfimo è un kernel se e solo se ha immagine chiusa;
+  \item un epimorfismo è un cokernel se e solo se è suriettivo.
+  \end{enumerate}
+\end{remark}
+
+\begin{example}
+  La categoria additiva \(\Ban\) è quasi-abeliana. Una dimostrazione di
+  questo fatto si può trovare in~\cite{buehler:boundedcohomology}
+  (Teorema 2.3.3) oppure in~\cite{schneiders:quasi-abelian}
+  (Proposizione 3.2.4). Sia
+  \[
+    \begin{tikzcd}
+      A \ar["{f}", d, swap] \ar["{m}", rightarrowtail, r] & B \ar["{f'}", d] \\
+      A' \ar["{m'}", r, swap] & B'
+    \end{tikzcd}
+  \]
+  un quadrato di pushout in \(\Ban\) e proviamo che \(m'\) è un
+  kernel. Grazie alla
+  Proposizione~\ref{proposition:FromPullbackToKernel}, il quadrato di
+  pushout diventa
+  \[
+    \begin{tikzcd}[ampersand replacement=\&]
+      A \ar["{\begin{psmallmatrix} f \\ m \end{psmallmatrix}}", r] \& A'
+      \oplus B \ar["{\begin{psmallmatrix} m' & -f' \end{psmallmatrix}}", r]
+      \& B'
+    \end{tikzcd}
+  \]
+  dove la seconda freccia è cokernel della prima. A patto di dimenticare
+  la struttura extra di \(\Ban\) rispetto a \(\Vect_k\), si può
+  dimostrare che (vedi Osservazione precedente)
+  \(\begin{psmallmatrix} m' & -f' \end{psmallmatrix}\) è cokernel di
+  \(\begin{psmallmatrix} f \\ m \end{psmallmatrix}\) nella categoria
+  degli spazi vettoriali. Di nuovo per la
+  Proposizione~\ref{proposition:FromPullbackToKernel}, abbiamo che il
+  quadrato di pushout in \(\Ban\) rimane tale in
+  \(\Vect_k\). Richiamiamo che \(\Vect_k\) è una categoria abeliana:
+  grazie alla Proposizione~\ref{proposition:PushotMonoIsMono}, possiamo
+  concludere che \(m'\) è un monomorfismo in \(\Vect_k\) e quindi, da
+  definizione di categoria abeliana, un kernel. In realtà questo vale
+  anche in \(\Ban\), visto che il funtore dimenticante
+  \(\Ban \to \Vect_k\) è fedele.
+\end{example}
+
+Possiamo mostrare anche che le categorie quasi-abeliane sono categorie
+esatte. Più precisamente:
+
+\begin{proposition}
+  La classe \(\cat E_{\max}\) delle coppie ker-coker di una categoria
+  quasi-abeliana \(\cat C\) è una struttura esatta per la categoria
+  stessa.
+\end{proposition}
+
+\begin{proof}
+  È chiaro che $\cat E_{\max}$ è chiusa per isomorfismi (vedi
+  definizione di \(\cat C^{\to\to}\)) e che tra queste coppie ker-coker
+  figurano anche coppie in cui appaiono le identità. Gli assiomi di
+  pullback e pushout sono parte della definizione di categorie
+  quasi-abeliane. Dimostriamo che la classe dei cokernel è chiusa sotto
+  composizione. Per i kernel si ragiona dualmente.\newline Siano
+  $f: A \to B$ e $g: B \to C$ due cokernel e $h := gf$. Indichiamo con
+  \(i_f : F \to A\), \(i_g : G \to B\) e \(i_h : H \to A\) i kernel
+  rispettivamente di \(f\), \(g\) e \(h\). Nel diagramma
+  \[
+    \begin{tikzcd}
+      F \ar["{i_f}", dr, swap] \ar["{u}", r, dashed] & H \ar["{i_h}", d]
+      \ar["{v}", r, dashed] &
+      G \ar["{i_g}", d] \\
+      & A \ar["{h}", dr, swap] \ar["{f}", r, swap] & B \ar["{g}", d] \\
+      & & C
+    \end{tikzcd}
+  \]
+  esistono unici due morfismi $u$ e $v$ che rendono il diagramma
+  commutativo, usando la proprietà universale di kernel. Si può
+  facilmente verificare che il quadrato in alto a destra è un
+  pullback. Ne segue che \(v\) è un cokernel perché pullback del
+  cokernel \(f\) e $u$ è il suo kernel.\newline Per concludere, mostriamo che
+  \(h\) è cokernel di \(i_h\). Sia \(h' : A \to X\) tale che
+  \(h'i_h = 0_H^X\). Poiché \(i_f = i_h u\), allora \(h'i_f =
+  0_F^X\). Poiché \(f\) è cokernel di \(i_f\), sia \(f' : B \to X\) tale
+  che \(f'f = h'\). Per costruire un morfismo \(C \to X\), mostriamo che
+  \(f' i_g = 0_G^X\). Questa uguaglianza segue da
+  \[
+    f' i_g v = f' f i_h = h' i_h = 0_H^X
+  \]
+  e dal fatto che \(v\) è un epimorfismo. Per la proprietà universale di
+  cokernel, sia \(g' : C \to X\) tale che \(g' g = f'\). Componendo per
+  \(f\) entrambi i membri, arriviamo a \(h' = f'f = g'gf =
+  g'h\). Infine, se \(h' = g''h\), ne segue che \(g'' = g'\), essendo
+  \(h\) un epimorfismo.
+\end{proof}
+
+
+
+
 
 
 %%% Local Variables:
