@@ -1,0 +1,597 @@
+
+\documentclass{beamer}
+
+\mode<presentation>
+
+%\usepackage[T1]{fontenc}
+%\usepackage[utf8]{inputenc}
+%\usepackage[italian]{babel}
+
+\usetheme{CambridgeUS}
+
+\usepackage[no-math]{fontspec}
+\usepackage{polyglossia}
+\setmainlanguage{italian}
+
+\defaultfontfeatures[HaranoAjiMincho]{
+    Renderer=HarfBuzz,
+    Script=Kana,
+    Scale=MatchUppercase,
+    UprightFont=*-Light,
+    BoldFont=*-Medium,
+    Extension=.otf
+}
+
+\newfontfamily\kanafont{HaranoAjiMincho}
+\DeclareRobustCommand\yo{\textup{\kanafont よ}}
+
+%\usepackage{lmodern}
+\usepackage{MnSymbol}
+\usepackage{mathtools}
+\usepackage{booktabs}
+
+\input{../macros.tex}
+
+\title{Categorie esatte}
+\author{Indrjo Dedej}
+\institute[UNIPV]{Università degli Studi di Pavia}
+\date{Pavia, 28/10/2025}
+
+\pgfdeclareimage[height=1cm]{logo}{logo.png}
+\logo{\pgfuseimage{logo}}
+
+\usepackage{tikz}
+\usetikzlibrary{calc, babel}
+\usepackage{tikz-cd}
+
+\begin{document}
+
+\maketitle
+
+\section{Preludio}
+
+\begin{frame}[fragile]
+  \frametitle{Due categorie...}
+  \begin{tabular}{r|cc}
+    & \(\Modu_R\) & \(\Ban\) \\
+    \midrule
+    oggetti & moduli su \(R\) & spazi di Banach \\
+    morfismi & applicazioni lineari & applicazioni lineari limitate
+  \end{tabular}
+
+  ~\vfill
+  Richiamo: un'applicazione lineare tra spazi normati
+  \(f : (X, \left\lVert \cdot \right\rVert_X) \to (Y, \left\lVert \cdot
+  \right\rVert_Y)\) è detta {\em limitata} se esiste \(M > 0\) per cui
+  \(\left\lVert f x \right\rVert \le M \left\lVert x \right\rVert_X\) per
+  ogni \(x \in X\).
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Kernel e cokernel}
+
+\begin{block}{Definizione}
+  Sia \(\cat C\) una categoria con {\em oggetto zero} che indichiamo con
+  \(0\).
+  \begin{itemize}
+  \item {\em Morfismo nullo}
+    \(0_A^B : \begin{tikzcd}[column sep=small] A \ar["{\exists!}", r] & 0
+      \ar["{\exists!}", r] & B \end{tikzcd}\)
+  \item {\em Kernel} di \(f : A \to B\): equalizzatore di
+    \(\begin{tikzcd}[column sep=small] A \ar["f", shift left, r]
+      \ar["{0_A^B}", shift right, swap, r] & B \end{tikzcd}\)
+  
+  \item {\em Cokernel} di \(f : A \to B\): coequalizzatore di
+    \(\begin{tikzcd}[column sep=small] A \ar["f", shift left, r]
+      \ar["{0_A^B}", shift right, swap, r] & B \end{tikzcd}\)
+  \end{itemize}
+  
+\end{block}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Esempi}
+  In \(\Modu_R\):
+  \begin{itemize}
+  \item kernel di \(f : M \to N\): inclusione \(\ker f \hookrightarrow M\)
+  \item cokernel di \(f : M \to N\): proiezione canonica
+    \(N \to N{/}{\im f}\)
+  \end{itemize}
+
+  In \(\Ban\):
+  \begin{itemize}
+  \item kernel di \(f : M \to N\): inclusione \(\ker f \hookrightarrow M\)
+  \item cokernel di \(f : M \to N\): proiezione canonica
+    \(N \to N{/}{\bar{\im f}}\)
+  \end{itemize}
+
+  Richiamo: \((X, \left\lVert \cdot \right\rVert)\) spazio di Banach e
+  \(M \subseteq X\) chiuso \(\implies\) \((X/M, \lsem \cdot \rsem)\) spazio di
+  Banach con
+  \(\lsem x+M \rsem := \inf_{m \in M} \left\lVert x+m \right\rVert\)
+\end{frame}
+
+\begin{frame}
+  \frametitle{Categorie preadditive}
+
+\begin{block}{Definizione}
+  Una {\em categoria preadditiva} è una categoria \(\cat C\) in cui:
+  \begin{enumerate}%[leftmargin=*]
+  \item Per ogni \(A, B \in \obj{\cat C}\) la classe \(\cat C(A, B)\) è
+    dotata di un'operazione interna
+    \[
+      +_{A,B} : \cat C (A, B) \times \cat C (A, B) \to \cat C (A, B)
+    \]
+    e ha un elemento \(0_A^B : A \to B\) che lo rendono un gruppo
+    abeliano.
+  \item Per ogni \(A, B, C, D \in \obj{\cat C}\) e \(f : A \to B\) di
+    \(\cat C\), le funzioni
+    \begin{align*}
+      & f_\ast := \cat C(C, f) : \cat C(C, A) \to \cat C(C, B) \\
+      & f^\ast := \cat C(f, D) : \cat C(B, D) \to \cat C(A, D)
+    \end{align*}
+    sono omomorfismi di gruppi abeliani.
+  \end{enumerate}
+\end{block}
+  
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Proprietà ed esempi}
+  \begin{itemize}
+  \item Un adagio: in una categoria preadditiva con oggetto zero \(0\),
+    \(f : A \to B\) è monomorfismo se e solo se
+    \(\begin{tikzcd}[column sep=small, cramped] 0 \ar["{\exists!}", r] &
+      A \end{tikzcd}\) è kernel di \(f\).
+  \item Enunciato duale.
+  \item Esempio: caratterizzazione morfismi di \(\Ban\)
+  \item \(\Modu_R\) e \(\Ban\) sono categorie preadditive.
+  \end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Biprodotti}
+  
+  \begin{block}{Definizione}
+    Un {\em biprodotto} in una categoria preadditiva consta di oggetti e
+    frecce
+    \[
+      \begin{tikzcd}
+        A \ar["{i_A}", r, shift right, swap] & C \ar["{p_A}", l, shift
+        right, swap] \ar["{p_B}", r, shift left] & B \ar["{i_B}", l,
+        shift left]
+      \end{tikzcd}
+    \]
+    tali che
+    \begin{align}
+      & p_A i_A = \id_A \label{eqn:Biprod1} \\
+      & p_B i_B = \id_B \label{eqn:Biprod2}\\
+      & i_A p_A + i_B p_B = \id_C \label{eqn:Biprod3}
+    \end{align}
+  \end{block}
+
+  \begin{block}{Proposizione}
+    \((p_A, p_B)\) è un prodotto, \((i_A, i_B)\) è un coprodotto.
+  \end{block}
+  
+\end{frame}
+
+
+
+\begin{frame}[fragile]
+  \frametitle{Categorie additive}
+  \begin{block}{Definizione}
+    Una {\em categoria additiva} è una categoria che ha oggetto zero e
+    che per ogni coppia di oggetti \(A\) e \(B\) possiede biprodotto
+    \[
+      \begin{tikzcd}
+        A \ar["{i_A^{AB}}", r, shift right, swap] & A \oplus B
+        \ar["{p_A^{AB}}", l, shift right, swap] \ar["{p_B^{AB}}", r,
+        shift left] & B \ar["{i_B^{AB}}", l, shift left]
+      \end{tikzcd}
+    \]
+  \end{block}
+  
+  \begin{block}{Esempio}
+    \(\Modu_R\) e \(\Ban\) sono additive.
+  \end{block}
+
+  Richiamo: norma su \(X \oplus Y\) in \(\Ban\):
+  \(\left\lVert (x,y) \right\rVert_{X \oplus Y} := \left\lVert x
+  \right\rVert_X + \left\lVert y \right\rVert_Y\)
+\end{frame}
+
+\begin{frame}
+  \frametitle{Categorie Abeliane}
+  \begin{block}{Definizione}
+    Una {\em categoria abeliana} è una categoria additiva in cui:
+    \begin{enumerate}
+    \item Ogni morfismo ha un kernel e un cokernel.
+    \item Ogni monomorfismo è un kernel e ogni epimorfismo è un
+      cokernel.
+    \end{enumerate}
+  \end{block}
+
+  \begin{block}{Esempi}
+    \begin{itemize}
+    \item \(\Modu_R\) è una categoria abeliana.
+    \item \(\Ban\) è una categoria abeliana?
+    \end{itemize}
+  \end{block}
+  
+\end{frame}
+
+\begin{frame}
+  \frametitle{Categorie Abeliane}
+
+  \begin{block}{Proprietà}
+    \begin{itemize}
+    \item La categorie abeliane sono finitamente complete e cocomplete.
+    \item Nelle categorie abeliane, mono e epi \(\implies\) iso.
+    \end{itemize}
+  \end{block}
+
+  \begin{block}{Esempio}
+    Quindi, no, \(\Ban\) \alert{non} è abeliana.
+    \[
+      C_c^0[a, b] \hookrightarrow L^p[a, b]
+    \]
+    è mono ed epi, ma non iso.
+  \end{block}
+  
+\end{frame}
+
+
+
+% \section{Interludio}
+
+% \begin{frame}
+%   % \frametitle{}
+% \end{frame}
+
+
+
+\section{Categorie esatte}
+
+\begin{frame}[fragile]
+  \frametitle{Verso le categorie esatte}
+
+  \begin{block}{Proposizione}
+    In una categoria abeliana, i pushout preservano i kernel e pullback
+    preservano i cokernel.
+    \[
+      \begin{tikzcd}
+        A \ar["{f}", d, swap] \ar["{PO}" description, phantom, dr] \ar["{i}", rightarrowtail, r] & B \ar["{}", d] \\
+        A' \ar["{i'}", rightarrowtail, r, swap] & B'
+      \end{tikzcd}
+      \qquad
+            \begin{tikzcd}
+        B' \ar["{}", d] \ar["{PB}" description, dr, phantom] \ar["{p'}", twoheadrightarrow, r] & C' \ar["{g}", d] \\
+        B \ar["{p}", twoheadrightarrow, r, swap] & C
+      \end{tikzcd}
+    \]
+  \end{block}
+
+  \pause
+  
+  \begin{block}{Ma...}
+    Anche in \(\Ban\) vale!
+  \end{block}
+  
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Categorie quasi-abeliane}
+
+  \begin{block}{Definizione}
+    Una {\em categoria quasi-abeliana} è una categoria additiva in cui:
+    \begin{enumerate}
+    \item Ogni morfismo ha kernel e cokernel.
+    \item I pushout preservano i kernel e i pullback preservano i cokernel.
+    \end{enumerate}
+  \end{block}
+
+  \begin{block}{Esempio}
+    \(\Ban\) è quasi-abeliana.
+  \end{block}
+
+  \begin{block}{Proposizione}
+    Abeliana \(\implies\) quasi-abeliana.
+  \end{block}
+  
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Definizione categoria esatte, I}
+
+  \begin{block}{Definizione}
+    Una {\em struttura esatta} per una categoria additiva \(\cat C\) è una
+  classe \(\cat E\) di coppie ker-coker di \(\cat C\) in cui:
+  \begin{itemize}
+  \item Chiamiamo {\em monomorfismi ammissibili} le frecce
+    \(i : A \to B\) per le quali esiste \(p : B \to C\) tale che
+    \(\begin{tikzcd}[column sep=small, cramped] A \ar["{i}", r] & B
+      \ar["{p}", r] & C \end{tikzcd}\) appartiene ad \(\cat E\). % Useremo
+    % \(\mono\) al posto di \(\to\) per indicare monomomorfismi
+    % ammissibili nei diagrammi commutativi.
+  \item Chiamiamo {\em epimorfismi ammissibili} le frecce
+    \(p : B \to C\) per le quali esiste \(i : A \to B\) tale che
+    \(\begin{tikzcd}[column sep=small, cramped] A \ar["{i}", r] & B
+      \ar["{p}", r] & C \end{tikzcd}\) appartiene ad \(\cat E\). % Useremo
+    % \(\epi\) al posto di \(\to\) per indicare epimomorfismi ammissibili
+    % nei diagrammi commutativi.
+  \end{itemize}
+  tale che...
+  \end{block}
+  
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Definizione categorie esatte, II}
+
+  \begin{block}{Definizione}
+    ... tale che:
+    \begin{itemize}
+  \item \(\cat E\) è chiusa per isomorfismo, cioè se
+    \(\begin{tikzcd}[column sep=small, cramped] A \ar["{i}", r] & B
+      \ar["{p}", r] & C \end{tikzcd}\) è in \(\cat E\) ed è isomorfo a
+    \(\begin{tikzcd}[column sep=small, cramped] A' \ar["{i'}", r] & B'
+      \ar["{p'}", r] & C' \end{tikzcd}\) come oggetto di
+    \(\cat C^{\to\to}\), allora anche quest'ultima coppia di frecce è in
+    \(\cat E\).
+  \item \label{item:EO} \(\id_A : A \to A\) è un monomorfismo
+    ammissibile per ogni \(A \in \obj{\cat C}\).
+  \item \label{item:EOop} \(\id_A : A \to A\) è un epimorfismo
+    ammissibile per ogni \(A \in \obj{\cat C}\).
+  \item \label{item:E1} La composizione di due monomorfismi ammissibili
+    è un monomorfismo ammissibile.
+  \item \label{item:E1op} La composizione di due epimorfismi ammissibili
+    è un epimorfismo ammissibile.
+  \end{itemize}
+  ...
+  \end{block}
+  
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Definizione categorie esatte, III}
+
+  \begin{block}{Definizione}
+    ...
+    \begin{itemize}
+    \item \label{item:E2} Il pushout di un monomorfismo ammissibile
+      lungo un qualsiasi morfismo di \(\cat C\) esiste ed è un
+      monomorfismo ammissibile.
+    \item \label{item:E2op} Il pullback di un epimorfismo ammissibile
+      lungo un qualsiasi morfismo di \(\cat C\) esiste ed è un
+      epimorfismo ammissibile.
+    \end{itemize}
+    \[
+      \begin{tikzcd}
+        A \ar["{f}", d, swap] \ar["{PO}" description, dr, phantom] \ar["{i}", rightarrowtail, r] & B \ar["{}", d] \\
+        A' \ar["{i'}", rightarrowtail, r, swap] & B'
+      \end{tikzcd}
+      \qquad
+      \begin{tikzcd}
+        B' \ar["{}", d] \ar["{PB}" description, dr, phantom] \ar["{p'}", twoheadrightarrow, r] & C' \ar["{g}", d] \\
+        B \ar["{p}", twoheadrightarrow, r, swap] & C
+      \end{tikzcd}
+    \]
+    Una {\em categoria esatta} è una coppia \((\cat C,\cat E)\) come
+    sopra e gli elementi di \(\cat E\) si chiamano {\em successioni
+      esatte corte}.
+  \end{block}
+  
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Successioni esatte corte, I}
+  
+  \begin{block}{Proposizione}
+    Sia \((\cat C,\cat E)\) una categoria esatta e sia
+    \[
+      \begin{tikzcd}
+        A \ar["{i_A}", r, shift right, swap] & A \oplus B \ar["{p_A}",
+        l, shift right, swap] \ar["{p_B}", r, shift left] & B
+        \ar["{i_B}", l, shift left]
+      \end{tikzcd}
+    \]
+    un biprodotto. Allora
+    \[
+      \begin{tikzcd}[row sep=tiny]
+        A \ar["{i_A}", r] & A \oplus B \ar["{p_B}", r] & B \\
+        B \ar["{i_B}", r] & A \oplus B \ar["{p_A}", r] & A
+      \end{tikzcd}
+    \]
+    sono successioni esatte corte, cioè coppie ker-coker in \(\cat E\).
+  \end{block}
+  
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Successioni esatte corte, II}
+
+  \begin{block}{Proposizione}
+    ``In una categoria esatta la somma di successioni esatte corte è
+    esatta corta''. Vale a dire: in una categoria esatta
+    \((\cat C,\cat E)\), se
+    \[
+      \begin{tikzcd}[row sep=tiny, column sep=small]
+        A \ar["{f}", r] & B \ar["{g}", r] & C \\
+        A' \ar["{f'}", r, swap] & B' \ar["{g'}", r, swap] & C'
+      \end{tikzcd}
+    \]
+    sono successioni esatte corte, allora lo è anche
+    \[
+      \begin{tikzcd}[row sep=small]
+        A \oplus A' \ar["{f \oplus f'}", r] & B \oplus B' \ar["{g \oplus
+          g'}", r] & C \oplus C'
+      \end{tikzcd}
+    \]
+  \end{block}
+  
+\end{frame}
+
+
+\begin{frame}[fragile]
+  \frametitle{Successioni esatte corte, III}
+
+  \begin{block}{Proposizione}
+    In una categoria esatta consideriamo il diagramma commutativo
+    \[
+      \begin{tikzcd}
+        A \ar["{f}", d, swap] \ar["{i}", rightarrowtail, r] & B \ar["{f'}", d] \\
+        A' \ar["{i'}", rightarrowtail, r, swap] & B'
+      \end{tikzcd}
+    \]
+    Sono equivalenti:
+    \begin{itemize}
+    \item Il quadrato è di pushout.
+    \item \(
+      \begin{tikzcd}[ampersand replacement=\&]
+        A \ar["{\begin{psmallmatrix} i \\ f \end{psmallmatrix}}", r] \&
+        B \oplus A' \ar["{\begin{psmallmatrix} f' &
+            -i' \end{psmallmatrix}}", r] \& B'
+      \end{tikzcd}
+      \) è esatta corta.
+    \item ...
+    % \item Il quadrato è bicartesiano (cioè di pullback e di pushout).
+    % \item Il quadrato è parte del diagramma commutativo
+    %   \[
+    %     \begin{tikzcd}[row sep=tiny]
+    %       A \ar["{f}", dd, swap] \ar["{i}", rightarrowtail, r] & B
+    %       \ar["{f'}", dd, swap]
+    %       \ar["{p}", twoheadrightarrow, dr] \\
+    %       & & C \\
+    %       A' \ar["{i'}", rightarrowtail, r, swap] & B' \ar["{p'}",
+    %       twoheadrightarrow, ur, swap]
+    %     \end{tikzcd}
+    %   \]
+    %   dove \((i, p)\) e \((i', p')\) sono successioni esatte corte.
+    \end{itemize}
+  \end{block}
+  
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Successioni esatte corte, III}
+
+  \begin{block}{Proposizione}
+    % In una categoria esatta consideriamo il diagramma commutativo
+    % \[
+    %   \begin{tikzcd}
+    %     A \ar["{f}", d, swap] \ar["{i}", rightarrowtail, r] & B \ar["{f'}", d] \\
+    %     A' \ar["{i'}", rightarrowtail, r, swap] & B'
+    %   \end{tikzcd}
+    % \]
+    % Sono equivalenti:
+    \begin{itemize}
+    % \item Il quadrato è di pushout.
+    % \item \(
+    %   \begin{tikzcd}[ampersand replacement=\&]
+    %     A \ar["{\begin{psmallmatrix} i \\ f \end{psmallmatrix}}", r] \&
+    %     B \oplus A' \ar["{\begin{psmallmatrix} f' &
+    %         -i' \end{psmallmatrix}}", r] \& B'
+    %   \end{tikzcd}
+    %   \) è esatta corta.
+    \item ...
+    \item Il quadrato è bicartesiano (cioè di pullback e di pushout).
+    \item Il quadrato è parte del diagramma commutativo
+      \[
+        \begin{tikzcd}[row sep=tiny]
+          A \ar["{f}", dd, swap] \ar["{i}", rightarrowtail, r] & B
+          \ar["{f'}", dd, swap]
+          \ar["{p}", twoheadrightarrow, dr] \\
+          & & C \\
+          A' \ar["{i'}", rightarrowtail, r, swap] & B' \ar["{p'}",
+          twoheadrightarrow, ur, swap]
+        \end{tikzcd}
+      \]
+      dove \((i, p)\) e \((i', p')\) sono successioni esatte corte.
+    \end{itemize}
+  \end{block}
+  
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Ancora un risultato}
+
+  \begin{block}{Teorema di Noether, ``\(C/B \cong (C/A) / (B / A)\)''}
+    In una categoria esatta, sia il diagramma commutativo
+    \[
+      \begin{tikzcd}
+        A \ar["{\id_A}", d, swap] \ar["{}", rightarrowtail, r] & B
+        \ar["{}", rightarrowtail, d] \ar["{}", twoheadrightarrow, r] & X
+        \ar["{}", dashed, rightarrowtail, d] \\
+        A \ar["{}", rightarrowtail, r] & C \ar["{}", twoheadrightarrow,
+        d]
+        \ar["{}", twoheadrightarrow, r] & Y \ar["{}", dashed, twoheadrightarrow, d] \\
+        & Z \ar["{\id_Z}", r, swap] & Z
+      \end{tikzcd}
+    \]
+    in cui le prime due righe orizzontali e la colonna centrale sono
+    esatte corte. Allora la terza colonna esiste, è esatta corta e è
+    unicamente determinata dalla condizione che rende il diagramma
+    commutativo. Inoltre, il quadrato in alto a destra è bicartesiano.
+  \end{block}
+  
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Un teorema di embedding, I}
+
+  \begin{block}{Lemma di Yoneda}
+    Se \(\cat C\) è una categoria localmente piccola, l'embedding di
+    Yoneda \(\yo : \cat C \to [\opcat C, \Set]\) è un funtore pieno e
+    fedele.
+  \end{block}
+
+  % \begin{itemize}
+  % \item Il lemma di Yoneda quindi incorpora una categoria nella
+  %   categoria dei prefasci.
+  % \item E se \(\cat C\) è una categoria additiva?
+  % \end{itemize}
+
+  \pause
+  
+  \begin{block}{Domanda}
+    E se \(\cat C\) è una categoria additiva?
+  \end{block}
+  
+  Possiamo considerare questo embedding di Yoneda:
+  \[
+    \yo : \cat C \to [\opcat C, \Ab]
+  \]
+
+  \begin{block}{Teorema di embedding}
+    Sia \((\cat C, \cat E)\) una categoria esatta piccola. L'embedding
+    di Yoneda \(\yo : \cat C \to [\opcat C, \Ab]\) preserva e riflette
+    l'esattezza.
+  \end{block}
+  
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Un teorema di embedding, II}
+
+  Come \(\yo : \cat C \to [\opcat C, \Set]\) incorpora \(\cat C\) nella
+  categoria dei prefasci \([\opcat C, \Set]\)...
+
+  \pause
+
+  \bigskip
+  
+  ... \(\yo : \cat C \to [\opcat C, \Ab]\) incorpora una
+  categoria esatta in una \alert{categoria abeliana}!
+    
+\end{frame}
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: LaTeX
+%%% TeX-master: t
+%%% TeX-engine: luatex
+%%% ispell-local-dictionary: "italian"
+%%% End:
