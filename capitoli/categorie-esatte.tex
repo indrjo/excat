@@ -396,7 +396,7 @@ Quindi ``la somma di due coppie ker-coker è una coppia ker-coker.''
     ammissibile.
     \[
       \begin{tikzcd}
-        B' \ar["{}", d] \ar["{PB}" description, dr, phantom] \ar["{p'}", twoheadrightarrow, r] & C' \ar["{f}", d] \\
+        B' \ar["{}", d] \ar["{PB}" description, dr, phantom] \ar["{p'}", twoheadrightarrow, r] & C' \ar["{g}", d] \\
         B \ar["{p}", twoheadrightarrow, r, swap] & C
       \end{tikzcd}
     \]
@@ -554,7 +554,7 @@ Primi esempi di successioni esatte corte coinvolgono le identità.
       A' \ar["{f'}", r, swap] & B' \ar["{g'}", r, swap] & C'
     \end{tikzcd}
   \]
-  sono successioni esatte corte, allora anche
+  sono successioni esatte corte, allora lo è anche
   \begin{equation}
     \label{cd:SumExactSeqs}
     \begin{tikzcd}[row sep=small]
@@ -562,7 +562,6 @@ Primi esempi di successioni esatte corte coinvolgono le identità.
         g'}", r] & C \oplus C'
     \end{tikzcd}
   \end{equation}
-  lo è.
 \end{proposition}
 
 Quindi \(\cat E\) è chiusa rispetto alla somma di successioni esatte
@@ -1049,7 +1048,7 @@ epimorfismo ammissibile e \(i\) è un kernel di \(p\)
   epimorfismi ammissibili è duale.
 \end{proof}
 
-\begin{lemma}[Isomorfismo di Noether \(C/B \cong (C/A) / (B / A)\)]
+\begin{lemma}[Isomorfismo di Noether, \(C/B \cong (C/A) / (B / A)\)]
   \label{lem:c/b=(c/a)/(b/a)}
   In una categoria esatta, sia il diagramma commutativo
   \[
@@ -1217,7 +1216,7 @@ epimorfismo ammissibile e \(i\) è un kernel di \(p\)
   \begin{enumerate}[leftmargin=*]
   \item Ogni morfismo ha kernel e cokernel.
   \item Il pushout di un kernel lungo un qualsiasi morfismo è esso
-    stesso un kernel e il pushout di un cokernel lungo un qualsiasi
+    stesso un kernel e il pullback di un cokernel lungo un qualsiasi
     morfismo è esso stesso un cokernel.
   \end{enumerate}
 \end{definition}
