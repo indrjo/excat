@@ -116,7 +116,7 @@
 
 \begin{block}{Definizione}
   Una {\em categoria preadditiva} è una categoria \(\cat C\) in cui:
-  \begin{enumerate}%[leftmargin=*]
+  \begin{enumerate}
   \item Per ogni \(A, B \in \obj{\cat C}\) la classe \(\cat C(A, B)\) è
     dotata di un'operazione interna
     \[
@@ -139,13 +139,13 @@
 \begin{frame}[fragile]
   \frametitle{Proprietà ed esempi}
   \begin{itemize}
+  \item \(\Modu_R\) e \(\Ban\) sono categorie preadditive.
   \item Un adagio: in una categoria preadditiva con oggetto zero \(0\),
     \(f : A \to B\) è monomorfismo se e solo se
     \(\begin{tikzcd}[column sep=small, cramped] 0 \ar["{\exists!}", r] &
       A \end{tikzcd}\) è kernel di \(f\).
   \item Enunciato duale.
   \item Esempio: caratterizzazione morfismi di \(\Ban\)
-  \item \(\Modu_R\) e \(\Ban\) sono categorie preadditive.
   \end{itemize}
 
 \end{frame}
@@ -232,6 +232,8 @@
     \end{itemize}
   \end{block}
 
+  \pause
+  
   \begin{block}{Esempio}
     Quindi, no, \(\Ban\) \alert{non} è abeliana.
     \[
@@ -244,21 +246,13 @@
 
 
 
-% \section{Interludio}
-
-% \begin{frame}
-%   % \frametitle{}
-% \end{frame}
-
-
-
 \section{Categorie esatte}
 
 \begin{frame}[fragile]
   \frametitle{Verso le categorie esatte}
 
   \begin{block}{Proposizione}
-    In una categoria abeliana, i pushout preservano i kernel e pullback
+    In una categoria abeliana, i pushout preservano i kernel e i pullback
     preservano i cokernel.
     \[
       \begin{tikzcd}
@@ -303,7 +297,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-  \frametitle{Definizione categoria esatte, I}
+  \frametitle{Definizione categorie esatte, I}
 
   \begin{block}{Definizione}
     Una {\em struttura esatta} per una categoria additiva \(\cat C\) è una
@@ -312,15 +306,11 @@
   \item Chiamiamo {\em monomorfismi ammissibili} le frecce
     \(i : A \to B\) per le quali esiste \(p : B \to C\) tale che
     \(\begin{tikzcd}[column sep=small, cramped] A \ar["{i}", r] & B
-      \ar["{p}", r] & C \end{tikzcd}\) appartiene ad \(\cat E\). % Useremo
-    % \(\mono\) al posto di \(\to\) per indicare monomomorfismi
-    % ammissibili nei diagrammi commutativi.
+      \ar["{p}", r] & C \end{tikzcd}\) appartiene ad \(\cat E\).
   \item Chiamiamo {\em epimorfismi ammissibili} le frecce
     \(p : B \to C\) per le quali esiste \(i : A \to B\) tale che
     \(\begin{tikzcd}[column sep=small, cramped] A \ar["{i}", r] & B
-      \ar["{p}", r] & C \end{tikzcd}\) appartiene ad \(\cat E\). % Useremo
-    % \(\epi\) al posto di \(\to\) per indicare epimomorfismi ammissibili
-    % nei diagrammi commutativi.
+      \ar["{p}", r] & C \end{tikzcd}\) appartiene ad \(\cat E\).
   \end{itemize}
   tale che...
   \end{block}
@@ -381,6 +371,35 @@
     Una {\em categoria esatta} è una coppia \((\cat C,\cat E)\) come
     sopra e gli elementi di \(\cat E\) si chiamano {\em successioni
       esatte corte}.
+  \end{block}
+  
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Alcune osservazioni}
+
+  \begin{itemize}
+  \item Una categoria è esatta perché viene munita di una struttura,
+    mentre per le categorie abeliane e quasi-abeliane gli assiomi sulla
+    struttura sono proprietà interne.
+  \end{itemize}
+
+  \pause
+  
+  \begin{block}{Proposizione}
+    Per una categoria quasi-abeliana \(\cat C\) ci sono diverse
+    strutture esatte:
+    \begin{itemize}
+    \item la classe \(\cat E_{\text{max}}\) di tutte le coppie ker-coker
+      di \(\cat C\)
+    \item la classe \(\cat E_{\text{split}}\) delle coppie ker-coker
+      \[
+        \begin{tikzcd}[column sep=small]
+          A \ar["{i_A}", r] & A \oplus B \ar["{p_B}", r] & B
+        \end{tikzcd}
+      \]
+      e coppie ker-coker isomorfe.
+    \end{itemize}
   \end{block}
   
 \end{frame}
@@ -547,12 +566,6 @@
     fedele.
   \end{block}
 
-  % \begin{itemize}
-  % \item Il lemma di Yoneda quindi incorpora una categoria nella
-  %   categoria dei prefasci.
-  % \item E se \(\cat C\) è una categoria additiva?
-  % \end{itemize}
-
   \pause
   
   \begin{block}{Domanda}
@@ -564,6 +577,8 @@
     \yo : \cat C \to [\opcat C, \Ab]
   \]
 
+  \pause
+  
   \begin{block}{Teorema di embedding}
     Sia \((\cat C, \cat E)\) una categoria esatta piccola. L'embedding
     di Yoneda \(\yo : \cat C \to [\opcat C, \Ab]\) preserva e riflette
@@ -583,7 +598,8 @@
   \bigskip
   
   ... \(\yo : \cat C \to [\opcat C, \Ab]\) incorpora una
-  categoria esatta in una \alert{categoria abeliana}!
+  categoria esatta in una \alert{categoria abeliana}: la sottocategoria
+  piena dei funtori esatti a sinistra.
     
 \end{frame}
 
